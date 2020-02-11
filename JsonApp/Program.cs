@@ -400,39 +400,136 @@ namespace JsonApp
             return b;
         }
 
+        //private static List<ModelItem> Fond(JsonObject jObject)
+        //{
+        //    //TODO: Add a check if wether it needs a yes/no answer or a word to look for, maybe rework this method (have 1 loop for bool and 1 for string)
+        //    List<ModelItem> result = new List<ModelItem>();
+        //    string cmd, term;
+        //    bool b = false;
+        //    //Get a correct cmd
+        //    while (true)
+        //    {
+        //        //Ask for the command and check wether its a valid one or not
+        //        Console.WriteLine("What field do you want to search in?");
+        //        cmd = Console.ReadLine();
+
+        //        if (cmd.Equals("exit"))
+        //        {
+        //            Console.WriteLine("Cancel Search");
+        //            return null;
+        //        }
+        //        else if (cmd.Equals("alternative") || cmd.Equals("english") || cmd.Equals("genres") || cmd.Equals("description") || cmd.Equals("watched") || cmd.Equals("ending")) { break; }
+        //        else
+        //        {
+        //            Console.WriteLine(cmd + " isn't a valid command");
+        //            Console.WriteLine("\"alternative\" for looking for the alternative name\n " +
+        //                "\"english\" for looking for the english name\n " +
+        //                "\"genres\" for looking in the genres \n" +
+        //                "\"description\" for looking in the description \n" +
+        //                "\"watched\" for looking if you watched it \n" +
+        //                "\"ending\" for looking if it has an ending \n" +
+        //                "\"exit\" to stop searching");
+        //        }
+        //    }
+        //    do
+        //    {
+        //        while (true)
+        //        {
+        //            if (cmd.Equals("watched") || cmd.Equals("ending"))
+        //            {   //Check for bool
+        //                Console.WriteLine(cmd + " ?");
+        //                term = GetBool().ToString().ToLower();
+        //                if (term.Equals("true")) Console.WriteLine("Are you sure you want to search using: yes ?");
+        //                else Console.WriteLine("Are you sure you want to search using: no ?");
+        //            }
+        //            else
+        //            {   //Check wether if in where you want to search in contains the term
+        //                Console.WriteLine("What do you want to use to search?");
+        //                term = Console.ReadLine().ToLower();
+        //                Console.WriteLine("Are you sure you want to search using: {0} ?", term);
+        //            }
+        //            Console.WriteLine("Type \"y\" to continue");
+        //            if (Console.ReadLine().ToLower().Equals("y")) break;
+        //        }
+
+        //        if (cmd.Equals("alternative"))
+        //        {
+        //            foreach (ModelItem mi in jObject.Items)
+        //            {
+        //                if (mi.AltName.ToLower().Contains(term)) result.Add(mi);
+        //            }
+        //        }
+        //        else if (cmd.Equals("english"))
+        //        {
+        //            foreach (ModelItem mi in jObject.Items)
+        //            {
+        //                if (mi.EnName.ToLower().Contains(term)) result.Add(mi);
+        //            }
+        //        }
+        //        else if (cmd.Equals("genres"))
+        //        {
+        //            foreach (ModelItem mi in jObject.Items)
+        //            {
+        //                foreach (string g in mi.Genres)
+        //                {
+        //                    if (g.ToLower() == term) result.Add(mi);
+        //                }
+        //            }
+        //        }
+        //        else if (cmd.Equals("description"))
+        //        {
+        //            foreach (ModelItem mi in jObject.Items)
+        //            {
+        //                if (mi.Description.ToLower().Contains(term)) result.Add(mi);
+        //            }
+        //        }
+        //        else if (cmd.Equals("watched"))
+        //        {
+        //            foreach (ModelItem mi in jObject.Items)
+        //            {
+        //                if (b == mi.Watched)
+        //                {
+        //                    result.Add(mi);
+        //                }
+        //            }
+        //        }
+        //        else if (cmd.Equals("ending"))
+        //        {
+        //            foreach (ModelItem mi in jObject.Items)
+        //            {
+        //                if (b == mi.HasEnd)
+        //                {
+        //                    result.Add(mi);
+        //                }
+        //            }
+        //        }
+        //        if (result.Count == 0)
+        //        {
+        //            Console.WriteLine("There hasn't been any item found using: {0} in {1} do you want to use a different term?", term, cmd);
+        //            Console.WriteLine("Y / N");
+        //            if (Console.ReadLine().ToUpper().Equals("N")) { Console.WriteLine("Canceling search"); break; }
+        //        }
+        //        else { break; }
+        //    } while (true);
+
+        //    for (int i = 0; i < result.Count; i++)
+        //    {
+        //        Console.WriteLine(i + 1);
+        //        Console.WriteLine(result[i].ReturnName());
+        //    }
+        //    return result;
+        //}
+
         /// <summary>
         /// Find all ModelItems that contain an a term
         /// </summary>
-        /// <param name="jObject">JsonObject which contains the json you want to search in</param>
+        /// <param name="jsonObject">JsonObject which contains the json you want to search in</param>
         /// <returns>A ModelItem List that contains all items that contains the search term</returns>
-        private static List<ModelItem> Find(JsonObject jObject)
+        private static List<ModelItem> Find(JsonObject jsonObject)
         {
-            //TODO: Add a check if wether it needs a yes/no answer or a word to look for, maybe rework this method
-            /**
-             Get a valid cmd
-{ cmd } 
-
-Get a term and confirm if you want to search using it
-{ term }
-
-But if you cannot find anything using that term, you might want to fill in the term again
-{ {term} cannot find anything}
-
-Afterwards we need to give every item that has been found and index number
-{ index }
-
-
-
-{ cmd }
-{ { term } items count == 0}
-
-{ index }
-return;
-             */
             List<ModelItem> result = new List<ModelItem>();
-            string cmd, term;
-            bool b = false;
-            //Get a correct cmd
+            string cmd;
+
             while (true)
             {
                 //Ask for the command and check wether its a valid one or not
@@ -457,44 +554,73 @@ return;
                         "\"exit\" to stop searching");
                 }
             }
-            do
+            if (cmd.Equals("watched") || cmd.Equals("ending"))
             {
-                while (true)
+                bool term;
+                Boolterm:
+                do
                 {
-                    if (cmd.Equals("watched") || cmd.Equals("ending"))
-                    {   //Check for bool
-                        Console.WriteLine(cmd + " ?");
-                        term = GetBool().ToString().ToLower();
-                        if (term.Equals("true")) Console.WriteLine("Are you sure you want to search using: yes ?");
-                        else Console.WriteLine("Are you sure you want to search using: no ?");
-                    }
-                    else
-                    {   //Check wether if in where you want to search in contains the term
-                        Console.WriteLine("What do you want to use to search?");
-                        term = Console.ReadLine().ToLower();
-                        Console.WriteLine("Are you sure you want to search using: {0} ?", term);
-                    }
+                    if (cmd.Equals("watched")) Console.WriteLine("Have you watched it?");
+                    else Console.WriteLine("Does it have an ending");
+                    term = GetBool();
+                    if (term) Console.WriteLine("Are you sure you want to search using: yes ?");
+                    else Console.WriteLine("Are you sure you want to search using: no ?");
                     Console.WriteLine("Type \"y\" to continue");
                     if (Console.ReadLine().ToLower().Equals("y")) break;
+                } while (true);
+                //Start searching
+                if (cmd.Equals("watched"))
+                {
+                    for (int i = 0; i < jsonObject.Items.Count; i++)
+                    {
+                        if (jsonObject.Items[i].Watched == term) { result.Add(jsonObject.Items[i]); }
+                    }
                 }
-
+                else
+                {
+                    for (int i = 0; i < jsonObject.Items.Count; i++)
+                    {
+                        if (jsonObject.Items[i].HasEnd == term) { result.Add(jsonObject.Items[i]); }
+                    }
+                }
+                //Check if the list is empty
+                if (result.Count == 0)
+                {
+                    Console.WriteLine("There hasn't been any item found using: in {0} with the term {1} do you want to use a different term?", cmd, BoolToAnwser(term));
+                    if (!GetBool()) { Console.WriteLine("Canceling search"); }
+                    else { goto Boolterm; }
+                }
+            }
+            else
+            {
+                string term;
+                Stringterm:
+                do
+                {
+                    Console.WriteLine("On do you want to use to search?");
+                    term = Console.ReadLine().ToLower();
+                    Console.WriteLine("Are you sure you want to search using: {0} ?", term);
+                    Console.WriteLine("Type \"y\" to continue");
+                    if (Console.ReadLine().ToLower().Equals("y")) break;
+                } while (true);
+                //Start searching
                 if (cmd.Equals("alternative"))
                 {
-                    foreach (ModelItem mi in jObject.Items)
+                    foreach (ModelItem mi in jsonObject.Items)
                     {
                         if (mi.AltName.ToLower().Contains(term)) result.Add(mi);
                     }
                 }
                 else if (cmd.Equals("english"))
                 {
-                    foreach (ModelItem mi in jObject.Items)
+                    foreach (ModelItem mi in jsonObject.Items)
                     {
                         if (mi.EnName.ToLower().Contains(term)) result.Add(mi);
                     }
                 }
                 else if (cmd.Equals("genres"))
                 {
-                    foreach (ModelItem mi in jObject.Items)
+                    foreach (ModelItem mi in jsonObject.Items)
                     {
                         foreach (string g in mi.Genres)
                         {
@@ -502,42 +628,21 @@ return;
                         }
                     }
                 }
-                else if (cmd.Equals("description"))
+                else
                 {
-                    foreach (ModelItem mi in jObject.Items)
+                    foreach (ModelItem mi in jsonObject.Items)
                     {
                         if (mi.Description.ToLower().Contains(term)) result.Add(mi);
                     }
                 }
-                else if (cmd.Equals("watched"))
-                {
-                    foreach (ModelItem mi in jObject.Items)
-                    {
-                        if (b == mi.Watched)
-                        {
-                            result.Add(mi);
-                        }
-                    }
-                }
-                else if (cmd.Equals("ending"))
-                {
-                    foreach (ModelItem mi in jObject.Items)
-                    {
-                        if (b == mi.HasEnd)
-                        {
-                            result.Add(mi);
-                        }
-                    }
-                }
+                //Check if the list is empty
                 if (result.Count == 0)
                 {
-                    Console.WriteLine("There hasn't been any item found using: {0} in {1} do you want to use a different term?", term, cmd);
-                    Console.WriteLine("Y / N");
-                    if (Console.ReadLine().ToUpper().Equals("N")) { Console.WriteLine("Canceling search"); break; }
+                    Console.WriteLine("There hasn't been any item found using: in {0} with the term {1} do you want to use a different term?", cmd, term);
+                    if (!GetBool()) { Console.WriteLine("Canceling search"); }
+                    else { goto Stringterm; }
                 }
-                else { break; }
-            } while (true);
-
+            }
             for (int i = 0; i < result.Count; i++)
             {
                 Console.WriteLine(i + 1);
@@ -599,6 +704,16 @@ return;
                 }
             } while (true);
             return num;
+        }
+
+        /// <summary>
+        /// Transform a bool to string
+        /// </summary>
+        /// <param name="b">bool to transform</param>
+        /// <returns>the given bool as a string</returns>
+        public static string BoolToAnwser(bool b)
+        {   // condition ? true : false
+            return b ? "yes" : "no";
         }
 
         private static string FirstToUpper(string s)

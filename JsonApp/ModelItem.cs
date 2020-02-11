@@ -129,16 +129,6 @@ namespace JsonApp
         }
 
         /// <summary>
-        /// Transform a bool to string
-        /// </summary>
-        /// <param name="b">bool to transform</param>
-        /// <returns>the given bool as a string</returns>
-        public string BoolToAnwser(bool b)
-        {   // condition ? true : false
-            return b ? "yes" : "no";
-        }
-
-        /// <summary>
         /// Convert a string representing a bool to a bool
         /// </summary>
         /// <param name="s">the bool as string</param>
@@ -190,9 +180,9 @@ namespace JsonApp
             }
             Console.WriteLine("");
             Console.WriteLine("Score: " + Score);
-            Console.WriteLine("Watched: " + BoolToAnwser(Watched));
+            Console.WriteLine("Watched: " + Program.BoolToAnwser(Watched));
             Console.WriteLine("Run time is {0}:{1} or {2} minutes per episode", RunTime / Constants.MINUTES, RunTime % Constants.MINUTES, RunTime / Episodes);
-            Console.WriteLine("Has an ending: " + BoolToAnwser(HasEnd));
+            Console.WriteLine("Has an ending: " + Program.BoolToAnwser(HasEnd));
             Console.WriteLine("Notes: " + Notes);
             Console.WriteLine("");
         }
