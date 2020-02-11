@@ -16,9 +16,9 @@ Functionality of it reminding the user that he/she made a change and ask to save
 Changed Edit to include the new data
 Add functionality to convert runtime to an hh:mm or hh:mm format (only needed on All())
 Changed some of the variables to be slightly more memory efficient. (using smaller data types where possible aswell as using unsigned types instead of signed)
+Changed Find to include watched and hasend options (refactored)
 
 TODO
-- Change Find to include watched and hasend options (probably have to rework the entire function)
 - Internet intergration in looking for looking up more information about a show. https://stackoverflow.com/questions/6305388/how-to-launch-a-google-chrome-tab-with-specific-url-using-c-sharp
   Could be used when using Find or even with Add after you filled in the name.
   for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so time+for+polka
@@ -107,6 +107,8 @@ namespace JsonApp
                     int elem = AccesItem(results.Count());
 
                     results.ElementAt(elem).ShowAll();
+
+                    //TODO ask if the user wants to open a webbrowser for more information about this item
                 }
                 else if (cmd.Equals("edit"))
                 {
@@ -118,7 +120,7 @@ namespace JsonApp
                     //acces a specific item
                     int elem = AccesItem(results.Count());
                     ModelItem edit = results.ElementAt(elem);
-                    //edit specific field
+                    //edit specific field(s)
                     IsChanged = Edit(ref edit);
                     Console.WriteLine("Editing complete");
                 }
@@ -276,6 +278,7 @@ namespace JsonApp
             item.EnName = FirstToUpper(Console.ReadLine());
             Console.WriteLine("Enter a Alternative name of the show if it has one");
             item.AltName = FirstToUpper(Console.ReadLine());
+            //TODO: give the user an option to use the just given name to look it up for more information with a webbrowser
             Console.WriteLine("Enter the amount of episodes of the show");
             item.Episodes = (ushort)GetNumber();
             Console.WriteLine("Enter the description of the show");
@@ -298,6 +301,7 @@ namespace JsonApp
 
             return item;
         }
+
         /// <summary>
         /// Edit a specific part of the json
         /// </summary>
@@ -305,6 +309,7 @@ namespace JsonApp
         /// <returns>true if it has changed</returns>
         private static bool Edit(ref ModelItem item)
         {
+            //TODO: ask if the user wants to open an webbrowser with the given title to look up for more information
             bool b = false;
             Console.WriteLine("What field do you want to edit?");
             string cmd;
@@ -716,6 +721,11 @@ namespace JsonApp
             return b ? "yes" : "no";
         }
 
+        /// <summary>
+        /// Change a string so the first letter is uppercase
+        /// </summary>
+        /// <param name="s">string to change</param>
+        /// <returns>the given string with the first character as uppercase</returns>
         private static string FirstToUpper(string s)
         {
             return s.First().ToString().ToUpper() + s.Substring(1);
