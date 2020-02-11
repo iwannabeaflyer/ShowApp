@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace JsonApp
 {
     class Constants
@@ -12,5 +6,16 @@ namespace JsonApp
         public const byte MAX = 100;
         public const byte JSON_FIELDS = 11;
         public const byte MINUTES = 60;
+
+        public const string APPLICATION_NAME = "json creator";
+
+        public const string GOOGLE = "https://www.google.com/search?q=";
+        public const string MAL_ALL = "https://myanimelist.net/search/all?q=";
+        public const string MAL_CATAGORY = "https://myanimelist.net/";
+        public const string MAL_ANIME = "anime.php?q=";
+        public const string MAL_CHARACTER = "character.php?q=";
+        public const string MAL_MANGA = "manga.php?q=";
+        public const string IMDB = "https://www.imdb.com/find?q=";
+        public const string YOUTUBE = "https://www.youtube.com/results?search_query=";
     }
 }

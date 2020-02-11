@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
 
 
@@ -20,7 +18,7 @@ Changed Find to include watched and hasend options (refactored)
 
 TODO
 - Internet intergration in looking for looking up more information about a show. https://stackoverflow.com/questions/6305388/how-to-launch-a-google-chrome-tab-with-specific-url-using-c-sharp
-  Could be used when using Find or even with Add after you filled in the name.
+  Could be used when using Find or even with Add and Edit.
   for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so time+for+polka
   
   for mal       "https://myanimelist.net/search/all?q=" and then word or words where spaces are indicated by "%20" so the%20rising%20of%20the%20shield%20hero (or replace %20 with a white space)
@@ -42,7 +40,7 @@ namespace JsonApp
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Title = "json creator";
+            Console.Title = Constants.APPLICATION_NAME;
             string jsonString = "";
             string cmd;
             bool IsChanged = false;
