@@ -15,11 +15,12 @@ Changed ModelItem serializer so it can generate valid json strings from ModelIte
 Functionality of it reminding the user that he/she made a change and ask to save if they want to save it before closing the app (bool has to change within Main, edit doesn't have to change)
 Changed Edit to include the new data
 Add functionality to convert runtime to an hh:mm or hh:mm format (only needed on All())
+Changed some of the variables to be slightly more memory efficient. (using smaller data types where possible aswell as using unsigned types instead of signed)
 
 TODO
 - Change Find to include watched and hasend options (probably have to rework the entire function)
-
 - Internet intergration in looking for looking up more information about a show. https://stackoverflow.com/questions/6305388/how-to-launch-a-google-chrome-tab-with-specific-url-using-c-sharp
+  Could be used when using Find or even with Add after you filled in the name.
   for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so time+for+polka
   
   for mal       "https://myanimelist.net/search/all?q=" and then word or words where spaces are indicated by "%20" so the%20rising%20of%20the%20shield%20hero (or replace %20 with a white space)
@@ -31,6 +32,7 @@ TODO
 
 - Think if you want a trashcan functionality for removing, this should help users recover accidentaly deleted shows but you will not be able to clear the memory while the program is open, 
     aswell as that what is in the trashcan will be deleted once the program exits. Furthermore there is already a check to try to prevent users from deleting things they didn't want to delete.
+- Think if i want to change it so that in Notes you can also use the ':' character without the program breaking.
      */
 
 namespace JsonApp
@@ -112,20 +114,20 @@ namespace JsonApp
                     //find certain items
                     List<ModelItem> results = Find(jsonObject);
                     if (results == null || results.Count() == 0) continue;
-                   
+
                     //acces a specific item
                     int elem = AccesItem(results.Count());
                     ModelItem edit = results.ElementAt(elem);
                     //edit specific field
-                    edit = Edit(edit);
-                    IsChanged = true;
+                    IsChanged = Edit(ref edit);
                     Console.WriteLine("Editing complete");
                 }
                 else if (cmd.Equals("save"))
                 {
                     Console.WriteLine("Saving");
                     jsonString = Serialize(jsonObject);
-                    IsChanged = Save(jsonString);
+                    Save(jsonString);
+                    IsChanged = false;
                     Console.WriteLine("Saving complete");
                 }
                 else if (cmd.Equals("load"))
@@ -145,7 +147,7 @@ namespace JsonApp
                     if (IsChanged)
                     {
                         Console.WriteLine("The file has been changed but not saved, do you want to save it?");
-                        if(GetBool()) { IsChanged = Save(jsonString); }
+                        if (GetBool()) { Save(jsonString); IsChanged = false; }
                     }
                     break;
                 }
@@ -240,13 +242,12 @@ namespace JsonApp
         /// </summary>
         /// <param name="json">The json string you want to save in a file</param>
         /// <param name="fileName">The name of the file</param>
-        private static bool Save(string json)
+        private static void Save(string json)
         {
             Console.WriteLine("What should the file be named?");
             string fileName = Console.ReadLine();
             //Saving the file
             File.WriteAllText(fileName + ".json", json);
-            return false;
         }
 
         /// <summary>
@@ -276,18 +277,18 @@ namespace JsonApp
             Console.WriteLine("Enter a Alternative name of the show if it has one");
             item.AltName = FirstToUpper(Console.ReadLine());
             Console.WriteLine("Enter the amount of episodes of the show");
-            item.Episodes = GetNumber();
+            item.Episodes = (ushort)GetNumber();
             Console.WriteLine("Enter the description of the show");
-            item.Description = FirstToUpper(Console.ReadLine().Replace("\"",""));
+            item.Description = FirstToUpper(Console.ReadLine().Replace("\"", ""));
             Console.WriteLine("Enter the genres of the show");
             foreach (string s in Console.ReadLine().Split(' '))
             {
                 item.Genres.Add(FirstToUpper(s));
             }
             Console.WriteLine("Enter the score of the show");
-            item.Score = MinMax(GetNumber());
+            item.Score = (byte)MinMax(GetNumber(), Constants.MIN, Constants.MAX);
             Console.WriteLine("Enter the run time per episode");
-            item.RunTime = GetNumber() * item.Episodes;
+            item.RunTime = (uint)GetNumber() * item.Episodes;
             Console.WriteLine("Enter if you have watched it");
             item.Watched = GetBool();
             Console.WriteLine("Enter if it has an ending");
@@ -297,14 +298,14 @@ namespace JsonApp
 
             return item;
         }
-
         /// <summary>
         /// Edit a specific part of the json
         /// </summary>
-        /// <param name="item">ModelItem that you want to edit</param>
-        /// <returns>The edited item</returns>
-        private static ModelItem Edit(ModelItem item)
+        /// <param name="item">ref to the ModelItem that you want to edit</param>
+        /// <returns>true if it has changed</returns>
+        private static bool Edit(ref ModelItem item)
         {
+            bool b = false;
             Console.WriteLine("What field do you want to edit?");
             string cmd;
             while (true)
@@ -314,21 +315,25 @@ namespace JsonApp
                 {
                     Console.WriteLine("Enter its Alternative name");
                     item.AltName = FirstToUpper(Console.ReadLine());
+                    b = true;
                 }
                 else if (cmd.Equals("english"))
                 {
                     Console.WriteLine("Enter its English name");
                     item.EnName = FirstToUpper(Console.ReadLine());
+                    b = true;
                 }
                 else if (cmd.Equals("episodes"))
                 {
                     Console.WriteLine("Enter the amount of episodes");
-                    item.Episodes = GetNumber();
+                    item.Episodes = (ushort)GetNumber();
+                    b = true;
                 }
                 else if (cmd.Equals("description"))
                 {
                     Console.WriteLine("Enter the description");
-                    item.Description = FirstToUpper(Console.ReadLine().Replace("\"",""));
+                    item.Description = FirstToUpper(Console.ReadLine().Replace("\"", ""));
+                    b = true;
                 }
                 else if (cmd.Equals("genres"))
                 {
@@ -339,31 +344,37 @@ namespace JsonApp
                         temp.Add(FirstToUpper(s));
                     }
                     item.Genres = temp;
+                    b = true;
                 }
                 else if (cmd.Equals("notes"))
                 {
                     Console.WriteLine("Enter its notes");
                     item.Notes = Console.ReadLine();
+                    b = true;
                 }
                 else if (cmd.Equals("score"))
                 {
                     Console.WriteLine("Enter its scoring");
-                    item.Score = MinMax(GetNumber());
+                    item.Score = (byte)MinMax(GetNumber(), Constants.MIN, Constants.MAX);
+                    b = true;
                 }
                 else if (cmd.Equals("runtime"))
                 {
                     Console.WriteLine("Enter the runtime per episode");
-                    item.RunTime = item.Episodes * GetNumber();
+                    item.RunTime = (uint)(item.Episodes * GetNumber());
+                    b = true;
                 }
                 else if (cmd.Equals("watched"))
                 {
                     Console.WriteLine("Enter if you have watched it");
                     item.Watched = GetBool();
+                    b = true;
                 }
-                else if (cmd.Equals("end"))
+                else if (cmd.Equals("ending"))
                 {
                     Console.WriteLine("Enter if it has an ending");
                     item.HasEnd = GetBool();
+                    b = true;
                 }
                 else if (cmd.Equals("exit"))
                 {
@@ -382,11 +393,11 @@ namespace JsonApp
                         "\"score\" for editing the score\n" +
                         "\"runtime\" for editing the runtime\n" +
                         "\"watched\" for editing if you have watched it\n" +
-                        "\"end\" for editing if it has an end\n" +
+                        "\"ending\" for editing if it has an ending\n" +
                         "\"exit\" for stop editing");
                 }
             }
-            return item;
+            return b;
         }
 
         /// <summary>
@@ -397,9 +408,31 @@ namespace JsonApp
         private static List<ModelItem> Find(JsonObject jObject)
         {
             //TODO: Add a check if wether it needs a yes/no answer or a word to look for, maybe rework this method
+            /**
+             Get a valid cmd
+{ cmd } 
+
+Get a term and confirm if you want to search using it
+{ term }
+
+But if you cannot find anything using that term, you might want to fill in the term again
+{ {term} cannot find anything}
+
+Afterwards we need to give every item that has been found and index number
+{ index }
+
+
+
+{ cmd }
+{ { term } items count == 0}
+
+{ index }
+return;
+             */
             List<ModelItem> result = new List<ModelItem>();
             string cmd, term;
-            //go through the list
+            bool b = false;
+            //Get a correct cmd
             while (true)
             {
                 //Ask for the command and check wether its a valid one or not
@@ -411,7 +444,7 @@ namespace JsonApp
                     Console.WriteLine("Cancel Search");
                     return null;
                 }
-                else if (cmd.Equals("alternative") || cmd.Equals("english") || cmd.Equals("genres") || cmd.Equals("description") || cmd.Equals("watched") || cmd.Equals("end")) { break; }
+                else if (cmd.Equals("alternative") || cmd.Equals("english") || cmd.Equals("genres") || cmd.Equals("description") || cmd.Equals("watched") || cmd.Equals("ending")) { break; }
                 else
                 {
                     Console.WriteLine(cmd + " isn't a valid command");
@@ -420,7 +453,7 @@ namespace JsonApp
                         "\"genres\" for looking in the genres \n" +
                         "\"description\" for looking in the description \n" +
                         "\"watched\" for looking if you watched it \n" +
-                        "\"end\" for looking if it has an ending \n" +
+                        "\"ending\" for looking if it has an ending \n" +
                         "\"exit\" to stop searching");
                 }
             }
@@ -428,10 +461,19 @@ namespace JsonApp
             {
                 while (true)
                 {
-                    //Check wether if in where you want to search in contains the term
-                    Console.WriteLine("On what do you want to search?");
-                    term = Console.ReadLine().ToLower();
-                    Console.WriteLine("Are you sure you want to search using: " + term + " ?");
+                    if (cmd.Equals("watched") || cmd.Equals("ending"))
+                    {   //Check for bool
+                        Console.WriteLine(cmd + " ?");
+                        term = GetBool().ToString().ToLower();
+                        if (term.Equals("true")) Console.WriteLine("Are you sure you want to search using: yes ?");
+                        else Console.WriteLine("Are you sure you want to search using: no ?");
+                    }
+                    else
+                    {   //Check wether if in where you want to search in contains the term
+                        Console.WriteLine("What do you want to use to search?");
+                        term = Console.ReadLine().ToLower();
+                        Console.WriteLine("Are you sure you want to search using: {0} ?", term);
+                    }
                     Console.WriteLine("Type \"y\" to continue");
                     if (Console.ReadLine().ToLower().Equals("y")) break;
                 }
@@ -454,9 +496,9 @@ namespace JsonApp
                 {
                     foreach (ModelItem mi in jObject.Items)
                     {
-                        foreach (string t in mi.Genres)
+                        foreach (string g in mi.Genres)
                         {
-                            if (t.ToLower() == term) result.Add(mi);
+                            if (g.ToLower() == term) result.Add(mi);
                         }
                     }
                 }
@@ -465,6 +507,26 @@ namespace JsonApp
                     foreach (ModelItem mi in jObject.Items)
                     {
                         if (mi.Description.ToLower().Contains(term)) result.Add(mi);
+                    }
+                }
+                else if (cmd.Equals("watched"))
+                {
+                    foreach (ModelItem mi in jObject.Items)
+                    {
+                        if (b == mi.Watched)
+                        {
+                            result.Add(mi);
+                        }
+                    }
+                }
+                else if (cmd.Equals("ending"))
+                {
+                    foreach (ModelItem mi in jObject.Items)
+                    {
+                        if (b == mi.HasEnd)
+                        {
+                            result.Add(mi);
+                        }
                     }
                 }
                 if (result.Count == 0)
@@ -476,49 +538,22 @@ namespace JsonApp
                 else { break; }
             } while (true);
 
-            //Add index numbers to it
-            switch (cmd)
+            for (int i = 0; i < result.Count; i++)
             {
-                case "alternative":
-                    result.ForEach(delegate (ModelItem item)
-                    {
-                        Console.WriteLine(result.IndexOf(item) + 1);
-                        Console.WriteLine(item.ReturnName());
-                    });
-                    break;
-                case "english":
-                    result.ForEach(delegate (ModelItem item)
-                    {
-                        Console.WriteLine(result.IndexOf(item) + 1);
-                        Console.WriteLine(item.ReturnName());
-                    });
-                    break;
-                case "genres":
-                    result.ForEach(delegate (ModelItem item)
-                    {
-                        Console.WriteLine(result.IndexOf(item) + 1);
-                        Console.WriteLine(item.ReturnName());
-                    });
-                    break;
-                case "description":
-                    result.ForEach(delegate (ModelItem item)
-                    {
-                        Console.WriteLine(result.IndexOf(item) + 1);
-                        Console.WriteLine(item.ReturnName());
-                    });
-                    break;
+                Console.WriteLine(i + 1);
+                Console.WriteLine(result[i].ReturnName());
             }
             return result;
         }
 
         /// <summary>
-        /// Make sure a number is between 0 and 100
+        /// Make sure a number is between min and max
         /// </summary>
         /// <param name="i">number to clamp</param>
-        /// <returns>int between 0 and 100</returns>
-        private static int MinMax(int i)
+        /// <returns>int between min and max</returns>
+        private static int MinMax(int i, int min, int max)
         {
-            return Math.Min(Math.Max(0, i), 100);
+            return Math.Min(Math.Max(min, i), max);
         }
 
         /// <summary>

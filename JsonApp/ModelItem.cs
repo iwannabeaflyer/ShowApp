@@ -8,10 +8,10 @@ namespace JsonApp
     {
         public string EnName { get; set; }          //Name of the show in english
         public string AltName { get; set; }         //an alternative name for the show
-        public int Episodes { get; set; }           //Amount of episodes
+        public ushort Episodes { get; set; }        //Amount of episodes (max is 65.535, longest running is ~20.000 episodes which started in 1959)
         public List<string> Genres { get; set; }    //Genres of the show
-        public int Score { get; set; }              //Score of the show
-        public int RunTime { get; set; }            //Total runtime
+        public byte Score { get; set; }             //Score of the show (clamped between 0 and 100)
+        public uint RunTime { get; set; }           //Total runtime (still can contain 4.294.967.295 min or ~71.582.788 hours or max #episodes with 65.537 minutes per episode)
         public bool Watched { get; set; }           //Seen this show
         public bool HasEnd { get; set; }            //Does it has an ending
         public string Notes { get; set; }           //Additional notes about the show
@@ -22,21 +22,23 @@ namespace JsonApp
         public ModelItem(string json)
         {
             char[] array = { ':' };
-            string[] results = json.Split(array,11);
+            string[] results = json.Split(array, Constants.JSON_FIELDS);
 
             EnName = results[1].Split(',')[0].Trim('"');
             AltName = results[2].Split(',')[0].Trim('"');
-            Episodes = int.Parse(results[3].Split(',')[0].Trim('"'));
+            Episodes = ushort.Parse(results[3].Split(',')[0].Trim('"'));
             Genres = new List<string>();
             string[] genres = results[4].Trim('[').Replace("]", "").Replace("\"", "").Split(',');
             for (int i = 0; i < genres.Length - 1; i++)
             {
                 Genres.Add(genres[i]);
             }
-            Score = int.Parse(results[5].Split(',')[0]);
-            RunTime = int.Parse(results[6].Split(',')[0]);
+            Score = byte.Parse(results[5].Split(',')[0]);
+            RunTime = uint.Parse(results[6].Split(',')[0]);
             Watched = StringToBool(results[7].Split(',')[0]);
             HasEnd = StringToBool(results[8].Split(',')[0]);
+            //NOTE: you can make Constants.JSON_FIELDS 9 and then manually split the last result by .Split("\"description\":"); then the first part will be the notes and the second part will
+            //have the description left. This should make it so that notes also can have ':' in it.
             Notes = results[9].Split(',')[0].Trim('"');
             Description = results[10].Trim('"');
 
@@ -131,7 +133,7 @@ namespace JsonApp
         /// </summary>
         /// <param name="b">bool to transform</param>
         /// <returns>the given bool as a string</returns>
-        private string BoolToAnwser(bool b)
+        public string BoolToAnwser(bool b)
         {   // condition ? true : false
             return b ? "yes" : "no";
         }
@@ -189,8 +191,8 @@ namespace JsonApp
             Console.WriteLine("");
             Console.WriteLine("Score: " + Score);
             Console.WriteLine("Watched: " + BoolToAnwser(Watched));
-            Console.WriteLine("Run time is {0}:{1} or a total of {2} minutes", RunTime / 60, RunTime % 60, RunTime);
-            Console.WriteLine("Has end: " + BoolToAnwser(HasEnd));
+            Console.WriteLine("Run time is {0}:{1} or {2} minutes per episode", RunTime / Constants.MINUTES, RunTime % Constants.MINUTES, RunTime / Episodes);
+            Console.WriteLine("Has an ending: " + BoolToAnwser(HasEnd));
             Console.WriteLine("Notes: " + Notes);
             Console.WriteLine("");
         }
