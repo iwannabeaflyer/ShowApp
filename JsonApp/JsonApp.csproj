@@ -89,7 +89,7 @@
   <ItemGroup>
     <EmbeddedResource Include="strings.en-US.resx" />
     <EmbeddedResource Include="strings.en.resx" />
-    <EmbeddedResource Include="strings.fr.resx" />
+    <EmbeddedResource Include="strings.nl.resx" />
     <EmbeddedResource Include="strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>

@@ -38,7 +38,8 @@ TODO
 
     - Think if i want to change it so that in Notes you can also use the ':' character without the program breaking.
 
-    - Add Globalisation https://www.agiledeveloper.com/articles/LocalizingDOTNet.pdf
+    - Add Globalisation (language tag) https://www.agiledeveloper.com/articles/LocalizingDOTNet.pdf
+    https://docs.microsoft.com/nl-nl/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c
      */
 
 namespace JsonApp
@@ -54,10 +55,16 @@ namespace JsonApp
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
 
-            LanguageManager.Display("en-US");
-            LanguageManager.Display("en-GB");
-            LanguageManager.Display("fr-FR");
-            LanguageManager.Display("es-MX");
+            //LanguageManager.Display("en-US"); //american english
+            //LanguageManager.Display("en-GB"); //british english
+            //LanguageManager.Display("fr-FR"); //french french
+            //LanguageManager.Display("es-MX"); //mexican spanish
+            LanguageManager.SetCulture("nl");
+            Console.WriteLine(LanguageManager.GetTranslation("bye"));
+            Console.WriteLine(LanguageManager.GetTranslation("thanks"));
+            LanguageManager.SetCulture("en");
+            Console.WriteLine(LanguageManager.GetTranslation("bye"));
+            Console.WriteLine(LanguageManager.GetTranslation("thanks"));
 
             Console.WriteLine("Starting Program");
             while (true)
@@ -483,7 +490,7 @@ namespace JsonApp
                 //Check if the list is empty
                 if (result.Count == 0)
                 {
-                    Console.WriteLine("There hasn't been any item found using: in {0} with the term {1} do you want to use a different term?", cmd, BoolToAnwser(term));
+                    Console.WriteLine("There hasn't been any item found in {0} with the term {1} do you want to use a different term?", cmd, BoolToAnwser(term));
                     if (!GetBool()) { Console.WriteLine("Canceling search"); }
                     else { goto Boolterm; }
                 }

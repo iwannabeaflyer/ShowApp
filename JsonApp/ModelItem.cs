@@ -160,7 +160,7 @@ namespace JsonApp
             string s;
             if (!string.IsNullOrWhiteSpace(EnName)) { s = EnName; }
             else if (!string.IsNullOrWhiteSpace(AltName)) { s = AltName; }
-            else { s = ""; Console.WriteLine("Failed to serialize a show since it doesn't have a name"); }
+            else { s = ""; Console.WriteLine(LanguageManager.GetTranslation("noName")); }
             return s;
         }
 
@@ -169,21 +169,21 @@ namespace JsonApp
         /// </summary>
         public void ShowAll()
         {
-            Console.WriteLine("English name: " + EnName);
-            Console.WriteLine("Alternative name: " + AltName);
-            Console.WriteLine("Number of Episodes: " + Episodes);
-            Console.WriteLine("Description: " + Description);
-            Console.Write("Genres: ");
+            Console.WriteLine(LanguageManager.GetTranslation("showEnglish") + EnName);
+            Console.WriteLine(LanguageManager.GetTranslation("showAlternative") + AltName);
+            Console.WriteLine(LanguageManager.GetTranslation("showEpisodes") + Episodes);
+            Console.WriteLine(LanguageManager.GetTranslation("showDescription") + Description);
+            Console.Write(LanguageManager.GetTranslation("showGenres"));
             foreach (string genre in Genres)
             {
                 Console.Write("\"" + genre + "\" ");
             }
             Console.WriteLine("");
-            Console.WriteLine("Score: " + Score);
-            Console.WriteLine("Watched: " + Program.BoolToAnwser(Watched));
-            Console.WriteLine("Run time is {0}:{1} or {2} minutes per episode", RunTime / Constants.MINUTES, RunTime % Constants.MINUTES, RunTime / Episodes);
-            Console.WriteLine("Has an ending: " + Program.BoolToAnwser(HasEnd));
-            Console.WriteLine("Notes: " + Notes);
+            Console.WriteLine(LanguageManager.GetTranslation("showScore") + Score);
+            Console.WriteLine(LanguageManager.GetTranslation("showWatched") + Program.BoolToAnwser(Watched));
+            Console.WriteLine(LanguageManager.GetTranslation("showRuntime"), RunTime / Constants.MINUTES, RunTime % Constants.MINUTES, RunTime / Episodes);
+            Console.WriteLine(LanguageManager.GetTranslation("showEnding") + Program.BoolToAnwser(HasEnd));
+            Console.WriteLine(LanguageManager.GetTranslation("showNotes") + Notes);
             Console.WriteLine("");
         }
     }
