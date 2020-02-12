@@ -17,5 +17,6 @@ namespace JsonApp
         public const string MAL_MANGA = "manga.php?q=";
         public const string IMDB = "https://www.imdb.com/find?q=";
         public const string YOUTUBE = "https://www.youtube.com/results?search_query=";
+        public const string WIKIPEDIA = "https://en.wikipedia.org/w/index.php?search=";
     }
 }

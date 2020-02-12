@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+using System.Globalization;
+using System.Resources;
 
 
 /***
@@ -17,20 +19,26 @@ Changed some of the variables to be slightly more memory efficient. (using small
 Changed Find to include watched and hasend options (refactored)
 
 TODO
-- Internet intergration in looking for looking up more information about a show. https://stackoverflow.com/questions/6305388/how-to-launch-a-google-chrome-tab-with-specific-url-using-c-sharp
-  Could be used when using Find or even with Add and Edit.
-  for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so time+for+polka
+
+    - Internet intergration in looking for looking up more information about a show. https://stackoverflow.com/questions/6305388/how-to-launch-a-google-chrome-tab-with-specific-url-using-c-sharp
+    Could be used when using Find or even with Add and Edit.
+  for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so one+punch+man
   
-  for mal       "https://myanimelist.net/search/all?q=" and then word or words where spaces are indicated by "%20" so the%20rising%20of%20the%20shield%20hero (or replace %20 with a white space)
+  for mal       "https://myanimelist.net/search/all?q=" and then word or words where spaces are indicated by "%20" so one%20punch%20man (or replace %20 with a white space)
   but specific  "https://myanimelist.net/anime.php?q=" where anime.php can be replaced with manga.php, character.php and other categories
 
   imdb          "https://www.imdb.com/find?q=" and then word or words where spaces are indicated by '+' so iron+man+3 (https://www.imdb.com/find?q= + search + &ref_=nv_sr_sm) is also possible
 
-  youtube       "https://www.youtube.com/results?search_query=" and then wor or words where spaces are indicated by '+' so time+for+polka
+  youtube       "https://www.youtube.com/results?search_query=" and then word or words where spaces are indicated by '+' so one+punch+man
 
-- Think if you want a trashcan functionality for removing, this should help users recover accidentaly deleted shows but you will not be able to clear the memory while the program is open, 
+  wikipedia     "https://en.wikipedia.org/w/index.php?search=" and then word or words where spaces are indicated by '+' so one+punch+man
+
+    - Think if you want a trashcan functionality for removing, this should help users recover accidentaly deleted shows but you will not be able to clear the memory while the program is open, 
     aswell as that what is in the trashcan will be deleted once the program exits. Furthermore there is already a check to try to prevent users from deleting things they didn't want to delete.
-- Think if i want to change it so that in Notes you can also use the ':' character without the program breaking.
+
+    - Think if i want to change it so that in Notes you can also use the ':' character without the program breaking.
+
+    - Add Globalisation https://www.agiledeveloper.com/articles/LocalizingDOTNet.pdf
      */
 
 namespace JsonApp
@@ -45,6 +53,11 @@ namespace JsonApp
             string cmd;
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
+
+            LanguageManager.Display("en-US");
+            LanguageManager.Display("en-GB");
+            LanguageManager.Display("fr-FR");
+            LanguageManager.Display("es-MX");
 
             Console.WriteLine("Starting Program");
             while (true)
@@ -142,6 +155,7 @@ namespace JsonApp
                     Console.Clear();
                 }
                 else if (cmd.Equals("polka")) { Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); }
+                else if (cmd.Equals("lonely")) { Process.Start("https://www.youtube.com/watch?v=unOSs2P-An0"); }
                 else if (cmd.Equals("exit"))
                 {
                     if (IsChanged)
@@ -402,126 +416,6 @@ namespace JsonApp
             }
             return b;
         }
-
-        //private static List<ModelItem> Fond(JsonObject jObject)
-        //{
-        //    //TODO: Add a check if wether it needs a yes/no answer or a word to look for, maybe rework this method (have 1 loop for bool and 1 for string)
-        //    List<ModelItem> result = new List<ModelItem>();
-        //    string cmd, term;
-        //    bool b = false;
-        //    //Get a correct cmd
-        //    while (true)
-        //    {
-        //        //Ask for the command and check wether its a valid one or not
-        //        Console.WriteLine("What field do you want to search in?");
-        //        cmd = Console.ReadLine();
-
-        //        if (cmd.Equals("exit"))
-        //        {
-        //            Console.WriteLine("Cancel Search");
-        //            return null;
-        //        }
-        //        else if (cmd.Equals("alternative") || cmd.Equals("english") || cmd.Equals("genres") || cmd.Equals("description") || cmd.Equals("watched") || cmd.Equals("ending")) { break; }
-        //        else
-        //        {
-        //            Console.WriteLine(cmd + " isn't a valid command");
-        //            Console.WriteLine("\"alternative\" for looking for the alternative name\n " +
-        //                "\"english\" for looking for the english name\n " +
-        //                "\"genres\" for looking in the genres \n" +
-        //                "\"description\" for looking in the description \n" +
-        //                "\"watched\" for looking if you watched it \n" +
-        //                "\"ending\" for looking if it has an ending \n" +
-        //                "\"exit\" to stop searching");
-        //        }
-        //    }
-        //    do
-        //    {
-        //        while (true)
-        //        {
-        //            if (cmd.Equals("watched") || cmd.Equals("ending"))
-        //            {   //Check for bool
-        //                Console.WriteLine(cmd + " ?");
-        //                term = GetBool().ToString().ToLower();
-        //                if (term.Equals("true")) Console.WriteLine("Are you sure you want to search using: yes ?");
-        //                else Console.WriteLine("Are you sure you want to search using: no ?");
-        //            }
-        //            else
-        //            {   //Check wether if in where you want to search in contains the term
-        //                Console.WriteLine("What do you want to use to search?");
-        //                term = Console.ReadLine().ToLower();
-        //                Console.WriteLine("Are you sure you want to search using: {0} ?", term);
-        //            }
-        //            Console.WriteLine("Type \"y\" to continue");
-        //            if (Console.ReadLine().ToLower().Equals("y")) break;
-        //        }
-
-        //        if (cmd.Equals("alternative"))
-        //        {
-        //            foreach (ModelItem mi in jObject.Items)
-        //            {
-        //                if (mi.AltName.ToLower().Contains(term)) result.Add(mi);
-        //            }
-        //        }
-        //        else if (cmd.Equals("english"))
-        //        {
-        //            foreach (ModelItem mi in jObject.Items)
-        //            {
-        //                if (mi.EnName.ToLower().Contains(term)) result.Add(mi);
-        //            }
-        //        }
-        //        else if (cmd.Equals("genres"))
-        //        {
-        //            foreach (ModelItem mi in jObject.Items)
-        //            {
-        //                foreach (string g in mi.Genres)
-        //                {
-        //                    if (g.ToLower() == term) result.Add(mi);
-        //                }
-        //            }
-        //        }
-        //        else if (cmd.Equals("description"))
-        //        {
-        //            foreach (ModelItem mi in jObject.Items)
-        //            {
-        //                if (mi.Description.ToLower().Contains(term)) result.Add(mi);
-        //            }
-        //        }
-        //        else if (cmd.Equals("watched"))
-        //        {
-        //            foreach (ModelItem mi in jObject.Items)
-        //            {
-        //                if (b == mi.Watched)
-        //                {
-        //                    result.Add(mi);
-        //                }
-        //            }
-        //        }
-        //        else if (cmd.Equals("ending"))
-        //        {
-        //            foreach (ModelItem mi in jObject.Items)
-        //            {
-        //                if (b == mi.HasEnd)
-        //                {
-        //                    result.Add(mi);
-        //                }
-        //            }
-        //        }
-        //        if (result.Count == 0)
-        //        {
-        //            Console.WriteLine("There hasn't been any item found using: {0} in {1} do you want to use a different term?", term, cmd);
-        //            Console.WriteLine("Y / N");
-        //            if (Console.ReadLine().ToUpper().Equals("N")) { Console.WriteLine("Canceling search"); break; }
-        //        }
-        //        else { break; }
-        //    } while (true);
-
-        //    for (int i = 0; i < result.Count; i++)
-        //    {
-        //        Console.WriteLine(i + 1);
-        //        Console.WriteLine(result[i].ReturnName());
-        //    }
-        //    return result;
-        //}
 
         /// <summary>
         /// Find all ModelItems that contain an a term
