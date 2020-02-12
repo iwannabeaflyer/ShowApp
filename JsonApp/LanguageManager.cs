@@ -24,11 +24,6 @@ Main
     {
         private static ResourceManager resourceManager;
 
-        public LanguageManager()
-        {
-            resourceManager = new ResourceManager("JsonApp.strings", System.Reflection.Assembly.GetExecutingAssembly());
-        }
-
         public static void SetCulture(string specifiedCulture)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo(specifiedCulture);

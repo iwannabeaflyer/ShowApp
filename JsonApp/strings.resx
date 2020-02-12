@@ -120,89 +120,69 @@
   <data name="accesItem" xml:space="preserve">
     <value>What item do you want to acces?</value>
   </data>
-  <data name="accesNaN" xml:space="preserve">
-    <value> isn't a valid number please fill in a number</value>
-  </data>
   <data name="accesOutofRange" xml:space="preserve">
     <value>Index is out of range</value>
-  </data>
-  <data name="addAlternative" xml:space="preserve">
-    <value>Enter an Alternative name of the show if it has one</value>
   </data>
   <data name="addComplete" xml:space="preserve">
     <value>Adding complete</value>
   </data>
-  <data name="addDescription" xml:space="preserve">
-    <value>Enter the description of the show</value>
-  </data>
-  <data name="addEnding" xml:space="preserve">
-    <value>Enter if the show has an ending</value>
-  </data>
-  <data name="addEnglish" xml:space="preserve">
-    <value>Enter its English name of the show</value>
-  </data>
-  <data name="addEpisodes" xml:space="preserve">
-    <value>Enter the amount of episodes of the show</value>
-  </data>
-  <data name="addGenres" xml:space="preserve">
-    <value>Enter the genres of the show</value>
-  </data>
   <data name="addNewItem" xml:space="preserve">
     <value>Adding a new item</value>
   </data>
-  <data name="addNotes" xml:space="preserve">
+  <data name="assignAlternative" xml:space="preserve">
+    <value>Enter an Alternative name of the show if it has one</value>
+  </data>
+  <data name="assignDescription" xml:space="preserve">
+    <value>Enter the description of the show</value>
+  </data>
+  <data name="assignEnding" xml:space="preserve">
+    <value>Enter if the show has an ending</value>
+  </data>
+  <data name="assignEnglish" xml:space="preserve">
+    <value>Enter the English name of the show</value>
+  </data>
+  <data name="assignEpisodes" xml:space="preserve">
+    <value>Enter the amount of episodes of the show</value>
+  </data>
+  <data name="assignGenres" xml:space="preserve">
+    <value>Enter the genres of the show</value>
+  </data>
+  <data name="assignNotes" xml:space="preserve">
     <value>Enter any additional notes about the show</value>
   </data>
-  <data name="addRuntime" xml:space="preserve">
+  <data name="assignRuntime" xml:space="preserve">
     <value>Enter the runtime of a single episode</value>
   </data>
-  <data name="addScore" xml:space="preserve">
+  <data name="assignScore" xml:space="preserve">
     <value>Enter the score of the show</value>
   </data>
-  <data name="addWatched" xml:space="preserve">
+  <data name="assignWatched" xml:space="preserve">
     <value>Enter if you have already watched it</value>
   </data>
   <data name="edit" xml:space="preserve">
     <value>Editing</value>
   </data>
-  <data name="editAlternative" xml:space="preserve">
-    <value>Enter the alternative name of the show</value>
-  </data>
   <data name="editComplete" xml:space="preserve">
     <value>Editing complete</value>
-  </data>
-  <data name="editDescription" xml:space="preserve">
-    <value>Enter the description of the show</value>
   </data>
   <data name="editEnding" xml:space="preserve">
     <value>Enter wether the show has an ending or not</value>
   </data>
-  <data name="editEnglish" xml:space="preserve">
-    <value>Enter the english name of the show</value>
-  </data>
-  <data name="editEpisodes" xml:space="preserve">
-    <value>Enter the amount of episodes of the show</value>
-  </data>
   <data name="editField" xml:space="preserve">
     <value>What field do you want to edit?</value>
   </data>
-  <data name="editGenres" xml:space="preserve">
-    <value>Enter teh genres of the show</value>
-  </data>
-  <data name="editNotes" xml:space="preserve">
-    <value>Enter additional notes about the show</value>
-  </data>
   <data name="editOptions" xml:space="preserve">
-    <value>\"alternative\" for editing the alternative name\n\"english\" for editing the english name\n\"episodes\" for editing the amount of episodes\n\"description\" for editing the description\n\"genres\" for editing its genres\n\"notes\" for editing the notes\n\"score\" for editing the score\n\"runtime\" for editing the runtime\n\"watched\" for editing if you have watched it\n\"ending\" for editing if it has an ending\n\"exit\" for stop editing</value>
-  </data>
-  <data name="editRuntime" xml:space="preserve">
-    <value>Enter the runtime per episode</value>
-  </data>
-  <data name="editScore" xml:space="preserve">
-    <value>Enter the scoring of the show</value>
-  </data>
-  <data name="editWatched" xml:space="preserve">
-    <value>Enter wether you have watched the show or not</value>
+    <value>"alternative" for editing the alternative name
+"english" for editing the english name
+"episodes" for editing the amount of episodes
+"description" for editing the description
+"genres" for editing its genres
+"notes" for editing the notes
+"score" for editing the score
+"runtime" for editing the runtime
+"watched" for editing if you have watched it
+"ending" for editing if it has an ending
+"exit" for stop editing</value>
   </data>
   <data name="find" xml:space="preserve">
     <value>Finding</value>
@@ -213,14 +193,14 @@
   <data name="findConfirmNo" xml:space="preserve">
     <value>Are you sure you want to search using: no ?</value>
   </data>
-  <data name="findConfirmTerm" xml:space="preserve">
+  <data name="findConfirmOther" xml:space="preserve">
     <value>Are you sure you want to search using: {0} ?</value>
   </data>
   <data name="findConfirmYes" xml:space="preserve">
     <value>Are you sure you want to search using: yes ?</value>
   </data>
   <data name="findContinue" xml:space="preserve">
-    <value>Type \"y\" to continue</value>
+    <value>Type "y" to continue</value>
   </data>
   <data name="findEnding" xml:space="preserve">
     <value>Does it have an ending?</value>
@@ -232,7 +212,13 @@
     <value>There hasn't been any item found in {0} with the term {1} do you want to use a different term?</value>
   </data>
   <data name="findOptions" xml:space="preserve">
-    <value>\"alternative\" for looking for the alternative name\n\"english\" for looking for the english name\n\"genres\" for looking in the genres \n\"description\" for looking in the description \n\"watched\" for looking if you watched it \n\"ending\" for looking if it has an ending \n\"exit\" to stop searching</value>
+    <value>"alternative" for looking for the alternative name
+"english" for looking for the english name
+"genres" for looking in the genres 
+"description" for looking in the description 
+"watched" for looking if you watched it 
+"ending" for looking if it has an ending 
+"exit" to stop searching</value>
   </data>
   <data name="findOther" xml:space="preserve">
     <value>On what do you want to search?</value>
@@ -253,7 +239,16 @@
     <value>What is the name of the file?</value>
   </data>
   <data name="mainOptions" xml:space="preserve">
-    <value>\"add\" for adding a new item\n"\"remove\" for removing an excisting item\n\"find\" for finding items\n\"edit\" for editing an excisting item\n\"save\" for saving the excisting items\n\"load\" for loading items from a file\n\"exit\" exit for stopping the program\n</value>
+    <value>"add" for adding a new item
+"remove" for removing an excisting item
+"find" for finding items
+"edit" for editing an excisting item
+"save" for saving the excisting items
+"load" for loading items from a file
+"exit" exit for stopping the program</value>
+  </data>
+  <data name="NaN" xml:space="preserve">
+    <value> isn't a valid number please fill in a number</value>
   </data>
   <data name="noName" xml:space="preserve">
     <value>Failed to serialize a show since it doesn't have a name</value>

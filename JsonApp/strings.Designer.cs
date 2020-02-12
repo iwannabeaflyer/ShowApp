@@ -70,29 +70,11 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  isn&apos;t a valid number please fill in a number.
-        /// </summary>
-        internal static string accesNaN {
-            get {
-                return ResourceManager.GetString("accesNaN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Index is out of range.
         /// </summary>
         internal static string accesOutofRange {
             get {
                 return ResourceManager.GetString("accesOutofRange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter an Alternative name of the show if it has one.
-        /// </summary>
-        internal static string addAlternative {
-            get {
-                return ResourceManager.GetString("addAlternative", resourceCulture);
             }
         }
         
@@ -106,51 +88,6 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the description of the show.
-        /// </summary>
-        internal static string addDescription {
-            get {
-                return ResourceManager.GetString("addDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter if the show has an ending.
-        /// </summary>
-        internal static string addEnding {
-            get {
-                return ResourceManager.GetString("addEnding", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter its English name of the show.
-        /// </summary>
-        internal static string addEnglish {
-            get {
-                return ResourceManager.GetString("addEnglish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the amount of episodes of the show.
-        /// </summary>
-        internal static string addEpisodes {
-            get {
-                return ResourceManager.GetString("addEpisodes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the genres of the show.
-        /// </summary>
-        internal static string addGenres {
-            get {
-                return ResourceManager.GetString("addGenres", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Adding a new item.
         /// </summary>
         internal static string addNewItem {
@@ -160,38 +97,92 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter an Alternative name of the show if it has one.
+        /// </summary>
+        internal static string assignAlternative {
+            get {
+                return ResourceManager.GetString("assignAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the description of the show.
+        /// </summary>
+        internal static string assignDescription {
+            get {
+                return ResourceManager.GetString("assignDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter if the show has an ending.
+        /// </summary>
+        internal static string assignEnding {
+            get {
+                return ResourceManager.GetString("assignEnding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the English name of the show.
+        /// </summary>
+        internal static string assignEnglish {
+            get {
+                return ResourceManager.GetString("assignEnglish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the amount of episodes of the show.
+        /// </summary>
+        internal static string assignEpisodes {
+            get {
+                return ResourceManager.GetString("assignEpisodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the genres of the show.
+        /// </summary>
+        internal static string assignGenres {
+            get {
+                return ResourceManager.GetString("assignGenres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter any additional notes about the show.
         /// </summary>
-        internal static string addNotes {
+        internal static string assignNotes {
             get {
-                return ResourceManager.GetString("addNotes", resourceCulture);
+                return ResourceManager.GetString("assignNotes", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter the runtime of a single episode.
         /// </summary>
-        internal static string addRuntime {
+        internal static string assignRuntime {
             get {
-                return ResourceManager.GetString("addRuntime", resourceCulture);
+                return ResourceManager.GetString("assignRuntime", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter the score of the show.
         /// </summary>
-        internal static string addScore {
+        internal static string assignScore {
             get {
-                return ResourceManager.GetString("addScore", resourceCulture);
+                return ResourceManager.GetString("assignScore", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter if you have already watched it.
         /// </summary>
-        internal static string addWatched {
+        internal static string assignWatched {
             get {
-                return ResourceManager.GetString("addWatched", resourceCulture);
+                return ResourceManager.GetString("assignWatched", resourceCulture);
             }
         }
         
@@ -205,29 +196,11 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the alternative name of the show.
-        /// </summary>
-        internal static string editAlternative {
-            get {
-                return ResourceManager.GetString("editAlternative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Editing complete.
         /// </summary>
         internal static string editComplete {
             get {
                 return ResourceManager.GetString("editComplete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the description of the show.
-        /// </summary>
-        internal static string editDescription {
-            get {
-                return ResourceManager.GetString("editDescription", resourceCulture);
             }
         }
         
@@ -241,24 +214,6 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the english name of the show.
-        /// </summary>
-        internal static string editEnglish {
-            get {
-                return ResourceManager.GetString("editEnglish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the amount of episodes of the show.
-        /// </summary>
-        internal static string editEpisodes {
-            get {
-                return ResourceManager.GetString("editEpisodes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to What field do you want to edit?.
         /// </summary>
         internal static string editField {
@@ -268,56 +223,21 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter teh genres of the show.
-        /// </summary>
-        internal static string editGenres {
-            get {
-                return ResourceManager.GetString("editGenres", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter additional notes about the show.
-        /// </summary>
-        internal static string editNotes {
-            get {
-                return ResourceManager.GetString("editNotes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to \&quot;alternative\&quot; for editing the alternative name\n\&quot;english\&quot; for editing the english name\n\&quot;episodes\&quot; for editing the amount of episodes\n\&quot;description\&quot; for editing the description\n\&quot;genres\&quot; for editing its genres\n\&quot;notes\&quot; for editing the notes\n\&quot;score\&quot; for editing the score\n\&quot;runtime\&quot; for editing the runtime\n\&quot;watched\&quot; for editing if you have watched it\n\&quot;ending\&quot; for editing if it has an ending\n\&quot;exit\&quot; for stop editing.
+        ///   Looks up a localized string similar to &quot;alternative&quot; for editing the alternative name
+        ///&quot;english&quot; for editing the english name
+        ///&quot;episodes&quot; for editing the amount of episodes
+        ///&quot;description&quot; for editing the description
+        ///&quot;genres&quot; for editing its genres
+        ///&quot;notes&quot; for editing the notes
+        ///&quot;score&quot; for editing the score
+        ///&quot;runtime&quot; for editing the runtime
+        ///&quot;watched&quot; for editing if you have watched it
+        ///&quot;ending&quot; for editing if it has an ending
+        ///&quot;exit&quot; for stop editing.
         /// </summary>
         internal static string editOptions {
             get {
                 return ResourceManager.GetString("editOptions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the runtime per episode.
-        /// </summary>
-        internal static string editRuntime {
-            get {
-                return ResourceManager.GetString("editRuntime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the scoring of the show.
-        /// </summary>
-        internal static string editScore {
-            get {
-                return ResourceManager.GetString("editScore", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter wether you have watched the show or not.
-        /// </summary>
-        internal static string editWatched {
-            get {
-                return ResourceManager.GetString("editWatched", resourceCulture);
             }
         }
         
@@ -351,9 +271,9 @@ namespace JsonApp {
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to search using: {0} ?.
         /// </summary>
-        internal static string findConfirmTerm {
+        internal static string findConfirmOther {
             get {
-                return ResourceManager.GetString("findConfirmTerm", resourceCulture);
+                return ResourceManager.GetString("findConfirmOther", resourceCulture);
             }
         }
         
@@ -367,7 +287,7 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type \&quot;y\&quot; to continue.
+        ///   Looks up a localized string similar to Type &quot;y&quot; to continue.
         /// </summary>
         internal static string findContinue {
             get {
@@ -403,7 +323,13 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \&quot;alternative\&quot; for looking for the alternative name\n\&quot;english\&quot; for looking for the english name\n\&quot;genres\&quot; for looking in the genres \n\&quot;description\&quot; for looking in the description \n\&quot;watched\&quot; for looking if you watched it \n\&quot;ending\&quot; for looking if it has an ending \n\&quot;exit\&quot; to stop searching.
+        ///   Looks up a localized string similar to &quot;alternative&quot; for looking for the alternative name
+        ///&quot;english&quot; for looking for the english name
+        ///&quot;genres&quot; for looking in the genres 
+        ///&quot;description&quot; for looking in the description 
+        ///&quot;watched&quot; for looking if you watched it 
+        ///&quot;ending&quot; for looking if it has an ending 
+        ///&quot;exit&quot; to stop searching.
         /// </summary>
         internal static string findOptions {
             get {
@@ -466,11 +392,26 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \&quot;add\&quot; for adding a new item\n&quot;\&quot;remove\&quot; for removing an excisting item\n\&quot;find\&quot; for finding items\n\&quot;edit\&quot; for editing an excisting item\n\&quot;save\&quot; for saving the excisting items\n\&quot;load\&quot; for loading items from a file\n\&quot;exit\&quot; exit for stopping the program\n.
+        ///   Looks up a localized string similar to &quot;add&quot; for adding a new item
+        ///&quot;remove&quot; for removing an excisting item
+        ///&quot;find&quot; for finding items
+        ///&quot;edit&quot; for editing an excisting item
+        ///&quot;save&quot; for saving the excisting items
+        ///&quot;load&quot; for loading items from a file
+        ///&quot;exit&quot; exit for stopping the program.
         /// </summary>
         internal static string mainOptions {
             get {
                 return ResourceManager.GetString("mainOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  isn&apos;t a valid number please fill in a number.
+        /// </summary>
+        internal static string NaN {
+            get {
+                return ResourceManager.GetString("NaN", resourceCulture);
             }
         }
         

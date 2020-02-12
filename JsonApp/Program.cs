@@ -54,19 +54,22 @@ namespace JsonApp
             string cmd;
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
-
+            LanguageManager.SetCulture("en");
             //LanguageManager.Display("en-US"); //american english
             //LanguageManager.Display("en-GB"); //british english
             //LanguageManager.Display("fr-FR"); //french french
             //LanguageManager.Display("es-MX"); //mexican spanish
-            LanguageManager.SetCulture("nl");
-            Console.WriteLine(LanguageManager.GetTranslation("bye"));
-            Console.WriteLine(LanguageManager.GetTranslation("thanks"));
-            LanguageManager.SetCulture("en");
-            Console.WriteLine(LanguageManager.GetTranslation("bye"));
-            Console.WriteLine(LanguageManager.GetTranslation("thanks"));
 
-            Console.WriteLine("Starting Program");
+            //LanguageManager.SetCulture("nl");
+            //Console.WriteLine(LanguageManager.GetTranslation("find"));
+            //Console.WriteLine(LanguageManager.GetTranslation("bye"));
+            //Console.WriteLine(LanguageManager.GetTranslation("thanks"));
+            
+            //LanguageManager.SetCulture("en");
+            //Console.WriteLine(LanguageManager.GetTranslation("bye"));
+            //Console.WriteLine(LanguageManager.GetTranslation("thanks"));
+
+            Console.WriteLine(LanguageManager.GetTranslation("programStart"));
             while (true)
             {
                 cmd = Console.ReadLine().ToLower();
@@ -74,11 +77,11 @@ namespace JsonApp
                 {
                     jsonObject.Items.Add(Add());
                     IsChanged = true;
-                    Console.WriteLine("Adding complete");
+                    Console.WriteLine(LanguageManager.GetTranslation("addComplete"));
                 }
                 else if (cmd.Equals("remove"))
                 {
-                    Console.WriteLine("Removing");
+                    Console.WriteLine(LanguageManager.GetTranslation("remove"));
                     List<ModelItem> results;
                     do
                     {
@@ -87,16 +90,16 @@ namespace JsonApp
                         if (results == null || results.Count() == 0) continue;
 
                         int elem = AccesItem(results.Count());
-                        Console.WriteLine("Are you sure you want to remove:");
+                        Console.WriteLine(LanguageManager.GetTranslation("removeConfirm"));
                         jsonObject.Items[elem].ShowAll();
                         Question:
-                        Console.WriteLine("Yes / No / Other");
+                        Console.WriteLine(LanguageManager.GetTranslation("yesNoOther"));
                         cmd = Console.ReadLine().ToLower();
                         if (cmd.Equals("y") || cmd.Equals("yes"))
                         {
                             jsonObject.Items.Remove(results.ElementAt(elem));
                             IsChanged = true;
-                            Console.WriteLine("Removing complete");
+                            Console.WriteLine(LanguageManager.GetTranslation("removeComplete"));
                             break;
                         }
                         else if (cmd.Equals("o") || cmd.Equals("other"))
@@ -105,7 +108,7 @@ namespace JsonApp
                         }
                         else if (cmd.Equals("n") || cmd.Equals("no"))
                         {
-                            Console.WriteLine("Canceling removal");
+                            Console.WriteLine(LanguageManager.GetTranslation("removeCancel"));
                             break;
                         }
                         else
@@ -117,7 +120,7 @@ namespace JsonApp
                 }
                 else if (cmd.Equals("find"))
                 {
-                    Console.WriteLine("Finding");
+                    Console.WriteLine(LanguageManager.GetTranslation("find"));
                     List<ModelItem> results = Find(jsonObject);
                     if (results == null || results.Count() == 0) continue;
 
@@ -130,7 +133,7 @@ namespace JsonApp
                 }
                 else if (cmd.Equals("edit"))
                 {
-                    Console.WriteLine("Editing");
+                    Console.WriteLine(LanguageManager.GetTranslation("edit"));
                     //find certain items
                     List<ModelItem> results = Find(jsonObject);
                     if (results == null || results.Count() == 0) continue;
@@ -140,22 +143,22 @@ namespace JsonApp
                     ModelItem edit = results.ElementAt(elem);
                     //edit specific field(s)
                     IsChanged = Edit(ref edit);
-                    Console.WriteLine("Editing complete");
+                    Console.WriteLine(LanguageManager.GetTranslation("editComplete"));
                 }
                 else if (cmd.Equals("save"))
                 {
-                    Console.WriteLine("Saving");
+                    Console.WriteLine(LanguageManager.GetTranslation("save"));
                     jsonString = Serialize(jsonObject);
                     Save(jsonString);
                     IsChanged = false;
-                    Console.WriteLine("Saving complete");
+                    Console.WriteLine(LanguageManager.GetTranslation("saveComplete"));
                 }
                 else if (cmd.Equals("load"))
                 {
-                    Console.WriteLine("Loading");
+                    Console.WriteLine(LanguageManager.GetTranslation("load"));
                     jsonString = Load();
                     jsonObject.Items = Deserialize(jsonString);
-                    Console.WriteLine("Loading complete");
+                    Console.WriteLine(LanguageManager.GetTranslation("loadComplete"));
                 }
                 else if (cmd.Equals("clear"))
                 {
@@ -167,24 +170,18 @@ namespace JsonApp
                 {
                     if (IsChanged)
                     {
-                        Console.WriteLine("The file has been changed but not saved, do you want to save it?");
+                        Console.WriteLine(LanguageManager.GetTranslation("unsavedChanges"));
                         if (GetBool()) { Save(jsonString); IsChanged = false; }
                     }
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(cmd + " isn't a valid command");
-                    Console.WriteLine("\"add\" for adding a new item\n" +
-                        "\"remove\" for removing an excisting item\n" +
-                        "\"find\" for finding items\n" +
-                        "\"edit\" for editing an excisting item\n" +
-                        "\"save\" for saving the excisting items\n" +
-                        "\"load\" for loading items from a file\n" +
-                        "\"exit\" exit for stopping the program\n");
+                    Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
+                    Console.WriteLine(LanguageManager.GetTranslation("mainOptions"));
                 }
             }
-            Console.WriteLine("Ending Program");
+            Console.WriteLine(LanguageManager.GetTranslation("programEnd"));
             Console.ReadKey();
         }
 
@@ -198,7 +195,7 @@ namespace JsonApp
             int elem;
             do
             {
-                Console.WriteLine("What item do you want to acces?");
+                Console.WriteLine(LanguageManager.GetTranslation("accesItem"));
                 string cmd = Console.ReadLine();
                 if (Int32.TryParse(cmd, out elem))
                 {
@@ -208,12 +205,12 @@ namespace JsonApp
                     }
                     else
                     {
-                        Console.WriteLine("Index is out of range");
+                        Console.WriteLine(LanguageManager.GetTranslation("accesOutofRange"));
                     }
                 }
                 else
                 {
-                    Console.WriteLine(cmd + " isn't a valid number please try again");
+                    Console.WriteLine(cmd + LanguageManager.GetTranslation("NaN"));
                 }
             } while (true);
             return --elem;
@@ -265,7 +262,7 @@ namespace JsonApp
         /// <param name="fileName">The name of the file</param>
         private static void Save(string json)
         {
-            Console.WriteLine("What should the file be named?");
+            Console.WriteLine(LanguageManager.GetTranslation("saveFileName"));
             string fileName = Console.ReadLine();
             //Saving the file
             File.WriteAllText(fileName + ".json", json);
@@ -278,7 +275,7 @@ namespace JsonApp
         /// <returns>The entire content of a file as a string</returns>
         private static string Load()
         {
-            Console.WriteLine("What is the name of the file?");
+            Console.WriteLine(LanguageManager.GetTranslation("loadFileName"));
             string fileName = Console.ReadLine();
             //Read the file
             return File.ReadAllText(fileName + ".json");
@@ -290,32 +287,32 @@ namespace JsonApp
         /// <returns>The newly created ModelItem</returns>
         private static ModelItem Add()
         {
-            Console.WriteLine("Adding a new item");
+            Console.WriteLine(LanguageManager.GetTranslation("addNewItem"));
             ModelItem item = new ModelItem();
             //fill each section invidualy
-            Console.WriteLine("Enter its English name of the show");
+            Console.WriteLine(LanguageManager.GetTranslation("assignEnglish"));
             item.EnName = FirstToUpper(Console.ReadLine());
-            Console.WriteLine("Enter a Alternative name of the show if it has one");
+            Console.WriteLine(LanguageManager.GetTranslation("assignAlternative"));
             item.AltName = FirstToUpper(Console.ReadLine());
             //TODO: give the user an option to use the just given name to look it up for more information with a webbrowser
-            Console.WriteLine("Enter the amount of episodes of the show");
+            Console.WriteLine(LanguageManager.GetTranslation("assignEpisodes"));
             item.Episodes = (ushort)GetNumber();
-            Console.WriteLine("Enter the description of the show");
+            Console.WriteLine(LanguageManager.GetTranslation("assignDescription"));
             item.Description = FirstToUpper(Console.ReadLine().Replace("\"", ""));
-            Console.WriteLine("Enter the genres of the show");
+            Console.WriteLine(LanguageManager.GetTranslation("assignGenres"));
             foreach (string s in Console.ReadLine().Split(' '))
             {
                 item.Genres.Add(FirstToUpper(s));
             }
-            Console.WriteLine("Enter the score of the show");
+            Console.WriteLine(LanguageManager.GetTranslation("assignScore"));
             item.Score = (byte)MinMax(GetNumber(), Constants.MIN, Constants.MAX);
-            Console.WriteLine("Enter the run time per episode");
+            Console.WriteLine(LanguageManager.GetTranslation("assignRuntime"));
             item.RunTime = (uint)GetNumber() * item.Episodes;
-            Console.WriteLine("Enter if you have watched it");
+            Console.WriteLine(LanguageManager.GetTranslation("assignWatched"));
             item.Watched = GetBool();
-            Console.WriteLine("Enter if it has an ending");
+            Console.WriteLine(LanguageManager.GetTranslation("assignEnding"));
             item.HasEnd = GetBool();
-            Console.WriteLine("Enter additional notes");
+            Console.WriteLine(LanguageManager.GetTranslation("assignNotes"));
             item.Notes = Console.ReadLine();
 
             return item;
@@ -330,38 +327,38 @@ namespace JsonApp
         {
             //TODO: ask if the user wants to open an webbrowser with the given title to look up for more information
             bool b = false;
-            Console.WriteLine("What field do you want to edit?");
+            Console.WriteLine(LanguageManager.GetTranslation("editField"));
             string cmd;
             while (true)
             {
                 cmd = Console.ReadLine().ToLower();
                 if (cmd.Equals("alternative"))
                 {
-                    Console.WriteLine("Enter its Alternative name");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignAlternative"));
                     item.AltName = FirstToUpper(Console.ReadLine());
                     b = true;
                 }
                 else if (cmd.Equals("english"))
                 {
-                    Console.WriteLine("Enter its English name");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignEnglish"));
                     item.EnName = FirstToUpper(Console.ReadLine());
                     b = true;
                 }
                 else if (cmd.Equals("episodes"))
                 {
-                    Console.WriteLine("Enter the amount of episodes");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignEpisodes"));
                     item.Episodes = (ushort)GetNumber();
                     b = true;
                 }
                 else if (cmd.Equals("description"))
                 {
-                    Console.WriteLine("Enter the description");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignDescription"));
                     item.Description = FirstToUpper(Console.ReadLine().Replace("\"", ""));
                     b = true;
                 }
                 else if (cmd.Equals("genres"))
                 {
-                    Console.WriteLine("Enter the genres");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignGenres"));
                     List<string> temp = new List<string>();
                     foreach (string s in Console.ReadLine().Split(' '))
                     {
@@ -372,31 +369,31 @@ namespace JsonApp
                 }
                 else if (cmd.Equals("notes"))
                 {
-                    Console.WriteLine("Enter its notes");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignNotes"));
                     item.Notes = Console.ReadLine();
                     b = true;
                 }
                 else if (cmd.Equals("score"))
                 {
-                    Console.WriteLine("Enter its scoring");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignScore"));
                     item.Score = (byte)MinMax(GetNumber(), Constants.MIN, Constants.MAX);
                     b = true;
                 }
                 else if (cmd.Equals("runtime"))
                 {
-                    Console.WriteLine("Enter the runtime per episode");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignRuntime"));
                     item.RunTime = (uint)(item.Episodes * GetNumber());
                     b = true;
                 }
                 else if (cmd.Equals("watched"))
                 {
-                    Console.WriteLine("Enter if you have watched it");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignWatched"));
                     item.Watched = GetBool();
                     b = true;
                 }
                 else if (cmd.Equals("ending"))
                 {
-                    Console.WriteLine("Enter if it has an ending");
+                    Console.WriteLine(LanguageManager.GetTranslation("assignEnding"));
                     item.HasEnd = GetBool();
                     b = true;
                 }
@@ -407,18 +404,8 @@ namespace JsonApp
                 }
                 else
                 {
-                    Console.WriteLine(cmd + " isn't a valid command");
-                    Console.WriteLine("\"alternative\" for editing the alternative name\n" +
-                        "\"english\" for editing the english name\n" +
-                        "\"episodes\" for editing the amount of episodes\n" +
-                        "\"description\" for editing the description\n" +
-                        "\"genres\" for editing its genres\n" +
-                        "\"notes\" for editing the notes\n" +
-                        "\"score\" for editing the score\n" +
-                        "\"runtime\" for editing the runtime\n" +
-                        "\"watched\" for editing if you have watched it\n" +
-                        "\"ending\" for editing if it has an ending\n" +
-                        "\"exit\" for stop editing");
+                    Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
+                    Console.WriteLine(LanguageManager.GetTranslation("editOptions"));
                 }
             }
             return b;
@@ -437,25 +424,19 @@ namespace JsonApp
             while (true)
             {
                 //Ask for the command and check wether its a valid one or not
-                Console.WriteLine("What field do you want to search in?");
+                Console.WriteLine(LanguageManager.GetTranslation("findField"));
                 cmd = Console.ReadLine();
 
                 if (cmd.Equals("exit"))
                 {
-                    Console.WriteLine("Cancel Search");
+                    Console.WriteLine(LanguageManager.GetTranslation("findCancel"));
                     return null;
                 }
                 else if (cmd.Equals("alternative") || cmd.Equals("english") || cmd.Equals("genres") || cmd.Equals("description") || cmd.Equals("watched") || cmd.Equals("ending")) { break; }
                 else
                 {
-                    Console.WriteLine(cmd + " isn't a valid command");
-                    Console.WriteLine("\"alternative\" for looking for the alternative name\n " +
-                        "\"english\" for looking for the english name\n " +
-                        "\"genres\" for looking in the genres \n" +
-                        "\"description\" for looking in the description \n" +
-                        "\"watched\" for looking if you watched it \n" +
-                        "\"ending\" for looking if it has an ending \n" +
-                        "\"exit\" to stop searching");
+                    Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
+                    Console.WriteLine(LanguageManager.GetTranslation("findOptions"));
                 }
             }
             if (cmd.Equals("watched") || cmd.Equals("ending"))
@@ -464,12 +445,12 @@ namespace JsonApp
                 Boolterm:
                 do
                 {
-                    if (cmd.Equals("watched")) Console.WriteLine("Have you watched it?");
-                    else Console.WriteLine("Does it have an ending");
+                    if (cmd.Equals("watched")) Console.WriteLine(LanguageManager.GetTranslation("findWatched"));
+                    else Console.WriteLine(LanguageManager.GetTranslation("findEnding"));
                     term = GetBool();
-                    if (term) Console.WriteLine("Are you sure you want to search using: yes ?");
-                    else Console.WriteLine("Are you sure you want to search using: no ?");
-                    Console.WriteLine("Type \"y\" to continue");
+                    if (term) Console.WriteLine(LanguageManager.GetTranslation("findConfirmYes"));
+                    else Console.WriteLine(LanguageManager.GetTranslation("findConfirmNo"));
+                    Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
                     if (Console.ReadLine().ToLower().Equals("y")) break;
                 } while (true);
                 //Start searching
@@ -490,8 +471,8 @@ namespace JsonApp
                 //Check if the list is empty
                 if (result.Count == 0)
                 {
-                    Console.WriteLine("There hasn't been any item found in {0} with the term {1} do you want to use a different term?", cmd, BoolToAnwser(term));
-                    if (!GetBool()) { Console.WriteLine("Canceling search"); }
+                    Console.WriteLine(LanguageManager.GetTranslation("findNoResult"), cmd, BoolToAnwser(term));
+                    if (!GetBool()) { Console.WriteLine(LanguageManager.GetTranslation("findCancel")); }
                     else { goto Boolterm; }
                 }
             }
@@ -501,10 +482,10 @@ namespace JsonApp
                 Stringterm:
                 do
                 {
-                    Console.WriteLine("On do you want to use to search?");
+                    Console.WriteLine(LanguageManager.GetTranslation("findOther"));
                     term = Console.ReadLine().ToLower();
-                    Console.WriteLine("Are you sure you want to search using: {0} ?", term);
-                    Console.WriteLine("Type \"y\" to continue");
+                    Console.WriteLine(LanguageManager.GetTranslation("findConfirmOther"), term);
+                    Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
                     if (Console.ReadLine().ToLower().Equals("y")) break;
                 } while (true);
                 //Start searching
@@ -542,8 +523,8 @@ namespace JsonApp
                 //Check if the list is empty
                 if (result.Count == 0)
                 {
-                    Console.WriteLine("There hasn't been any item found using: in {0} with the term {1} do you want to use a different term?", cmd, term);
-                    if (!GetBool()) { Console.WriteLine("Canceling search"); }
+                    Console.WriteLine(LanguageManager.GetTranslation("findNoResult"), cmd, term);
+                    if (!GetBool()) { Console.WriteLine(LanguageManager.GetTranslation("findCancel")); }
                     else { goto Stringterm; }
                 }
             }
@@ -574,7 +555,7 @@ namespace JsonApp
             bool b;
             do
             {
-                Console.WriteLine("Yes / No");
+                Console.WriteLine(LanguageManager.GetTranslation("yesNo"));
                 string cmd = Console.ReadLine().ToLower();
                 if (cmd.Equals("y") || cmd.Equals("yes"))
                 {
@@ -586,7 +567,7 @@ namespace JsonApp
                     b = false;
                     break;
                 }
-                Console.WriteLine(cmd + " isn't a valid anwser please enter a valid anwser");
+                Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
             } while (true);
             return b;
         }
@@ -604,7 +585,7 @@ namespace JsonApp
                 if (Int32.TryParse(cmd, out num)) break;
                 else
                 {
-                    Console.WriteLine(cmd + " isn't a valid number please enter a valid number");
+                    Console.WriteLine(cmd + LanguageManager.GetTranslation("NaN"));
                 }
             } while (true);
             return num;
