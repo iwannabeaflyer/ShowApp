@@ -32,14 +32,18 @@ TODO
   youtube       "https://www.youtube.com/results?search_query=" and then word or words where spaces are indicated by '+' so one+punch+man
 
   wikipedia     "https://en.wikipedia.org/w/index.php?search=" and then word or words where spaces are indicated by '+' so one+punch+man
-
-    - Think if you want a trashcan functionality for removing, this should help users recover accidentaly deleted shows but you will not be able to clear the memory while the program is open, 
-    aswell as that what is in the trashcan will be deleted once the program exits. Furthermore there is already a check to try to prevent users from deleting things they didn't want to delete.
-
-    - Think if i want to change it so that in Notes you can also use the ':' character without the program breaking.
+  
+    Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); //opens the default webbrowser with time for polka on yt
+    
+    - Think if i want to change it so that in Notes you can also use the ':' character without the program breaking. (change the way of deserialization of the last 2 fields)
 
     - Add Globalisation (language tag) https://www.agiledeveloper.com/articles/LocalizingDOTNet.pdf
     https://docs.microsoft.com/nl-nl/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c
+      Add it so all commands are also changed to their respective language (adds ~23 more strings in resx)
+
+     - Think if you want a trashcan functionality for removing, this should help users recover accidentaly deleted shows but you will not be able to clear the memory while the program is open, 
+    aswell as that what is in the trashcan will be deleted once the program exits. Furthermore there is already a check to try to prevent users from deleting things they didn't want to delete.
+
      */
 
 namespace JsonApp
@@ -50,36 +54,28 @@ namespace JsonApp
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Title = Constants.APPLICATION_NAME;
+            string culture = "en";
             string jsonString = "";
             string cmd;
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
-            LanguageManager.SetCulture("en");
+            LanguageManager.SetCulture(culture);
             //LanguageManager.Display("en-US"); //american english
             //LanguageManager.Display("en-GB"); //british english
             //LanguageManager.Display("fr-FR"); //french french
             //LanguageManager.Display("es-MX"); //mexican spanish
 
-            //LanguageManager.SetCulture("nl");
-            //Console.WriteLine(LanguageManager.GetTranslation("find"));
-            //Console.WriteLine(LanguageManager.GetTranslation("bye"));
-            //Console.WriteLine(LanguageManager.GetTranslation("thanks"));
-            
-            //LanguageManager.SetCulture("en");
-            //Console.WriteLine(LanguageManager.GetTranslation("bye"));
-            //Console.WriteLine(LanguageManager.GetTranslation("thanks"));
-
             Console.WriteLine(LanguageManager.GetTranslation("programStart"));
             while (true)
             {
                 cmd = Console.ReadLine().ToLower();
-                if (cmd.Equals("add"))
+                if (cmd.Equals(LanguageManager.GetTranslation("cmdAdd")))
                 {
                     jsonObject.Items.Add(Add());
                     IsChanged = true;
                     Console.WriteLine(LanguageManager.GetTranslation("addComplete"));
                 }
-                else if (cmd.Equals("remove"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdRemove")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("remove"));
                     List<ModelItem> results;
@@ -95,18 +91,18 @@ namespace JsonApp
                         Question:
                         Console.WriteLine(LanguageManager.GetTranslation("yesNoOther"));
                         cmd = Console.ReadLine().ToLower();
-                        if (cmd.Equals("y") || cmd.Equals("yes"))
+                        if (cmd.Equals(LanguageManager.GetTranslation("yesShort")) || cmd.Equals(LanguageManager.GetTranslation("yesLong")))
                         {
                             jsonObject.Items.Remove(results.ElementAt(elem));
                             IsChanged = true;
                             Console.WriteLine(LanguageManager.GetTranslation("removeComplete"));
                             break;
                         }
-                        else if (cmd.Equals("o") || cmd.Equals("other"))
+                        else if (cmd.Equals(LanguageManager.GetTranslation("otherShort")) || cmd.Equals(LanguageManager.GetTranslation("otherLong")))
                         {
                             goto Start;
                         }
-                        else if (cmd.Equals("n") || cmd.Equals("no"))
+                        else if (cmd.Equals(LanguageManager.GetTranslation("noShort")) || cmd.Equals(LanguageManager.GetTranslation("noLong")))
                         {
                             Console.WriteLine(LanguageManager.GetTranslation("removeCancel"));
                             break;
@@ -118,7 +114,7 @@ namespace JsonApp
 
                     } while (true);
                 }
-                else if (cmd.Equals("find"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdFind")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("find"));
                     List<ModelItem> results = Find(jsonObject);
@@ -131,7 +127,7 @@ namespace JsonApp
 
                     //TODO ask if the user wants to open a webbrowser for more information about this item
                 }
-                else if (cmd.Equals("edit"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdEdit")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("edit"));
                     //find certain items
@@ -145,7 +141,7 @@ namespace JsonApp
                     IsChanged = Edit(ref edit);
                     Console.WriteLine(LanguageManager.GetTranslation("editComplete"));
                 }
-                else if (cmd.Equals("save"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdSave")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("save"));
                     jsonString = Serialize(jsonObject);
@@ -153,12 +149,17 @@ namespace JsonApp
                     IsChanged = false;
                     Console.WriteLine(LanguageManager.GetTranslation("saveComplete"));
                 }
-                else if (cmd.Equals("load"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdLoad")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("load"));
                     jsonString = Load();
                     jsonObject.Items = Deserialize(jsonString);
                     Console.WriteLine(LanguageManager.GetTranslation("loadComplete"));
+                }
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdSettings")))
+                {
+                    culture = Settings();
+                    LanguageManager.SetCulture(culture);
                 }
                 else if (cmd.Equals("clear"))
                 {
@@ -166,7 +167,7 @@ namespace JsonApp
                 }
                 else if (cmd.Equals("polka")) { Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); }
                 else if (cmd.Equals("lonely")) { Process.Start("https://www.youtube.com/watch?v=unOSs2P-An0"); }
-                else if (cmd.Equals("exit"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
                 {
                     if (IsChanged)
                     {
@@ -332,31 +333,31 @@ namespace JsonApp
             while (true)
             {
                 cmd = Console.ReadLine().ToLower();
-                if (cmd.Equals("alternative"))
+                if (cmd.Equals(LanguageManager.GetTranslation("cmdAlternative")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignAlternative"));
                     item.AltName = FirstToUpper(Console.ReadLine());
                     b = true;
                 }
-                else if (cmd.Equals("english"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdEnglish")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignEnglish"));
                     item.EnName = FirstToUpper(Console.ReadLine());
                     b = true;
                 }
-                else if (cmd.Equals("episodes"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdEpisodes")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignEpisodes"));
                     item.Episodes = (ushort)GetNumber();
                     b = true;
                 }
-                else if (cmd.Equals("description"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdDescription")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignDescription"));
                     item.Description = FirstToUpper(Console.ReadLine().Replace("\"", ""));
                     b = true;
                 }
-                else if (cmd.Equals("genres"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdGenres")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignGenres"));
                     List<string> temp = new List<string>();
@@ -367,37 +368,37 @@ namespace JsonApp
                     item.Genres = temp;
                     b = true;
                 }
-                else if (cmd.Equals("notes"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdNotes")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignNotes"));
                     item.Notes = Console.ReadLine();
                     b = true;
                 }
-                else if (cmd.Equals("score"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdScore")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignScore"));
                     item.Score = (byte)MinMax(GetNumber(), Constants.MIN, Constants.MAX);
                     b = true;
                 }
-                else if (cmd.Equals("runtime"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdRuntime")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignRuntime"));
                     item.RunTime = (uint)(item.Episodes * GetNumber());
                     b = true;
                 }
-                else if (cmd.Equals("watched"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignWatched"));
                     item.Watched = GetBool();
                     b = true;
                 }
-                else if (cmd.Equals("ending"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdEnding")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("assignEnding"));
                     item.HasEnd = GetBool();
                     b = true;
                 }
-                else if (cmd.Equals("exit"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
                 {
                     item.ShowAll();
                     break;
@@ -536,6 +537,27 @@ namespace JsonApp
             return result;
         }
 
+        private static string Settings()
+        {
+            string l;
+            Console.WriteLine(LanguageManager.GetTranslation("settingsLanguage"));
+            Console.WriteLine(LanguageManager.GetTranslation("languages"));
+            switch (GetNumber())
+            {   case 1 :
+                    l = "en";
+                    break;
+                case 2 :
+                    l = "nl";
+                    break;
+                default:
+                    l = "en"; //default file is written in english
+                    break;
+            }
+            //Tell the user the language of the application has changed
+            Console.WriteLine(LanguageManager.GetTranslation("newLanguage") + l);
+            return l;
+        }
+
         /// <summary>
         /// Make sure a number is between min and max
         /// </summary>
@@ -557,12 +579,12 @@ namespace JsonApp
             {
                 Console.WriteLine(LanguageManager.GetTranslation("yesNo"));
                 string cmd = Console.ReadLine().ToLower();
-                if (cmd.Equals("y") || cmd.Equals("yes"))
+                if (cmd.Equals(LanguageManager.GetTranslation("yesShort")) || cmd.Equals(LanguageManager.GetTranslation("yesLong")))
                 {
                     b = true;
                     break;
                 }
-                else if (cmd.Equals("n") || cmd.Equals("no"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("noShort")) || cmd.Equals(LanguageManager.GetTranslation("noLong")))
                 {
                     b = false;
                     break;

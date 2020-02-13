@@ -76,6 +76,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LanguageManager.cs" />
+    <Compile Include="strings.nl.Designer.cs">
+      <DependentUpon>strings.nl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,9 +92,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="strings.nl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.nl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="strings.en-US.resx" />
     <EmbeddedResource Include="strings.en.resx" />
-    <EmbeddedResource Include="strings.nl.resx" />
     <EmbeddedResource Include="strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>

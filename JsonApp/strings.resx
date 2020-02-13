@@ -165,9 +165,6 @@
   <data name="editComplete" xml:space="preserve">
     <value>Editing complete</value>
   </data>
-  <data name="editEnding" xml:space="preserve">
-    <value>Enter wether the show has an ending or not</value>
-  </data>
   <data name="editField" xml:space="preserve">
     <value>What field do you want to edit?</value>
   </data>
@@ -245,6 +242,7 @@
 "edit" for editing an excisting item
 "save" for saving the excisting items
 "load" for loading items from a file
+"settings" for changing the settings
 "exit" exit for stopping the program</value>
   </data>
   <data name="NaN" xml:space="preserve">
@@ -318,5 +316,87 @@
   </data>
   <data name="yesNoOther" xml:space="preserve">
     <value>Yes / No / Other</value>
+  </data>
+  <data name="languages" xml:space="preserve">
+    <value>1 English
+2 Dutch</value>
+  </data>
+  <data name="newLanguage" xml:space="preserve">
+    <value>The new language of the application is : </value>
+  </data>
+  <data name="settingsLanguage" xml:space="preserve">
+    <value>What language do you want to use?</value>
+  </data>
+  <data name="cmdAdd" xml:space="preserve">
+    <value>add</value>
+  </data>
+  <data name="cmdAlternative" xml:space="preserve">
+    <value>alternative</value>
+  </data>
+  <data name="cmdDescription" xml:space="preserve">
+    <value>description</value>
+  </data>
+  <data name="cmdEdit" xml:space="preserve">
+    <value>edit</value>
+  </data>
+  <data name="cmdEnding" xml:space="preserve">
+    <value>ending</value>
+  </data>
+  <data name="cmdEnglish" xml:space="preserve">
+    <value>english</value>
+  </data>
+  <data name="cmdEpisodes" xml:space="preserve">
+    <value>episodes</value>
+  </data>
+  <data name="cmdExit" xml:space="preserve">
+    <value>exit</value>
+  </data>
+  <data name="cmdFind" xml:space="preserve">
+    <value>find</value>
+  </data>
+  <data name="cmdGenres" xml:space="preserve">
+    <value>genres</value>
+  </data>
+  <data name="cmdLoad" xml:space="preserve">
+    <value>load</value>
+  </data>
+  <data name="cmdNotes" xml:space="preserve">
+    <value>notes</value>
+  </data>
+  <data name="cmdRemove" xml:space="preserve">
+    <value>remove</value>
+  </data>
+  <data name="cmdRuntime" xml:space="preserve">
+    <value>runtime</value>
+  </data>
+  <data name="cmdSave" xml:space="preserve">
+    <value>save</value>
+  </data>
+  <data name="cmdScore" xml:space="preserve">
+    <value>score</value>
+  </data>
+  <data name="cmdSettings" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="cmdWatched" xml:space="preserve">
+    <value>watched</value>
+  </data>
+  <data name="noLong" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="noShort" xml:space="preserve">
+    <value>n</value>
+  </data>
+  <data name="otherLong" xml:space="preserve">
+    <value>other</value>
+  </data>
+  <data name="otherShort" xml:space="preserve">
+    <value>o</value>
+  </data>
+  <data name="yesLong" xml:space="preserve">
+    <value>yes</value>
+  </data>
+  <data name="yesShort" xml:space="preserve">
+    <value>y</value>
   </data>
 </root>

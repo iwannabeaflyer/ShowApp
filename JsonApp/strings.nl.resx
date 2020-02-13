@@ -117,10 +117,214 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="thanks" xml:space="preserve">
-    <value>Dank u wel</value>
+  <data name="accesItem" xml:space="preserve">
+    <value>Tot welk item wilt u toegang hebben?</value>
   </data>
-  <data name="welcome" xml:space="preserve">
-    <value>Hallo</value>
+  <data name="accesOutofRange" xml:space="preserve">
+    <value>Het nummer is buiten het bereik</value>
+  </data>
+  <data name="addComplete" xml:space="preserve">
+    <value>Het toevoegen is voltooid</value>
+  </data>
+  <data name="addNewItem" xml:space="preserve">
+    <value>Een nieuw item toevoegen</value>
+  </data>
+  <data name="assignAlternative" xml:space="preserve">
+    <value>Vul een alternatieve naam in voor de show</value>
+  </data>
+  <data name="assignDescription" xml:space="preserve">
+    <value>Vul een beschrijving in voor de show</value>
+  </data>
+  <data name="assignEnding" xml:space="preserve">
+    <value>Vul in of de show een einde heeft</value>
+  </data>
+  <data name="assignEnglish" xml:space="preserve">
+    <value>Vul de engelse naam in van de show</value>
+  </data>
+  <data name="assignEpisodes" xml:space="preserve">
+    <value>Vul in hoeveel afleveringen de show heeft</value>
+  </data>
+  <data name="assignGenres" xml:space="preserve">
+    <value>Vul in de genres van de show in</value>
+  </data>
+  <data name="assignNotes" xml:space="preserve">
+    <value>Vul enige toegevoegde informatie over de show in</value>
+  </data>
+  <data name="assignRuntime" xml:space="preserve">
+    <value>Vul in hoelang een enkele aflevering is</value>
+  </data>
+  <data name="assignScore" xml:space="preserve">
+    <value>Vul in de score in van de show</value>
+  </data>
+  <data name="assignWatched" xml:space="preserve">
+    <value>Vul in of u al deze show heeft gezien</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Aanpassen</value>
+  </data>
+  <data name="editComplete" xml:space="preserve">
+    <value>Afronden van aanpassen</value>
+  </data>
+  <data name="editField" xml:space="preserve">
+    <value>Welk veld wilt u aanpassen?</value>
+  </data>
+  <data name="editOptions" xml:space="preserve">
+    <value>"alternative" om het aanpassen van de alternatieve naam
+"english" om het aanpassen van de engelse naam
+"episodes" om het aanpassen van de hoeveelheid afleveringen
+"description" om het aanpassen van de beschrijving
+"genres" om het aanpassen van de genres
+"notes" om het aanpassen van de toegevoede notieties
+"score" om het aanpassen van de score
+"runtime" om het aanpassen van de speeltijd
+"watched" om het aanpassen of u het al heeft gezien
+"ending" om het aanpassen of het een einde heeft
+"exit" om te stoppen met aanpassen</value>
+  </data>
+  <data name="find" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
+  <data name="findCancel" xml:space="preserve">
+    <value>Stoppen moet zoeken</value>
+  </data>
+  <data name="findConfirmNo" xml:space="preserve">
+    <value>Bent u zeker dat u wilt zoeken met : nee ?</value>
+  </data>
+  <data name="findConfirmOther" xml:space="preserve">
+    <value>Bent u zeker dat u wilt zoeken met : {0} ?</value>
+  </data>
+  <data name="findConfirmYes" xml:space="preserve">
+    <value>Bent u zeker dat u wilt zoeken met : ja ?</value>
+  </data>
+  <data name="findContinue" xml:space="preserve">
+    <value>Type "y" om verder te gaan</value>
+  </data>
+  <data name="findEnding" xml:space="preserve">
+    <value>Heeft de show een einde?</value>
+  </data>
+  <data name="findField" xml:space="preserve">
+    <value>In welk veld wilt u zoeken?</value>
+  </data>
+  <data name="findNoResult" xml:space="preserve">
+    <value>Er is geen enkele item gevonden in de velden {0} met de woord(en) {1} wilt u met andere woorden gaan zoeken?</value>
+  </data>
+  <data name="findOptions" xml:space="preserve">
+    <value>"alternative" om te zoeken in de alternatieve naam
+"english" om te zoeken in de engelse naam
+"genres" om te zoeken in de genres van de show
+"description" om te zoeken in de beschrijving
+"watched" om te zoeken in of u het al heeft gezien
+"ending" om te zoeken of het een einde heeft
+"exit" om te stoppen met zoeken</value>
+  </data>
+  <data name="findOther" xml:space="preserve">
+    <value>Met welke woord(en) wilt u zoeken?</value>
+  </data>
+  <data name="findWatched" xml:space="preserve">
+    <value>Heeft u het gezien?</value>
+  </data>
+  <data name="invalidCommand" xml:space="preserve">
+    <value> is niet een bestaande instructie, wilt u alstublieft een bestaande instructie invoeren</value>
+  </data>
+  <data name="load" xml:space="preserve">
+    <value>Laden</value>
+  </data>
+  <data name="loadComplete" xml:space="preserve">
+    <value>Klaar met laden</value>
+  </data>
+  <data name="loadFileName" xml:space="preserve">
+    <value>Wat is de naam van het bestand?</value>
+  </data>
+  <data name="mainOptions" xml:space="preserve">
+    <value>"add" om een nieuw item toe te voegen
+"remove" om een bestaand item te verwijderen
+"find" om te zoeken naar een bestaand item
+"edit" om een bestaand item aan te passen
+"save" om de huidige items op te slaan
+"load" om items in te laden
+"settings" om de instellingen aan te passen
+"exit" om het programma af te sluiten</value>
+  </data>
+  <data name="NaN" xml:space="preserve">
+    <value> is niet een geldig nummer, wilt u alstublieft een geldig nummer invoeren</value>
+  </data>
+  <data name="noName" xml:space="preserve">
+    <value>Kan niet een show aanmaken aangezien het geen naam heeft</value>
+  </data>
+  <data name="programEnd" xml:space="preserve">
+    <value>Programma stoppen</value>
+  </data>
+  <data name="programStart" xml:space="preserve">
+    <value>Programma starten</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="removeCancel" xml:space="preserve">
+    <value>Annuleren van verwijderen</value>
+  </data>
+  <data name="removeComplete" xml:space="preserve">
+    <value>Verwijderen voltooid</value>
+  </data>
+  <data name="removeConfirm" xml:space="preserve">
+    <value>Bent u zeker dat u dit wil verwijderen:</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="saveComplete" xml:space="preserve">
+    <value>Opslaan voltooid</value>
+  </data>
+  <data name="saveFileName" xml:space="preserve">
+    <value>Wat zou de naam van het bestand moeten worden?</value>
+  </data>
+  <data name="showAlternative" xml:space="preserve">
+    <value>Alternatieve naam van de show : </value>
+  </data>
+  <data name="showDescription" xml:space="preserve">
+    <value>Beschrijving : </value>
+  </data>
+  <data name="showEnding" xml:space="preserve">
+    <value>Heeft een einde : </value>
+  </data>
+  <data name="showEnglish" xml:space="preserve">
+    <value>Engelse naam van de show : </value>
+  </data>
+  <data name="showEpisodes" xml:space="preserve">
+    <value>Aantal afleveringen : </value>
+  </data>
+  <data name="showGenres" xml:space="preserve">
+    <value>Genres : </value>
+  </data>
+  <data name="showNotes" xml:space="preserve">
+    <value>Toegevoegde notities : </value>
+  </data>
+  <data name="showRuntime" xml:space="preserve">
+    <value>The totale duur is {0}:{1} of {2} minuten per aflevering</value>
+  </data>
+  <data name="showScore" xml:space="preserve">
+    <value>Score : </value>
+  </data>
+  <data name="showWatched" xml:space="preserve">
+    <value>Gezien : </value>
+  </data>
+  <data name="unsavedChanges" xml:space="preserve">
+    <value>Het bestand is veranderd maar niet opgeslagen, wilt u dit bestand opslaan?</value>
+  </data>
+  <data name="yesNo" xml:space="preserve">
+    <value>Yes / No</value>
+  </data>
+  <data name="yesNoOther" xml:space="preserve">
+    <value>Yes / No / Other</value>
+  </data>
+  <data name="languages" xml:space="preserve">
+    <value>1 Engels
+2 Nederlands</value>
+  </data>
+  <data name="settingsLanguage" xml:space="preserve">
+    <value>Welke taal wilt u gebruiken?</value>
+  </data>
+  <data name="newLanguage" xml:space="preserve">
+    <value>De nieuwe taal van de applicatie is : </value>
   </data>
 </root>

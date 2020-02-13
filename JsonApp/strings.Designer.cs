@@ -187,6 +187,168 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to add.
+        /// </summary>
+        internal static string cmdAdd {
+            get {
+                return ResourceManager.GetString("cmdAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to alternative.
+        /// </summary>
+        internal static string cmdAlternative {
+            get {
+                return ResourceManager.GetString("cmdAlternative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to description.
+        /// </summary>
+        internal static string cmdDescription {
+            get {
+                return ResourceManager.GetString("cmdDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to edit.
+        /// </summary>
+        internal static string cmdEdit {
+            get {
+                return ResourceManager.GetString("cmdEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ending.
+        /// </summary>
+        internal static string cmdEnding {
+            get {
+                return ResourceManager.GetString("cmdEnding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to english.
+        /// </summary>
+        internal static string cmdEnglish {
+            get {
+                return ResourceManager.GetString("cmdEnglish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to episodes.
+        /// </summary>
+        internal static string cmdEpisodes {
+            get {
+                return ResourceManager.GetString("cmdEpisodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exit.
+        /// </summary>
+        internal static string cmdExit {
+            get {
+                return ResourceManager.GetString("cmdExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to find.
+        /// </summary>
+        internal static string cmdFind {
+            get {
+                return ResourceManager.GetString("cmdFind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to genres.
+        /// </summary>
+        internal static string cmdGenres {
+            get {
+                return ResourceManager.GetString("cmdGenres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to load.
+        /// </summary>
+        internal static string cmdLoad {
+            get {
+                return ResourceManager.GetString("cmdLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to notes.
+        /// </summary>
+        internal static string cmdNotes {
+            get {
+                return ResourceManager.GetString("cmdNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to remove.
+        /// </summary>
+        internal static string cmdRemove {
+            get {
+                return ResourceManager.GetString("cmdRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to runtime.
+        /// </summary>
+        internal static string cmdRuntime {
+            get {
+                return ResourceManager.GetString("cmdRuntime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to save.
+        /// </summary>
+        internal static string cmdSave {
+            get {
+                return ResourceManager.GetString("cmdSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to score.
+        /// </summary>
+        internal static string cmdScore {
+            get {
+                return ResourceManager.GetString("cmdScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to settings.
+        /// </summary>
+        internal static string cmdSettings {
+            get {
+                return ResourceManager.GetString("cmdSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to watched.
+        /// </summary>
+        internal static string cmdWatched {
+            get {
+                return ResourceManager.GetString("cmdWatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Editing.
         /// </summary>
         internal static string edit {
@@ -201,15 +363,6 @@ namespace JsonApp {
         internal static string editComplete {
             get {
                 return ResourceManager.GetString("editComplete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter wether the show has an ending or not.
-        /// </summary>
-        internal static string editEnding {
-            get {
-                return ResourceManager.GetString("editEnding", resourceCulture);
             }
         }
         
@@ -365,6 +518,16 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 English
+        ///2 Dutch.
+        /// </summary>
+        internal static string languages {
+            get {
+                return ResourceManager.GetString("languages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading.
         /// </summary>
         internal static string load {
@@ -398,6 +561,7 @@ namespace JsonApp {
         ///&quot;edit&quot; for editing an excisting item
         ///&quot;save&quot; for saving the excisting items
         ///&quot;load&quot; for loading items from a file
+        ///&quot;settings&quot; for changing the settings
         ///&quot;exit&quot; exit for stopping the program.
         /// </summary>
         internal static string mainOptions {
@@ -416,11 +580,56 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The new language of the application is : .
+        /// </summary>
+        internal static string newLanguage {
+            get {
+                return ResourceManager.GetString("newLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no.
+        /// </summary>
+        internal static string noLong {
+            get {
+                return ResourceManager.GetString("noLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to serialize a show since it doesn&apos;t have a name.
         /// </summary>
         internal static string noName {
             get {
                 return ResourceManager.GetString("noName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to n.
+        /// </summary>
+        internal static string noShort {
+            get {
+                return ResourceManager.GetString("noShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to other.
+        /// </summary>
+        internal static string otherLong {
+            get {
+                return ResourceManager.GetString("otherLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to o.
+        /// </summary>
+        internal static string otherShort {
+            get {
+                return ResourceManager.GetString("otherShort", resourceCulture);
             }
         }
         
@@ -502,6 +711,15 @@ namespace JsonApp {
         internal static string saveFileName {
             get {
                 return ResourceManager.GetString("saveFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What language do you want to use?.
+        /// </summary>
+        internal static string settingsLanguage {
+            get {
+                return ResourceManager.GetString("settingsLanguage", resourceCulture);
             }
         }
         
@@ -605,6 +823,15 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to yes.
+        /// </summary>
+        internal static string yesLong {
+            get {
+                return ResourceManager.GetString("yesLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes / No.
         /// </summary>
         internal static string yesNo {
@@ -619,6 +846,15 @@ namespace JsonApp {
         internal static string yesNoOther {
             get {
                 return ResourceManager.GetString("yesNoOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to y.
+        /// </summary>
+        internal static string yesShort {
+            get {
+                return ResourceManager.GetString("yesShort", resourceCulture);
             }
         }
     }
