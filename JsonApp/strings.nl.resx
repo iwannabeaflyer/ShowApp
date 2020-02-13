@@ -197,7 +197,7 @@
     <value>Bent u zeker dat u wilt zoeken met : ja ?</value>
   </data>
   <data name="findContinue" xml:space="preserve">
-    <value>Type "y" om verder te gaan</value>
+    <value>Type "j" om verder te gaan</value>
   </data>
   <data name="findEnding" xml:space="preserve">
     <value>Heeft de show een einde?</value>

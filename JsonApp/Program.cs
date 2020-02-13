@@ -54,7 +54,7 @@ namespace JsonApp
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Title = Constants.APPLICATION_NAME;
-            string culture = "en";
+            string culture = "nl";
             string jsonString = "";
             string cmd;
             bool IsChanged = false;
@@ -428,34 +428,39 @@ namespace JsonApp
                 Console.WriteLine(LanguageManager.GetTranslation("findField"));
                 cmd = Console.ReadLine();
 
-                if (cmd.Equals("exit"))
+                if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("findCancel"));
                     return null;
                 }
-                else if (cmd.Equals("alternative") || cmd.Equals("english") || cmd.Equals("genres") || cmd.Equals("description") || cmd.Equals("watched") || cmd.Equals("ending")) { break; }
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdAlternative")) || 
+                    cmd.Equals(LanguageManager.GetTranslation("cmdEnglish")) || 
+                    cmd.Equals(LanguageManager.GetTranslation("cmdGenres")) || 
+                    cmd.Equals(LanguageManager.GetTranslation("cmdDescription")) || 
+                    cmd.Equals(LanguageManager.GetTranslation("cmdWatched")) || 
+                    cmd.Equals(LanguageManager.GetTranslation("cmdEnding"))) { break; }
                 else
                 {
                     Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
                     Console.WriteLine(LanguageManager.GetTranslation("findOptions"));
                 }
             }
-            if (cmd.Equals("watched") || cmd.Equals("ending"))
+            if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched")) || cmd.Equals(LanguageManager.GetTranslation("cmdEnding")))
             {
                 bool term;
                 Boolterm:
                 do
                 {
-                    if (cmd.Equals("watched")) Console.WriteLine(LanguageManager.GetTranslation("findWatched"));
+                    if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched"))) Console.WriteLine(LanguageManager.GetTranslation("findWatched"));
                     else Console.WriteLine(LanguageManager.GetTranslation("findEnding"));
                     term = GetBool();
                     if (term) Console.WriteLine(LanguageManager.GetTranslation("findConfirmYes"));
                     else Console.WriteLine(LanguageManager.GetTranslation("findConfirmNo"));
                     Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
-                    if (Console.ReadLine().ToLower().Equals("y")) break;
+                    if (Console.ReadLine().ToLower().Equals(LanguageManager.GetTranslation("yesShort"))) break;
                 } while (true);
                 //Start searching
-                if (cmd.Equals("watched"))
+                if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched")))
                 {
                     for (int i = 0; i < jsonObject.Items.Count; i++)
                     {
@@ -487,24 +492,24 @@ namespace JsonApp
                     term = Console.ReadLine().ToLower();
                     Console.WriteLine(LanguageManager.GetTranslation("findConfirmOther"), term);
                     Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
-                    if (Console.ReadLine().ToLower().Equals("y")) break;
+                    if (Console.ReadLine().ToLower().Equals(LanguageManager.GetTranslation("yesShort"))) break;
                 } while (true);
                 //Start searching
-                if (cmd.Equals("alternative"))
+                if (cmd.Equals(LanguageManager.GetTranslation("cmdAlternative")))
                 {
                     foreach (ModelItem mi in jsonObject.Items)
                     {
                         if (mi.AltName.ToLower().Contains(term)) result.Add(mi);
                     }
                 }
-                else if (cmd.Equals("english"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdEnglish")))
                 {
                     foreach (ModelItem mi in jsonObject.Items)
                     {
                         if (mi.EnName.ToLower().Contains(term)) result.Add(mi);
                     }
                 }
-                else if (cmd.Equals("genres"))
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdGenres")))
                 {
                     foreach (ModelItem mi in jsonObject.Items)
                     {
