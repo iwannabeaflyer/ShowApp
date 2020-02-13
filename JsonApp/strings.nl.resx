@@ -169,17 +169,17 @@
     <value>Welk veld wilt u aanpassen?</value>
   </data>
   <data name="editOptions" xml:space="preserve">
-    <value>"alternative" om het aanpassen van de alternatieve naam
-"english" om het aanpassen van de engelse naam
-"episodes" om het aanpassen van de hoeveelheid afleveringen
-"description" om het aanpassen van de beschrijving
+    <value>"alternatief" om het aanpassen van de alternatieve naam
+"engels" om het aanpassen van de engelse naam
+"aflevering" om het aanpassen van de hoeveelheid afleveringen
+"beschrijving" om het aanpassen van de beschrijving
 "genres" om het aanpassen van de genres
-"notes" om het aanpassen van de toegevoede notieties
+"notities" om het aanpassen van de toegevoede notieties
 "score" om het aanpassen van de score
 "runtime" om het aanpassen van de speeltijd
-"watched" om het aanpassen of u het al heeft gezien
-"ending" om het aanpassen of het een einde heeft
-"exit" om te stoppen met aanpassen</value>
+"gezien" om het aanpassen of u het al heeft gezien
+"eind" om het aanpassen of het een einde heeft
+"stop" om te stoppen met aanpassen</value>
   </data>
   <data name="find" xml:space="preserve">
     <value>Zoeken</value>
@@ -209,13 +209,13 @@
     <value>Er is geen enkele item gevonden in de velden {0} met de woord(en) {1} wilt u met andere woorden gaan zoeken?</value>
   </data>
   <data name="findOptions" xml:space="preserve">
-    <value>"alternative" om te zoeken in de alternatieve naam
-"english" om te zoeken in de engelse naam
+    <value>"alternatief" om te zoeken in de alternatieve naam
+"engels" om te zoeken in de engelse naam
 "genres" om te zoeken in de genres van de show
-"description" om te zoeken in de beschrijving
-"watched" om te zoeken in of u het al heeft gezien
-"ending" om te zoeken of het een einde heeft
-"exit" om te stoppen met zoeken</value>
+"beschrijving" om te zoeken in de beschrijving
+"gezien" om te zoeken in of u het al heeft gezien
+"eind" om te zoeken of het een einde heeft
+"stop" om te stoppen met zoeken</value>
   </data>
   <data name="findOther" xml:space="preserve">
     <value>Met welke woord(en) wilt u zoeken?</value>
@@ -236,14 +236,14 @@
     <value>Wat is de naam van het bestand?</value>
   </data>
   <data name="mainOptions" xml:space="preserve">
-    <value>"add" om een nieuw item toe te voegen
-"remove" om een bestaand item te verwijderen
-"find" om te zoeken naar een bestaand item
-"edit" om een bestaand item aan te passen
-"save" om de huidige items op te slaan
-"load" om items in te laden
-"settings" om de instellingen aan te passen
-"exit" om het programma af te sluiten</value>
+    <value>"toevoegen" om een nieuw item toe te voegen
+"verwijderen" om een bestaand item te verwijderen
+"zoeken" om te zoeken naar een bestaand item
+"aanpassen" om een bestaand item aan te passen
+"opslaan" om de huidige items op te slaan
+"laden" om items in te laden
+"opties" om de instellingen aan te passen
+"stop" om het programma af te sluiten</value>
   </data>
   <data name="NaN" xml:space="preserve">
     <value> is niet een geldig nummer, wilt u alstublieft een geldig nummer invoeren</value>
@@ -312,10 +312,10 @@
     <value>Het bestand is veranderd maar niet opgeslagen, wilt u dit bestand opslaan?</value>
   </data>
   <data name="yesNo" xml:space="preserve">
-    <value>Yes / No</value>
+    <value>Ja / Nee</value>
   </data>
   <data name="yesNoOther" xml:space="preserve">
-    <value>Yes / No / Other</value>
+    <value>Ja / Nee / Anders</value>
   </data>
   <data name="languages" xml:space="preserve">
     <value>1 Engels
@@ -326,5 +326,77 @@
   </data>
   <data name="newLanguage" xml:space="preserve">
     <value>De nieuwe taal van de applicatie is : </value>
+  </data>
+  <data name="cmdAdd" xml:space="preserve">
+    <value>toevoegen</value>
+  </data>
+  <data name="cmdAlternative" xml:space="preserve">
+    <value>alternatief</value>
+  </data>
+  <data name="cmdDescription" xml:space="preserve">
+    <value>beschrijving</value>
+  </data>
+  <data name="cmdEdit" xml:space="preserve">
+    <value>aanpassen</value>
+  </data>
+  <data name="cmdEnding" xml:space="preserve">
+    <value>eind</value>
+  </data>
+  <data name="cmdEnglish" xml:space="preserve">
+    <value>engels</value>
+  </data>
+  <data name="cmdEpisodes" xml:space="preserve">
+    <value>aflevering</value>
+  </data>
+  <data name="cmdExit" xml:space="preserve">
+    <value>stop</value>
+  </data>
+  <data name="cmdFind" xml:space="preserve">
+    <value>zoeken</value>
+  </data>
+  <data name="cmdGenres" xml:space="preserve">
+    <value>genres</value>
+  </data>
+  <data name="cmdLoad" xml:space="preserve">
+    <value>laden</value>
+  </data>
+  <data name="cmdNotes" xml:space="preserve">
+    <value>notities</value>
+  </data>
+  <data name="cmdRemove" xml:space="preserve">
+    <value>verwijderen</value>
+  </data>
+  <data name="cmdRuntime" xml:space="preserve">
+    <value>runtime</value>
+  </data>
+  <data name="cmdSave" xml:space="preserve">
+    <value>opslaan</value>
+  </data>
+  <data name="cmdScore" xml:space="preserve">
+    <value>score</value>
+  </data>
+  <data name="cmdSettings" xml:space="preserve">
+    <value>opties</value>
+  </data>
+  <data name="cmdWatched" xml:space="preserve">
+    <value>gezien</value>
+  </data>
+  <data name="noLong" xml:space="preserve">
+    <value>nee</value>
+  </data>
+  <data name="noShort" xml:space="preserve">
+    <value>n</value>
+  </data>
+  <data name="otherLong" xml:space="preserve">
+    <value>anders</value>
+  </data>
+  <data name="otherShort" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="yesLong" xml:space="preserve">
+    <value>ja</value>
+  </data>
+  <data name="yesShort" xml:space="preserve">
+    <value>j</value>
   </data>
 </root>
