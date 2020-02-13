@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
-using System.Globalization;
-using System.Resources;
-
+using System.Configuration;
 
 /***
  DONE
@@ -52,18 +50,14 @@ namespace JsonApp
     {
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            SettingsTheme(int.Parse(ConfigurationManager.AppSettings.Get("theme")));
             Console.Title = Constants.APPLICATION_NAME;
-            string culture = "nl";
             string jsonString = "";
             string cmd;
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
-            LanguageManager.SetCulture(culture);
-            //LanguageManager.Display("en-US"); //american english
-            //LanguageManager.Display("en-GB"); //british english
-            //LanguageManager.Display("fr-FR"); //french french
-            //LanguageManager.Display("es-MX"); //mexican spanish
+            
+            LanguageManager.SetCulture(ConfigurationManager.AppSettings.Get("lang"));
 
             Console.WriteLine(LanguageManager.GetTranslation("programStart"));
             while (true)
@@ -84,7 +78,7 @@ namespace JsonApp
                         Start:
                         results = Find(jsonObject);
                         if (results == null || results.Count() == 0) continue;
-
+                        //acces a specific item
                         int elem = AccesItem(results.Count());
                         Console.WriteLine(LanguageManager.GetTranslation("removeConfirm"));
                         jsonObject.Items[elem].ShowAll();
@@ -107,11 +101,7 @@ namespace JsonApp
                             Console.WriteLine(LanguageManager.GetTranslation("removeCancel"));
                             break;
                         }
-                        else
-                        {
-                            goto Question;
-                        }
-
+                        else { goto Question; }
                     } while (true);
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdFind")))
@@ -119,12 +109,9 @@ namespace JsonApp
                     Console.WriteLine(LanguageManager.GetTranslation("find"));
                     List<ModelItem> results = Find(jsonObject);
                     if (results == null || results.Count() == 0) continue;
-
                     //acces a specific item
                     int elem = AccesItem(results.Count());
-
                     results.ElementAt(elem).ShowAll();
-
                     //TODO ask if the user wants to open a webbrowser for more information about this item
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdEdit")))
@@ -133,7 +120,6 @@ namespace JsonApp
                     //find certain items
                     List<ModelItem> results = Find(jsonObject);
                     if (results == null || results.Count() == 0) continue;
-
                     //acces a specific item
                     int elem = AccesItem(results.Count());
                     ModelItem edit = results.ElementAt(elem);
@@ -158,8 +144,20 @@ namespace JsonApp
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdSettings")))
                 {
-                    culture = Settings();
-                    LanguageManager.SetCulture(culture);
+                    LanguageManager.GetTranslation("settings");
+                    cmd = Console.ReadLine();
+                    if (cmd.Equals(LanguageManager.GetTranslation("settingsLanguage")))
+                    {
+                        LanguageManager.SetCulture(SettingsLanguage());
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("settingsTheme")))
+                    {
+                        SettingsTheme();
+                    }
+                    else
+                    {
+                        Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
+                    }          
                 }
                 else if (cmd.Equals("clear"))
                 {
@@ -178,7 +176,7 @@ namespace JsonApp
                 }
                 else
                 {
-                    Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
+                    Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
                     Console.WriteLine(LanguageManager.GetTranslation("mainOptions"));
                 }
             }
@@ -441,7 +439,7 @@ namespace JsonApp
                     cmd.Equals(LanguageManager.GetTranslation("cmdEnding"))) { break; }
                 else
                 {
-                    Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
+                    Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
                     Console.WriteLine(LanguageManager.GetTranslation("findOptions"));
                 }
             }
@@ -542,10 +540,14 @@ namespace JsonApp
             return result;
         }
 
-        private static string Settings()
+        /// <summary>
+        /// Change the language of the application
+        /// </summary>
+        /// <returns>Language Tag of the CultureInfo</returns>
+        private static string SettingsLanguage()
         {
             string l;
-            Console.WriteLine(LanguageManager.GetTranslation("settingsLanguage"));
+            Console.WriteLine(LanguageManager.GetTranslation("setLanguage"));
             Console.WriteLine(LanguageManager.GetTranslation("languages"));
             switch (GetNumber())
             {   case 1 :
@@ -558,9 +560,48 @@ namespace JsonApp
                     l = "en"; //default file is written in english
                     break;
             }
-            //Tell the user the language of the application has changed
+            ConfigurationManager.AppSettings.Set("lang", l);
             Console.WriteLine(LanguageManager.GetTranslation("newLanguage") + l);
             return l;
+        }
+
+        /// <summary>
+        /// Change the theme of the application
+        /// </summary>
+        private static void SettingsTheme()
+        {
+            Console.WriteLine(LanguageManager.GetTranslation("setTheme"));
+            Console.WriteLine(LanguageManager.GetTranslation("themes"));
+            SettingsTheme(MinMax(GetNumber(), 1, 3));
+        }
+
+        /// <summary>
+        /// Change the theme of the application based on the index
+        /// </summary>
+        /// <param name="i">index number of the language</param>
+        private static void SettingsTheme(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    break;
+                case 2:
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                case 3:
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                default:
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+            }
+            Console.Clear();
+            ConfigurationManager.AppSettings.Set("theme", i.ToString());
         }
 
         /// <summary>
@@ -594,7 +635,7 @@ namespace JsonApp
                     b = false;
                     break;
                 }
-                Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
+                Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
             } while (true);
             return b;
         }

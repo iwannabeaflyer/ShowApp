@@ -224,7 +224,7 @@
     <value>Have you watched it?</value>
   </data>
   <data name="invalidCommand" xml:space="preserve">
-    <value> isn't a valid command please enter a valid command</value>
+    <value>{0} isn't a valid command please enter a valid command</value>
   </data>
   <data name="load" xml:space="preserve">
     <value>Loading</value>
@@ -324,7 +324,7 @@
   <data name="newLanguage" xml:space="preserve">
     <value>The new language of the application is : </value>
   </data>
-  <data name="settingsLanguage" xml:space="preserve">
+  <data name="setLanguage" xml:space="preserve">
     <value>What language do you want to use?</value>
   </data>
   <data name="cmdAdd" xml:space="preserve">
@@ -398,5 +398,23 @@
   </data>
   <data name="yesShort" xml:space="preserve">
     <value>y</value>
+  </data>
+  <data name="setTheme" xml:space="preserve">
+    <value>What theme do you want to use?</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>What setting you want to change?
+"language" or "theme"</value>
+  </data>
+  <data name="settingsLanguage" xml:space="preserve">
+    <value>language</value>
+  </data>
+  <data name="settingsTheme" xml:space="preserve">
+    <value>theme</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>1 Light
+2 Dark
+3 Matrix</value>
   </data>
 </root>

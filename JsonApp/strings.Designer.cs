@@ -509,7 +509,7 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  isn&apos;t a valid command please enter a valid command.
+        ///   Looks up a localized string similar to {0} isn&apos;t a valid command please enter a valid command.
         /// </summary>
         internal static string invalidCommand {
             get {
@@ -717,9 +717,46 @@ namespace JsonApp {
         /// <summary>
         ///   Looks up a localized string similar to What language do you want to use?.
         /// </summary>
+        internal static string setLanguage {
+            get {
+                return ResourceManager.GetString("setLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What theme do you want to use?.
+        /// </summary>
+        internal static string setTheme {
+            get {
+                return ResourceManager.GetString("setTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What setting you want to change?
+        ///&quot;language&quot; or &quot;theme&quot;.
+        /// </summary>
+        internal static string settings {
+            get {
+                return ResourceManager.GetString("settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to language.
+        /// </summary>
         internal static string settingsLanguage {
             get {
                 return ResourceManager.GetString("settingsLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to theme.
+        /// </summary>
+        internal static string settingsTheme {
+            get {
+                return ResourceManager.GetString("settingsTheme", resourceCulture);
             }
         }
         
@@ -810,6 +847,17 @@ namespace JsonApp {
         internal static string showWatched {
             get {
                 return ResourceManager.GetString("showWatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Light
+        ///2 Dark
+        ///3 Matrix.
+        /// </summary>
+        internal static string themes {
+            get {
+                return ResourceManager.GetString("themes", resourceCulture);
             }
         }
         
