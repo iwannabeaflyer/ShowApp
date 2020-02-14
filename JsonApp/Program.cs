@@ -17,7 +17,8 @@ Changed Find to include watched and hasend options (refactored)
 Added Globalisation (language tag)
 Added the ability to open a webbrowser to look more information up
 Changed the deserialization of the json so the notes and description fields can contain any character
-*/
+Changed it so that App.Config now saves the current settings
+ */
 /*** internet stuff
   for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so one+punch+man
   for mal       "https://myanimelist.net/search/all?q=" and then word or words where spaces are indicated by "%20" so one%20punch%20man (or replace %20 with a white space)
@@ -28,7 +29,7 @@ Changed the deserialization of the json so the notes and description fields can 
     Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); //opens the default webbrowser with time for polka on yt
  */
 /*** TODO
-    - App.Config file doesn't save the changes when trying to apply them, but remembers them for the current session
+        - improve the loading and saving of a file
      */
 
 namespace JsonApp
@@ -43,7 +44,8 @@ namespace JsonApp
             string cmd;
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
-            
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
             LanguageManager.SetCulture(ConfigurationManager.AppSettings.Get("lang"));
 
             Console.WriteLine(LanguageManager.GetTranslation("programStart"));
@@ -140,12 +142,16 @@ namespace JsonApp
                         cmd = Console.ReadLine();
                         if (cmd.Equals(LanguageManager.GetTranslation("settingsLanguage")))
                         {
-                            LanguageManager.SetCulture(SettingsLanguage());
+                            string l = SettingsLanguage();
+                            LanguageManager.SetCulture(l);
+                            config.AppSettings.Settings["lang"].Value = l;
+                            config.Save(ConfigurationSaveMode.Modified);
                             break;
                         }
                         else if (cmd.Equals(LanguageManager.GetTranslation("settingsTheme")))
                         {
-                            SettingsTheme();
+                            config.AppSettings.Settings["theme"].Value = SettingsTheme();
+                            config.Save(ConfigurationSaveMode.Modified);
                             break;
                         }
                         else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
@@ -277,7 +283,9 @@ namespace JsonApp
             Console.WriteLine(LanguageManager.GetTranslation("loadFileName"));
             string fileName = Console.ReadLine();
             //Read the file
-            return File.ReadAllText(fileName + ".json");
+            string result = File.ReadAllText(fileName + ".json");
+            if (string.IsNullOrEmpty(result)) return "";
+            return result;
         }
 
         /// <summary>
@@ -370,7 +378,7 @@ namespace JsonApp
                     }
                     else
                     {
-                        Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"));
+                        Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
                         Console.WriteLine(LanguageManager.GetTranslation("browserOptions"));
                     }
                 } while (true);
@@ -620,7 +628,7 @@ namespace JsonApp
                     l = "en"; //default file is written in english
                     break;
             }
-            ConfigurationManager.AppSettings.Set("lang", l); //Doesn't seem to change the app.config file.
+            //ConfigurationManager.AppSettings.Set("lang", l); //Doesn't seem to change the app.config file.
             Console.WriteLine(LanguageManager.GetTranslation("newLanguage") + l);
             return l;
         }
@@ -628,18 +636,18 @@ namespace JsonApp
         /// <summary>
         /// Change the theme of the application
         /// </summary>
-        private static void SettingsTheme()
+        private static string SettingsTheme()
         {
             Console.WriteLine(LanguageManager.GetTranslation("setTheme"));
             Console.WriteLine(LanguageManager.GetTranslation("themes"));
-            SettingsTheme(MinMax(GetNumber(), 1, 3));
+            return SettingsTheme(MinMax(GetNumber(), 1, 3));
         }
 
         /// <summary>
         /// Change the theme of the application based on the index
         /// </summary>
         /// <param name="i">index number of the language</param>
-        private static void SettingsTheme(int i)
+        private static string SettingsTheme(int i)
         {
             switch (i)
             {
@@ -661,7 +669,8 @@ namespace JsonApp
                     break;
             }
             Console.Clear();
-            ConfigurationManager.AppSettings.Set("theme", i.ToString()); //Doesn't seem to change app.Config
+            return i.ToString();
+            //ConfigurationManager.AppSettings.Set("theme", i.ToString()); //Doesn't seem to change app.Config
         }
 
         /// <summary>
@@ -736,6 +745,7 @@ namespace JsonApp
         /// <returns>the given string with the first character as uppercase</returns>
         private static string FirstToUpper(string s)
         {
+            if (string.IsNullOrEmpty(s)) return null;
             return s.First().ToString().ToUpper() + s.Substring(1);
         }
     }
