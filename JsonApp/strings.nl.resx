@@ -180,6 +180,8 @@
 "gezien" om het aanpassen of u het al heeft gezien
 "eind" om het aanpassen of het een einde heeft
 "stop" om te stoppen met aanpassen</value>
+    <comment>make sure the words marked by "xy" are the same as their cmdXy counterpart value.
+all commands should be fully lowercase</comment>
   </data>
   <data name="find" xml:space="preserve">
     <value>Zoeken</value>
@@ -192,6 +194,7 @@
   </data>
   <data name="findConfirmOther" xml:space="preserve">
     <value>Bent u zeker dat u wilt zoeken met : {0} ?</value>
+    <comment>{0} is the users input</comment>
   </data>
   <data name="findConfirmYes" xml:space="preserve">
     <value>Bent u zeker dat u wilt zoeken met : ja ?</value>
@@ -207,6 +210,7 @@
   </data>
   <data name="findNoResult" xml:space="preserve">
     <value>Er is geen enkele item gevonden in de velden {0} met de woord(en) {1} wilt u met andere woorden gaan zoeken?</value>
+    <comment>{0} is the users input</comment>
   </data>
   <data name="findOptions" xml:space="preserve">
     <value>"alternatief" om te zoeken in de alternatieve naam
@@ -216,6 +220,8 @@
 "gezien" om te zoeken in of u het al heeft gezien
 "eind" om te zoeken of het een einde heeft
 "stop" om te stoppen met zoeken</value>
+    <comment>make sure the words marked by "xy" are the same as their cmdXy counterpart value.
+all commands should be fully lowercase</comment>
   </data>
   <data name="findOther" xml:space="preserve">
     <value>Met welke woord(en) wilt u zoeken?</value>
@@ -244,9 +250,12 @@
 "laden" om items in te laden
 "opties" om de instellingen aan te passen
 "stop" om het programma af te sluiten</value>
+    <comment>make sure the words marked by "xy" are the same as their cmdXy counterpart value.
+all commands should be fully lowercase</comment>
   </data>
   <data name="NaN" xml:space="preserve">
     <value> is niet een geldig nummer, wilt u alstublieft een geldig nummer invoeren</value>
+    <comment>{0} is the users input</comment>
   </data>
   <data name="noName" xml:space="preserve">
     <value>Kan niet een show aanmaken aangezien het geen naam heeft</value>
@@ -301,6 +310,7 @@
   </data>
   <data name="showRuntime" xml:space="preserve">
     <value>The totale duur is {0}:{1} of {2} minuten per aflevering</value>
+    <comment>{0} for hours, (1} for minutes</comment>
   </data>
   <data name="showScore" xml:space="preserve">
     <value>Score : </value>
@@ -323,6 +333,7 @@
   </data>
   <data name="settingsLanguage" xml:space="preserve">
     <value>taal</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="newLanguage" xml:space="preserve">
     <value>De nieuwe taal van de applicatie is : </value>
@@ -383,21 +394,27 @@
   </data>
   <data name="noLong" xml:space="preserve">
     <value>nee</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="noShort" xml:space="preserve">
     <value>n</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="otherLong" xml:space="preserve">
     <value>anders</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="otherShort" xml:space="preserve">
     <value>a</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="yesLong" xml:space="preserve">
     <value>ja</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="yesShort" xml:space="preserve">
     <value>j</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="setLanguage" xml:space="preserve">
     <value>Welke taal wilt u gebruiken?</value>
@@ -407,10 +424,53 @@
   </data>
   <data name="settingsTheme" xml:space="preserve">
     <value>thema</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="themes" xml:space="preserve">
     <value>1 Light
 2 Donker
 3 Matrix</value>
+  </data>
+  <data name="browserConfirm" xml:space="preserve">
+    <value>Wilt u een web browser openen voor meer informatie?</value>
+  </data>
+  <data name="browserInput" xml:space="preserve">
+    <value>Please enter on what website you want to search</value>
+  </data>
+  <data name="browserOpen" xml:space="preserve">
+    <value>Opening a webbrowser</value>
+  </data>
+  <data name="browserOptions" xml:space="preserve">
+    <value>"google" om Google te openen
+"wiki" om Wikipedia te openen
+"imdb" om IMDB te openen
+"mal" om MAL te openen
+"youtube" om Youtube te openen
+"exit" om terug te gaan</value>
+    <comment>make sure the words marked by "x" are the same as their x counterpart value.
+all commands should be fully lowercase</comment>
+  </data>
+  <data name="google" xml:space="preserve">
+    <value>google</value>
+  </data>
+  <data name="imdb" xml:space="preserve">
+    <value>imdb</value>
+    <comment>Internet Movie DataBase</comment>
+  </data>
+  <data name="mal" xml:space="preserve">
+    <value>mal</value>
+    <comment>MyAnimeList</comment>
+  </data>
+  <data name="settingsOptions" xml:space="preserve">
+    <value>"taal" om de taal aan te passen
+"thema" om het thema te veranderen
+"exit" om terug te gaan</value>
+    <comment>all commands should be fully lowercase</comment>
+  </data>
+  <data name="wikipedia" xml:space="preserve">
+    <value>wiki</value>
+  </data>
+  <data name="youtube" xml:space="preserve">
+    <value>youtube</value>
   </data>
 </root>

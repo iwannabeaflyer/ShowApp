@@ -11,12 +11,11 @@ namespace JsonApp
         public ushort Episodes { get; set; }        //Amount of episodes (max is 65.535, longest running is ~20.000 episodes which started in 1959)
         public List<string> Genres { get; set; }    //Genres of the show
         public byte Score { get; set; }             //Score of the show (clamped between 0 and 100)
-        public uint RunTime { get; set; }           //Total runtime (still can contain 4.294.967.295 min or ~71.582.788 hours or max #episodes with 65.537 minutes per episode)
+        public uint RunTime { get; set; }           //Total runtime (still can contain 4.294.967.295 min or ~71.582.788 hours or max # episodes with 65.537 minutes per episode)
         public bool Watched { get; set; }           //Seen this show
         public bool HasEnd { get; set; }            //Does it has an ending
         public string Notes { get; set; }           //Additional notes about the show
         public string Description { get; set; }     //Description of the show
-
 
         public ModelItem() { Genres = new List<string>(); }
         public ModelItem(string json)

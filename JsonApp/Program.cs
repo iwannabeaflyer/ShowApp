@@ -16,6 +16,7 @@ Changed some of the variables to be slightly more memory efficient. (using small
 Changed Find to include watched and hasend options (refactored)
 Added Globalisation (language tag)
 Added the ability to open a webbrowser to look more information up
+Changed the deserialization of the json so the notes and description fields can contain any character
 */
 /*** internet stuff
   for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so one+punch+man
@@ -28,9 +29,6 @@ Added the ability to open a webbrowser to look more information up
  */
 /*** TODO
     - App.Config file doesn't save the changes when trying to apply them, but remembers them for the current session
-    - Think if i want to change it so that in Notes you can also use the ':' character without the program breaking. (change the way of deserialization of the last 2 fields)
-     - Think if you want a trashcan functionality for removing, this should help users recover accidentaly deleted shows but you will not be able to clear the memory while the program is open, 
-    aswell as that what is in the trashcan will be deleted once the program exits. Furthermore there is already a check to try to prevent users from deleting things they didn't want to delete.
      */
 
 namespace JsonApp
