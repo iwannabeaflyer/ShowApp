@@ -18,6 +18,7 @@ Added Globalisation (language tag)
 Added the ability to open a webbrowser to look more information up
 Changed the deserialization of the json so the notes and description fields can contain any character
 Changed it so that App.Config now saves the current settings
+Improved the loading and saving of a file
  */
 /*** internet stuff
   for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so one+punch+man
@@ -29,7 +30,6 @@ Changed it so that App.Config now saves the current settings
     Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); //opens the default webbrowser with time for polka on yt
  */
 /*** TODO
-        - improve the loading and saving of a file
      */
 
 namespace JsonApp
@@ -40,12 +40,13 @@ namespace JsonApp
         {
             SettingsTheme(int.Parse(ConfigurationManager.AppSettings.Get("theme")));
             Console.Title = Constants.APPLICATION_NAME;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            LanguageManager.SetCulture(ConfigurationManager.AppSettings.Get("lang"));
+
             string jsonString = "";
             string cmd;
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            LanguageManager.SetCulture(ConfigurationManager.AppSettings.Get("lang"));
 
             Console.WriteLine(LanguageManager.GetTranslation("programStart"));
             while (true)
@@ -273,13 +274,14 @@ namespace JsonApp
                 string path = "";
                 Console.WriteLine(LanguageManager.GetTranslation("directoryPath"));
                 cmd = Console.ReadLine();
-                if (Directory.Exists(cmd))
+                if (!Directory.Exists(cmd))
                 {
-                    path = Path.GetFullPath(cmd);
+                    Directory.CreateDirectory(cmd);   
                 }
-                else
+                path = Path.GetFullPath(cmd);
+                if (!path.EndsWith("\\"))
                 {
-                    Console.WriteLine(LanguageManager.GetTranslation("noValidPath"), cmd);
+                    path = path + "\\";
                 }
                 Save(jsonString, path);
             }
@@ -332,11 +334,11 @@ namespace JsonApp
             Console.WriteLine(LanguageManager.GetTranslation("loadFileName"));
             string fileName = Console.ReadLine();
             string line = "";
-            if(Directory.Exists(path))
+            if (Directory.Exists(path))
             {
                 fileName = path + fileName;
             }
-            else if(!string.IsNullOrEmpty(path))
+            else if (!string.IsNullOrEmpty(path))
             {
                 Console.WriteLine(LanguageManager.GetTranslation("noValidPath"), path);
             }
@@ -434,8 +436,8 @@ namespace JsonApp
                         break;
                     }
                     else if (cmd.Equals(LanguageManager.GetTranslation("youtube")))
-                    {   //TODO: maybe add trailer so it searches specificly for it
-                        Process.Start(Constants.YOUTUBE + search);
+                    {   //TODO: check if preview should stay, this should look up trailers for both movies and anime, but generaly tv shows don't have a trailers
+                        Process.Start(Constants.YOUTUBE + search + "+preview");
                         Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
                         break;
                     }
@@ -566,11 +568,11 @@ namespace JsonApp
                     Console.WriteLine(LanguageManager.GetTranslation("findCancel"));
                     return null;
                 }
-                else if (cmd.Equals(LanguageManager.GetTranslation("cmdAlternative")) || 
-                    cmd.Equals(LanguageManager.GetTranslation("cmdEnglish")) || 
-                    cmd.Equals(LanguageManager.GetTranslation("cmdGenres")) || 
-                    cmd.Equals(LanguageManager.GetTranslation("cmdDescription")) || 
-                    cmd.Equals(LanguageManager.GetTranslation("cmdWatched")) || 
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdAlternative")) ||
+                    cmd.Equals(LanguageManager.GetTranslation("cmdEnglish")) ||
+                    cmd.Equals(LanguageManager.GetTranslation("cmdGenres")) ||
+                    cmd.Equals(LanguageManager.GetTranslation("cmdDescription")) ||
+                    cmd.Equals(LanguageManager.GetTranslation("cmdWatched")) ||
                     cmd.Equals(LanguageManager.GetTranslation("cmdEnding"))) { break; }
                 else
                 {
@@ -685,10 +687,11 @@ namespace JsonApp
             Console.WriteLine(LanguageManager.GetTranslation("setLanguage"));
             Console.WriteLine(LanguageManager.GetTranslation("languages"));
             switch (GetNumber())
-            {   case 1 :
+            {
+                case 1:
                     l = "en";
                     break;
-                case 2 :
+                case 2:
                     l = "nl";
                     break;
                 default:
@@ -699,7 +702,7 @@ namespace JsonApp
             Console.WriteLine(LanguageManager.GetTranslation("newLanguage") + l);
             return l;
         }
-        
+
         /// <summary>
         /// Change the theme of the application
         /// </summary>
@@ -789,7 +792,7 @@ namespace JsonApp
                 if (Int32.TryParse(cmd, out num)) break;
                 else
                 {
-                    Console.WriteLine(LanguageManager.GetTranslation("NaN"),cmd);
+                    Console.WriteLine(LanguageManager.GetTranslation("NaN"), cmd);
                 }
             } while (true);
             return num;
