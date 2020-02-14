@@ -75,11 +75,11 @@ namespace JsonApp
             modelBuilder.Append(ReturnName());
 
             //english name pair
-            modelBuilder.Append("\",\"enName\":\"");
+            modelBuilder.Append("\":{\"enName\":\"");
             modelBuilder.Append(EnName);
 
             //alternative name pair
-            modelBuilder.Append("\":{\"altName\":\"");
+            modelBuilder.Append("\",\"altName\":\"");
             modelBuilder.Append(AltName);
 
             //episodes pair

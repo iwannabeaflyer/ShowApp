@@ -45,7 +45,6 @@ namespace JsonApp
             bool IsChanged = false;
             JsonObject jsonObject = new JsonObject();
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
             LanguageManager.SetCulture(ConfigurationManager.AppSettings.Get("lang"));
 
             Console.WriteLine(LanguageManager.GetTranslation("programStart"));
@@ -123,13 +122,14 @@ namespace JsonApp
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("save"));
                     jsonString = Serialize(jsonObject);
-                    Save(jsonString);
+                    Saving(jsonString);
                     IsChanged = false;
                     Console.WriteLine(LanguageManager.GetTranslation("saveComplete"));
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdLoad")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("load"));
+                    jsonObject.Items.Clear();
                     jsonString = Load();
                     jsonObject.Items = Deserialize(jsonString);
                     Console.WriteLine(LanguageManager.GetTranslation("loadComplete"));
@@ -176,7 +176,7 @@ namespace JsonApp
                     if (IsChanged)
                     {
                         Console.WriteLine(LanguageManager.GetTranslation("unsavedChanges"));
-                        if (GetBool()) { Save(jsonString); IsChanged = false; }
+                        if (GetBool()) { Saving(jsonString); IsChanged = false; }
                     }
                     break;
                 }
@@ -261,10 +261,38 @@ namespace JsonApp
         }
 
         /// <summary>
-        /// Save a specific jsonstring to a file with the name, if the name is not given it will ask for one
+        /// Select how you want to save the file
+        /// </summary>
+        /// <param name="jsonString">string containing the json</param>
+        private static void Saving(string jsonString)
+        {
+            string cmd;
+            Console.WriteLine(LanguageManager.GetTranslation("saveMode"));
+            if (GetBool())
+            {
+                string path = "";
+                Console.WriteLine(LanguageManager.GetTranslation("directoryPath"));
+                cmd = Console.ReadLine();
+                if (Directory.Exists(cmd))
+                {
+                    path = Path.GetFullPath(cmd);
+                }
+                else
+                {
+                    Console.WriteLine(LanguageManager.GetTranslation("noValidPath"), cmd);
+                }
+                Save(jsonString, path);
+            }
+            else
+            {
+                Save(jsonString);
+            }
+        }
+
+        /// <summary>
+        /// Save a specific jsonstring to a file with a asked for name
         /// </summary>
         /// <param name="json">The json string you want to save in a file</param>
-        /// <param name="fileName">The name of the file</param>
         private static void Save(string json)
         {
             Console.WriteLine(LanguageManager.GetTranslation("saveFileName"));
@@ -274,18 +302,57 @@ namespace JsonApp
         }
 
         /// <summary>
+        /// Save a specific jsonstring to a file with an given directory
+        /// </summary>
+        /// <param name="json">The json string you want to save in a file</param>
+        /// <param name="path">The path of where you want to save it</param>
+        private static void Save(string json, string path)
+        {
+            Console.WriteLine(LanguageManager.GetTranslation("saveFileName"));
+            string fileName = Console.ReadLine();
+            //Saving the file
+            File.WriteAllText(path + fileName + ".json", json);
+        }
+
+        /// <summary>
         /// Load a specific file into a string using the given fileName, if none is given it will ask for one
         /// </summary>
         /// <param name="fileName">Name of the file you want to look in, can be empty</param>
         /// <returns>The entire content of a file as a string</returns>
         private static string Load()
         {
+            StreamReader sr;
+            string path = "";
+            Console.WriteLine(LanguageManager.GetTranslation("loadMode"));
+            if (GetBool())
+            {
+                Console.WriteLine(LanguageManager.GetTranslation("directoryPath"));
+                path = Console.ReadLine();
+            }
             Console.WriteLine(LanguageManager.GetTranslation("loadFileName"));
             string fileName = Console.ReadLine();
-            //Read the file
-            string result = File.ReadAllText(fileName + ".json");
-            if (string.IsNullOrEmpty(result)) return "";
-            return result;
+            string line = "";
+            if(Directory.Exists(path))
+            {
+                fileName = path + fileName;
+            }
+            else if(!string.IsNullOrEmpty(path))
+            {
+                Console.WriteLine(LanguageManager.GetTranslation("noValidPath"), path);
+            }
+            try
+            {
+                using (sr = new StreamReader(fileName + ".json"))
+                {
+                    line = sr.ReadToEnd();
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("The file could not be read: ");
+                Console.WriteLine(e.Message);
+            }
+            return line;
         }
 
         /// <summary>

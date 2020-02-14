@@ -475,4 +475,16 @@ all commands should be fully lowercase</comment>
   <data name="youtube" xml:space="preserve">
     <value>youtube</value>
   </data>
+  <data name="directoryPath" xml:space="preserve">
+    <value>Please enter the directory</value>
+  </data>
+  <data name="loadMode" xml:space="preserve">
+    <value>Do you want to give a different directory to load from?</value>
+  </data>
+  <data name="noValidPath" xml:space="preserve">
+    <value>{0} isn't a valid path, resulting to the default path</value>
+  </data>
+  <data name="saveMode" xml:space="preserve">
+    <value>Do you want to give a directory to store the file on a specific location?</value>
+  </data>
 </root>

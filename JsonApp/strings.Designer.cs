@@ -390,6 +390,15 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter the directory.
+        /// </summary>
+        internal static string directoryPath {
+            get {
+                return ResourceManager.GetString("directoryPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Editing.
         /// </summary>
         internal static string edit {
@@ -614,6 +623,15 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to give a different directory to load from?.
+        /// </summary>
+        internal static string loadMode {
+            get {
+                return ResourceManager.GetString("loadMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;add&quot; to adding a new item
         ///&quot;remove&quot; to remove an excisting item
         ///&quot;find&quot; to find an item
@@ -680,6 +698,15 @@ namespace JsonApp {
         internal static string noShort {
             get {
                 return ResourceManager.GetString("noShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} isn&apos;t a valid path, resulting to the default path.
+        /// </summary>
+        internal static string noValidPath {
+            get {
+                return ResourceManager.GetString("noValidPath", resourceCulture);
             }
         }
         
@@ -779,6 +806,15 @@ namespace JsonApp {
         internal static string saveFileName {
             get {
                 return ResourceManager.GetString("saveFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to give a directory to store the file on a specific location?.
+        /// </summary>
+        internal static string saveMode {
+            get {
+                return ResourceManager.GetString("saveMode", resourceCulture);
             }
         }
         
