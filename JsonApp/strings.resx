@@ -169,17 +169,19 @@
     <value>What field do you want to edit?</value>
   </data>
   <data name="editOptions" xml:space="preserve">
-    <value>"alternative" for editing the alternative name
-"english" for editing the english name
-"episodes" for editing the amount of episodes
-"description" for editing the description
-"genres" for editing its genres
-"notes" for editing the notes
-"score" for editing the score
-"runtime" for editing the runtime
-"watched" for editing if you have watched it
-"ending" for editing if it has an ending
-"exit" for stop editing</value>
+    <value>"alternative" to edit the alternative name
+"english" to edit the english name
+"episodes" to edit the amount of episodes
+"description" to edit the description
+"genres" to edit its genres
+"notes" to edit the notes
+"score" to edit the score
+"runtime" to edit the runtime
+"watched" to edit if you have watched it
+"ending" to edit if it has an ending
+"exit" to stop editing</value>
+    <comment>make sure the words marked by "xy" are the same as their cmdXy counterpart value.
+all commands should be fully lowercase</comment>
   </data>
   <data name="find" xml:space="preserve">
     <value>Finding</value>
@@ -192,6 +194,7 @@
   </data>
   <data name="findConfirmOther" xml:space="preserve">
     <value>Are you sure you want to search using: {0} ?</value>
+    <comment>{0} is the users input</comment>
   </data>
   <data name="findConfirmYes" xml:space="preserve">
     <value>Are you sure you want to search using: yes ?</value>
@@ -209,13 +212,15 @@
     <value>There hasn't been any item found in {0} with the term {1} do you want to use a different term?</value>
   </data>
   <data name="findOptions" xml:space="preserve">
-    <value>"alternative" for looking for the alternative name
-"english" for looking for the english name
-"genres" for looking in the genres 
-"description" for looking in the description 
-"watched" for looking if you watched it 
-"ending" for looking if it has an ending 
+    <value>"alternative" to look for the alternative name
+"english" to look for the english name
+"genres" to look in the genres 
+"description" to look in the description 
+"watched" to look if you watched it 
+"ending" to look if it has an ending 
 "exit" to stop searching</value>
+    <comment>make sure the words marked by "xy" are the same as their cmdXy counterpart value.
+all commands should be fully lowercase</comment>
   </data>
   <data name="findOther" xml:space="preserve">
     <value>On what do you want to search?</value>
@@ -225,6 +230,7 @@
   </data>
   <data name="invalidCommand" xml:space="preserve">
     <value>{0} isn't a valid command please enter a valid command</value>
+    <comment>{0} is the users input</comment>
   </data>
   <data name="load" xml:space="preserve">
     <value>Loading</value>
@@ -236,17 +242,20 @@
     <value>What is the name of the file?</value>
   </data>
   <data name="mainOptions" xml:space="preserve">
-    <value>"add" for adding a new item
-"remove" for removing an excisting item
-"find" for finding items
-"edit" for editing an excisting item
-"save" for saving the excisting items
-"load" for loading items from a file
-"settings" for changing the settings
-"exit" exit for stopping the program</value>
+    <value>"add" to adding a new item
+"remove" to remove an excisting item
+"find" to find an item
+"edit" to edit an excisting item
+"save" to save the excisting items
+"load" to load items from a file
+"settings" to change the settings
+"exit" to stop the program</value>
+    <comment>make sure the words marked by "xy" are the same as their cmdXy counterpart value.
+all commands should be fully lowercase</comment>
   </data>
   <data name="NaN" xml:space="preserve">
-    <value> isn't a valid number please fill in a number</value>
+    <value>{0} isn't a valid number please fill in a number</value>
+    <comment>{0} is the users input</comment>
   </data>
   <data name="noName" xml:space="preserve">
     <value>Failed to serialize a show since it doesn't have a name</value>
@@ -301,6 +310,7 @@
   </data>
   <data name="showRuntime" xml:space="preserve">
     <value>The total runtime is {0}:{1} or {2} minutes per episode</value>
+    <comment>{0} for hours, (1} for minutes</comment>
   </data>
   <data name="showScore" xml:space="preserve">
     <value>Score : </value>
@@ -383,21 +393,27 @@
   </data>
   <data name="noLong" xml:space="preserve">
     <value>no</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="noShort" xml:space="preserve">
     <value>n</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="otherLong" xml:space="preserve">
     <value>other</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="otherShort" xml:space="preserve">
     <value>o</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="yesLong" xml:space="preserve">
     <value>yes</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="yesShort" xml:space="preserve">
     <value>y</value>
+    <comment>should be fully lowercase</comment>
   </data>
   <data name="setTheme" xml:space="preserve">
     <value>What theme do you want to use?</value>
@@ -416,5 +432,41 @@
     <value>1 Light
 2 Dark
 3 Matrix</value>
+  </data>
+  <data name="browserOpen" xml:space="preserve">
+    <value>Do you want to open a webbrowser to look up more information?</value>
+  </data>
+  <data name="browserOptions" xml:space="preserve">
+    <value>"google" to open up Google
+"wiki" to open Wikipedia
+"imdb" to open IMDB
+"mal" to open MAL
+"youtube" to open Youtube
+"exit" to back out</value>
+    <comment>make sure the words marked by "x" are the same as their x counterpart value.
+all commands should be fully lowercase</comment>
+  </data>
+  <data name="google" xml:space="preserve">
+    <value>google</value>
+  </data>
+  <data name="imdb" xml:space="preserve">
+    <value>imdb</value>
+    <comment>Internet Movie DataBase</comment>
+  </data>
+  <data name="mal" xml:space="preserve">
+    <value>mal</value>
+    <comment>MyAnimeList</comment>
+  </data>
+  <data name="settingsOptions" xml:space="preserve">
+    <value>"language" to change the language
+"theme" to editing the theme of the application
+"exit" to back out of the settings</value>
+    <comment>all commands should be fully lowercase</comment>
+  </data>
+  <data name="wikipedia" xml:space="preserve">
+    <value>wiki</value>
+  </data>
+  <data name="youtube" xml:space="preserve">
+    <value>youtube</value>
   </data>
 </root>

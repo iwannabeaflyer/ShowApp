@@ -6,8 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Configuration;
 
-/***
- DONE
+/*** DONE
 Changed ModelItem constructor so it can generate ModelItems from a json file with an already valid construction
 Changed ModelItem serializer so it can generate valid json strings from ModelItems
 Functionality of it reminding the user that he/she made a change and ask to save if they want to save it before closing the app (bool has to change within Main, edit doesn't have to change)
@@ -15,33 +14,23 @@ Changed Edit to include the new data
 Add functionality to convert runtime to an hh:mm or hh:mm format (only needed on All())
 Changed some of the variables to be slightly more memory efficient. (using smaller data types where possible aswell as using unsigned types instead of signed)
 Changed Find to include watched and hasend options (refactored)
-
-TODO
-
-    - Internet intergration in looking for looking up more information about a show. https://stackoverflow.com/questions/6305388/how-to-launch-a-google-chrome-tab-with-specific-url-using-c-sharp
-    Could be used when using Find or even with Add and Edit.
+Added Globalisation (language tag)
+Added the ability to open a webbrowser to look more information up
+*/
+/*** internet stuff
   for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so one+punch+man
-  
   for mal       "https://myanimelist.net/search/all?q=" and then word or words where spaces are indicated by "%20" so one%20punch%20man (or replace %20 with a white space)
   but specific  "https://myanimelist.net/anime.php?q=" where anime.php can be replaced with manga.php, character.php and other categories
-
   imdb          "https://www.imdb.com/find?q=" and then word or words where spaces are indicated by '+' so iron+man+3 (https://www.imdb.com/find?q= + search + &ref_=nv_sr_sm) is also possible
-
   youtube       "https://www.youtube.com/results?search_query=" and then word or words where spaces are indicated by '+' so one+punch+man
-
-  wikipedia     "https://en.wikipedia.org/w/index.php?search=" and then word or words where spaces are indicated by '+' so one+punch+man
-  
+  wikipedia     "https://en.wikipedia.org/w/index.php?search=" and then word or words where spaces are indicated by '+' so one+punch+man  
     Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); //opens the default webbrowser with time for polka on yt
-    
+ */
+/*** TODO
+    - App.Config file doesn't save the changes when trying to apply them, but remembers them for the current session
     - Think if i want to change it so that in Notes you can also use the ':' character without the program breaking. (change the way of deserialization of the last 2 fields)
-
-    - Add Globalisation (language tag) https://www.agiledeveloper.com/articles/LocalizingDOTNet.pdf
-    https://docs.microsoft.com/nl-nl/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c
-      Add it so all commands are also changed to their respective language (adds ~23 more strings in resx)
-
      - Think if you want a trashcan functionality for removing, this should help users recover accidentaly deleted shows but you will not be able to clear the memory while the program is open, 
     aswell as that what is in the trashcan will be deleted once the program exits. Furthermore there is already a check to try to prevent users from deleting things they didn't want to delete.
-
      */
 
 namespace JsonApp
@@ -112,7 +101,8 @@ namespace JsonApp
                     //acces a specific item
                     int elem = AccesItem(results.Count());
                     results.ElementAt(elem).ShowAll();
-                    //TODO ask if the user wants to open a webbrowser for more information about this item
+                    //Ask if the user wants to open a webbrowser for more information
+                    OpenBrowser(results.ElementAt(elem).ReturnName());
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdEdit")))
                 {
@@ -123,6 +113,8 @@ namespace JsonApp
                     //acces a specific item
                     int elem = AccesItem(results.Count());
                     ModelItem edit = results.ElementAt(elem);
+                    //Ask if the user wants to open a webbrowser for more information
+                    OpenBrowser(edit.ReturnName());
                     //edit specific field(s)
                     IsChanged = Edit(ref edit);
                     Console.WriteLine(LanguageManager.GetTranslation("editComplete"));
@@ -145,19 +137,29 @@ namespace JsonApp
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdSettings")))
                 {
                     LanguageManager.GetTranslation("settings");
-                    cmd = Console.ReadLine();
-                    if (cmd.Equals(LanguageManager.GetTranslation("settingsLanguage")))
+                    do
                     {
-                        LanguageManager.SetCulture(SettingsLanguage());
-                    }
-                    else if (cmd.Equals(LanguageManager.GetTranslation("settingsTheme")))
-                    {
-                        SettingsTheme();
-                    }
-                    else
-                    {
-                        Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
-                    }          
+                        cmd = Console.ReadLine();
+                        if (cmd.Equals(LanguageManager.GetTranslation("settingsLanguage")))
+                        {
+                            LanguageManager.SetCulture(SettingsLanguage());
+                            break;
+                        }
+                        else if (cmd.Equals(LanguageManager.GetTranslation("settingsTheme")))
+                        {
+                            SettingsTheme();
+                            break;
+                        }
+                        else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
+                            Console.WriteLine(LanguageManager.GetTranslation("settingsOptions"));
+                        }
+                    } while (true);
                 }
                 else if (cmd.Equals("clear"))
                 {
@@ -209,7 +211,7 @@ namespace JsonApp
                 }
                 else
                 {
-                    Console.WriteLine(cmd + LanguageManager.GetTranslation("NaN"));
+                    Console.WriteLine(LanguageManager.GetTranslation("NaN"), cmd);
                 }
             } while (true);
             return --elem;
@@ -293,7 +295,8 @@ namespace JsonApp
             item.EnName = FirstToUpper(Console.ReadLine());
             Console.WriteLine(LanguageManager.GetTranslation("assignAlternative"));
             item.AltName = FirstToUpper(Console.ReadLine());
-            //TODO: give the user an option to use the just given name to look it up for more information with a webbrowser
+            //Ask if the user wants to open a webbrowser for more information
+            OpenBrowser(item.ReturnName());
             Console.WriteLine(LanguageManager.GetTranslation("assignEpisodes"));
             item.Episodes = (ushort)GetNumber();
             Console.WriteLine(LanguageManager.GetTranslation("assignDescription"));
@@ -315,6 +318,54 @@ namespace JsonApp
             item.Notes = Console.ReadLine();
 
             return item;
+        }
+
+        /// <summary>
+        /// Ask to open a webbrowser to find more information
+        /// </summary>
+        /// <param name="search">Name of the item or show</param>
+        private static void OpenBrowser(string search)
+        {
+            string cmd;
+            Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+            if (GetBool())
+            {
+                do
+                {
+                    cmd = Console.ReadLine().ToLower();
+                    if (cmd.Equals(LanguageManager.GetTranslation("mal")))
+                    {
+                        Process.Start(Constants.MAL_ALL + search);
+                    }
+                    //MAL is the only site that accepts white spaces or %20, others need '+' between search words
+                    search = search.Replace(" ", "+");
+                    if (cmd.Equals(LanguageManager.GetTranslation("google")))
+                    {
+                        Process.Start(Constants.GOOGLE + search);
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("wikipedia")))
+                    {
+                        Process.Start(Constants.WIKIPEDIA + search);
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("imdb")))
+                    {
+                        Process.Start(Constants.IMDB + search);
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("youtube")))
+                    {   //TODO: maybe add trailer so it searches specificly for it
+                        Process.Start(Constants.YOUTUBE + search);
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"));
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOptions"));
+                    }
+                } while (true);
+            }
         }
 
         /// <summary>
@@ -424,7 +475,7 @@ namespace JsonApp
             {
                 //Ask for the command and check wether its a valid one or not
                 Console.WriteLine(LanguageManager.GetTranslation("findField"));
-                cmd = Console.ReadLine();
+                cmd = Console.ReadLine().ToLower();
 
                 if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
                 {
@@ -560,11 +611,11 @@ namespace JsonApp
                     l = "en"; //default file is written in english
                     break;
             }
-            ConfigurationManager.AppSettings.Set("lang", l);
+            ConfigurationManager.AppSettings.Set("lang", l); //Doesn't seem to change the app.config file.
             Console.WriteLine(LanguageManager.GetTranslation("newLanguage") + l);
             return l;
         }
-
+        
         /// <summary>
         /// Change the theme of the application
         /// </summary>
@@ -601,7 +652,7 @@ namespace JsonApp
                     break;
             }
             Console.Clear();
-            ConfigurationManager.AppSettings.Set("theme", i.ToString());
+            ConfigurationManager.AppSettings.Set("theme", i.ToString()); //Doesn't seem to change app.Config
         }
 
         /// <summary>
@@ -653,7 +704,7 @@ namespace JsonApp
                 if (Int32.TryParse(cmd, out num)) break;
                 else
                 {
-                    Console.WriteLine(cmd + LanguageManager.GetTranslation("NaN"));
+                    Console.WriteLine(LanguageManager.GetTranslation("NaN"),cmd);
                 }
             } while (true);
             return num;

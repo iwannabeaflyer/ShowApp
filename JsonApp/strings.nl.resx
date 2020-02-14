@@ -322,7 +322,7 @@
 2 Nederlands</value>
   </data>
   <data name="settingsLanguage" xml:space="preserve">
-    <value>Welke taal wilt u gebruiken?</value>
+    <value>taal</value>
   </data>
   <data name="newLanguage" xml:space="preserve">
     <value>De nieuwe taal van de applicatie is : </value>
@@ -398,5 +398,19 @@
   </data>
   <data name="yesShort" xml:space="preserve">
     <value>j</value>
+  </data>
+  <data name="setLanguage" xml:space="preserve">
+    <value>Welke taal wilt u gebruiken?</value>
+  </data>
+  <data name="setTheme" xml:space="preserve">
+    <value>Welk thema wilt u gebruiken?</value>
+  </data>
+  <data name="settingsTheme" xml:space="preserve">
+    <value>thema</value>
+  </data>
+  <data name="themes" xml:space="preserve">
+    <value>1 Light
+2 Donker
+3 Matrix</value>
   </data>
 </root>

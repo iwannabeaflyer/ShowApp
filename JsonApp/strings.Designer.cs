@@ -187,6 +187,29 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to open a webbrowser to look up more information?.
+        /// </summary>
+        internal static string browserOpen {
+            get {
+                return ResourceManager.GetString("browserOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;google&quot; to open up Google
+        ///&quot;wiki&quot; to open Wikipedia
+        ///&quot;imdb&quot; to open IMDB
+        ///&quot;mal&quot; to open MAL
+        ///&quot;youtube&quot; to open Youtube
+        ///&quot;exit&quot; to back out.
+        /// </summary>
+        internal static string browserOptions {
+            get {
+                return ResourceManager.GetString("browserOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add.
         /// </summary>
         internal static string cmdAdd {
@@ -376,17 +399,17 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;alternative&quot; for editing the alternative name
-        ///&quot;english&quot; for editing the english name
-        ///&quot;episodes&quot; for editing the amount of episodes
-        ///&quot;description&quot; for editing the description
-        ///&quot;genres&quot; for editing its genres
-        ///&quot;notes&quot; for editing the notes
-        ///&quot;score&quot; for editing the score
-        ///&quot;runtime&quot; for editing the runtime
-        ///&quot;watched&quot; for editing if you have watched it
-        ///&quot;ending&quot; for editing if it has an ending
-        ///&quot;exit&quot; for stop editing.
+        ///   Looks up a localized string similar to &quot;alternative&quot; to edit the alternative name
+        ///&quot;english&quot; to edit the english name
+        ///&quot;episodes&quot; to edit the amount of episodes
+        ///&quot;description&quot; to edit the description
+        ///&quot;genres&quot; to edit its genres
+        ///&quot;notes&quot; to edit the notes
+        ///&quot;score&quot; to edit the score
+        ///&quot;runtime&quot; to edit the runtime
+        ///&quot;watched&quot; to edit if you have watched it
+        ///&quot;ending&quot; to edit if it has an ending
+        ///&quot;exit&quot; to stop editing.
         /// </summary>
         internal static string editOptions {
             get {
@@ -476,12 +499,12 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;alternative&quot; for looking for the alternative name
-        ///&quot;english&quot; for looking for the english name
-        ///&quot;genres&quot; for looking in the genres 
-        ///&quot;description&quot; for looking in the description 
-        ///&quot;watched&quot; for looking if you watched it 
-        ///&quot;ending&quot; for looking if it has an ending 
+        ///   Looks up a localized string similar to &quot;alternative&quot; to look for the alternative name
+        ///&quot;english&quot; to look for the english name
+        ///&quot;genres&quot; to look in the genres 
+        ///&quot;description&quot; to look in the description 
+        ///&quot;watched&quot; to look if you watched it 
+        ///&quot;ending&quot; to look if it has an ending 
         ///&quot;exit&quot; to stop searching.
         /// </summary>
         internal static string findOptions {
@@ -505,6 +528,24 @@ namespace JsonApp {
         internal static string findWatched {
             get {
                 return ResourceManager.GetString("findWatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to google.
+        /// </summary>
+        internal static string google {
+            get {
+                return ResourceManager.GetString("google", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to imdb.
+        /// </summary>
+        internal static string imdb {
+            get {
+                return ResourceManager.GetString("imdb", resourceCulture);
             }
         }
         
@@ -555,14 +596,14 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;add&quot; for adding a new item
-        ///&quot;remove&quot; for removing an excisting item
-        ///&quot;find&quot; for finding items
-        ///&quot;edit&quot; for editing an excisting item
-        ///&quot;save&quot; for saving the excisting items
-        ///&quot;load&quot; for loading items from a file
-        ///&quot;settings&quot; for changing the settings
-        ///&quot;exit&quot; exit for stopping the program.
+        ///   Looks up a localized string similar to &quot;add&quot; to adding a new item
+        ///&quot;remove&quot; to remove an excisting item
+        ///&quot;find&quot; to find an item
+        ///&quot;edit&quot; to edit an excisting item
+        ///&quot;save&quot; to save the excisting items
+        ///&quot;load&quot; to load items from a file
+        ///&quot;settings&quot; to change the settings
+        ///&quot;exit&quot; to stop the program.
         /// </summary>
         internal static string mainOptions {
             get {
@@ -571,7 +612,16 @@ namespace JsonApp {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  isn&apos;t a valid number please fill in a number.
+        ///   Looks up a localized string similar to mal.
+        /// </summary>
+        internal static string mal {
+            get {
+                return ResourceManager.GetString("mal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} isn&apos;t a valid number please fill in a number.
         /// </summary>
         internal static string NaN {
             get {
@@ -752,6 +802,17 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;language&quot; to change the language
+        ///&quot;theme&quot; to editing the theme of the application
+        ///&quot;exit&quot; to back out of the settings.
+        /// </summary>
+        internal static string settingsOptions {
+            get {
+                return ResourceManager.GetString("settingsOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to theme.
         /// </summary>
         internal static string settingsTheme {
@@ -871,6 +932,15 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to wiki.
+        /// </summary>
+        internal static string wikipedia {
+            get {
+                return ResourceManager.GetString("wikipedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to yes.
         /// </summary>
         internal static string yesLong {
@@ -903,6 +973,15 @@ namespace JsonApp {
         internal static string yesShort {
             get {
                 return ResourceManager.GetString("yesShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to youtube.
+        /// </summary>
+        internal static string youtube {
+            get {
+                return ResourceManager.GetString("youtube", resourceCulture);
             }
         }
     }
