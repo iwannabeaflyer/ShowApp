@@ -189,6 +189,24 @@ namespace JsonApp {
         /// <summary>
         ///   Looks up a localized string similar to Do you want to open a webbrowser to look up more information?.
         /// </summary>
+        internal static string browserConfirm {
+            get {
+                return ResourceManager.GetString("browserConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter on what website you want to search.
+        /// </summary>
+        internal static string browserInput {
+            get {
+                return ResourceManager.GetString("browserInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opening a webbrowser.
+        /// </summary>
         internal static string browserOpen {
             get {
                 return ResourceManager.GetString("browserOpen", resourceCulture);

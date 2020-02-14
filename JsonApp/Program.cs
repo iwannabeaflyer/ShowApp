@@ -327,33 +327,44 @@ namespace JsonApp
         private static void OpenBrowser(string search)
         {
             string cmd;
-            Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+            Console.WriteLine(LanguageManager.GetTranslation("browserConfirm"));
             if (GetBool())
             {
+                Console.WriteLine(LanguageManager.GetTranslation("browserInput"));
                 do
                 {
                     cmd = Console.ReadLine().ToLower();
                     if (cmd.Equals(LanguageManager.GetTranslation("mal")))
                     {
                         Process.Start(Constants.MAL_ALL + search);
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+                        break;
                     }
                     //MAL is the only site that accepts white spaces or %20, others need '+' between search words
                     search = search.Replace(" ", "+");
                     if (cmd.Equals(LanguageManager.GetTranslation("google")))
                     {
                         Process.Start(Constants.GOOGLE + search);
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+                        break;
                     }
                     else if (cmd.Equals(LanguageManager.GetTranslation("wikipedia")))
                     {
                         Process.Start(Constants.WIKIPEDIA + search);
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+                        break;
                     }
                     else if (cmd.Equals(LanguageManager.GetTranslation("imdb")))
                     {
                         Process.Start(Constants.IMDB + search);
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+                        break;
                     }
                     else if (cmd.Equals(LanguageManager.GetTranslation("youtube")))
                     {   //TODO: maybe add trailer so it searches specificly for it
                         Process.Start(Constants.YOUTUBE + search);
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+                        break;
                     }
                     else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
                     {

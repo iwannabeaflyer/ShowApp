@@ -4,7 +4,7 @@ namespace JsonApp
     {
         public const byte MIN = 0;
         public const byte MAX = 100;
-        public const byte JSON_FIELDS = 11;
+        public const byte JSON_FIELDS = 9;
         public const byte MINUTES = 60;
 
         public const string APPLICATION_NAME = "json creator";

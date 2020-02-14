@@ -36,11 +36,10 @@ namespace JsonApp
             Score = byte.Parse(results[5].Split(',')[0]);
             RunTime = uint.Parse(results[6].Split(',')[0]);
             Watched = StringToBool(results[7].Split(',')[0]);
-            HasEnd = StringToBool(results[8].Split(',')[0]);
-            //NOTE: you can make Constants.JSON_FIELDS 9 and then manually split the last result by .Split("\"description\":"); then the first part will be the notes and the second part will
-            //have the description left. This should make it so that notes also can have ':' in it.
-            Notes = results[9].Split(',')[0].Trim('"');
-            Description = results[10].Trim('"');
+            results[8].Split(',').CopyTo(results, 0);
+            HasEnd = StringToBool(results[0]);
+            Notes = results[1].Replace("\"notes\":\"", "").Trim('"');
+            Description = results[2].Replace("\"description\":\"", "").Trim('"');
 
             /*
             char[] array = { ',' };

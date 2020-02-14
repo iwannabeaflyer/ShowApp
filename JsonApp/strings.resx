@@ -433,8 +433,14 @@ all commands should be fully lowercase</comment>
 2 Dark
 3 Matrix</value>
   </data>
-  <data name="browserOpen" xml:space="preserve">
+  <data name="browserConfirm" xml:space="preserve">
     <value>Do you want to open a webbrowser to look up more information?</value>
+  </data>
+  <data name="browserInput" xml:space="preserve">
+    <value>Please enter on what website you want to search</value>
+  </data>
+  <data name="browserOpen" xml:space="preserve">
+    <value>Opening a webbrowser</value>
   </data>
   <data name="browserOptions" xml:space="preserve">
     <value>"google" to open up Google

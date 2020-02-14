@@ -27,23 +27,6 @@ Main
             resourceManager = new ResourceManager("JsonApp.strings", System.Reflection.Assembly.GetExecutingAssembly());
         }
 
-        public static void Display(string specifiedCulture)
-        {
-            Console.WriteLine("---->" + specifiedCulture);
-            SetCulture(specifiedCulture);
-            resourceManager = new ResourceManager("JsonApp.strings", System.Reflection.Assembly.GetExecutingAssembly());
-            Console.WriteLine(resourceManager.GetString("welcome"));
-            Console.WriteLine(resourceManager.GetString("thanks"));
-            Console.WriteLine(resourceManager.GetString("bye"));
-        }
-
-        public static string GetTranslation(string cul, string s)
-        {
-            SetCulture(cul);
-            resourceManager = new ResourceManager("JsonApp.strings", System.Reflection.Assembly.GetExecutingAssembly());
-            return resourceManager.GetString(s);
-        }
-
         public static string GetTranslation(string s)
         {
             return resourceManager.GetString(s);
