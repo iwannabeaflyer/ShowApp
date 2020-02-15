@@ -30,6 +30,7 @@ Improved the loading and saving of a file
     Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); //opens the default webbrowser with time for polka on yt
  */
 /*** TODO
+ *  - remove goto's from code loops in Remove() and Find() (probably have to refactor Find() again)
      */
 
 namespace JsonApp
@@ -61,37 +62,7 @@ namespace JsonApp
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdRemove")))
                 {
                     Console.WriteLine(LanguageManager.GetTranslation("remove"));
-                    List<ModelItem> results;
-                    do
-                    {
-                        Start:
-                        results = Find(jsonObject);
-                        if (results == null || results.Count() == 0) continue;
-                        //acces a specific item
-                        int elem = AccesItem(results.Count());
-                        Console.WriteLine(LanguageManager.GetTranslation("removeConfirm"));
-                        jsonObject.Items[elem].ShowAll();
-                        Question:
-                        Console.WriteLine(LanguageManager.GetTranslation("yesNoOther"));
-                        cmd = Console.ReadLine().ToLower();
-                        if (cmd.Equals(LanguageManager.GetTranslation("yesShort")) || cmd.Equals(LanguageManager.GetTranslation("yesLong")))
-                        {
-                            jsonObject.Items.Remove(results.ElementAt(elem));
-                            IsChanged = true;
-                            Console.WriteLine(LanguageManager.GetTranslation("removeComplete"));
-                            break;
-                        }
-                        else if (cmd.Equals(LanguageManager.GetTranslation("otherShort")) || cmd.Equals(LanguageManager.GetTranslation("otherLong")))
-                        {
-                            goto Start;
-                        }
-                        else if (cmd.Equals(LanguageManager.GetTranslation("noShort")) || cmd.Equals(LanguageManager.GetTranslation("noLong")))
-                        {
-                            Console.WriteLine(LanguageManager.GetTranslation("removeCancel"));
-                            break;
-                        }
-                        else { goto Question; }
-                    } while (true);
+                    IsChanged = Remove(ref jsonObject);
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdFind")))
                 {
@@ -393,6 +364,50 @@ namespace JsonApp
             item.Notes = Console.ReadLine();
 
             return item;
+        }
+
+        private static bool Remove(ref JsonObject jsonObject)
+        {
+            List<ModelItem> results;
+            string cmd;
+            bool IsChanged = false;
+            bool Start, Question;
+            Start = Question = true;
+            do
+            {
+                results = Find(jsonObject);
+                if (results == null || results.Count() == 0) continue;
+                //acces a specific item
+                int elem = AccesItem(results.Count());
+                Console.WriteLine(LanguageManager.GetTranslation("removeConfirm"));
+                jsonObject.Items[elem].ShowAll();
+                do
+                {
+                    Question = true;
+                    Console.WriteLine(LanguageManager.GetTranslation("yesNoOther"));
+                    cmd = Console.ReadLine().ToLower();
+                    if (cmd.Equals(LanguageManager.GetTranslation("yesShort")) || cmd.Equals(LanguageManager.GetTranslation("yesLong")))
+                    {
+                        jsonObject.Items.Remove(results.ElementAt(elem));
+                        IsChanged = true;
+                        Console.WriteLine(LanguageManager.GetTranslation("removeComplete"));
+                        Start = false;
+                        Question = false;
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("otherShort")) || cmd.Equals(LanguageManager.GetTranslation("otherLong")))
+                    {
+                        Question = false;
+                        continue;
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("noShort")) || cmd.Equals(LanguageManager.GetTranslation("noLong")))
+                    {
+                        Console.WriteLine(LanguageManager.GetTranslation("removeCancel"));
+                        Start = false;
+                        Question = false;
+                    }
+                } while (Question);
+            } while (Start);
+            return IsChanged;
         }
 
         /// <summary>
