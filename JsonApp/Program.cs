@@ -6,33 +6,6 @@ using System.IO;
 using System.Diagnostics;
 using System.Configuration;
 
-/*** DONE
-Changed ModelItem constructor so it can generate ModelItems from a json file with an already valid construction
-Changed ModelItem serializer so it can generate valid json strings from ModelItems
-Functionality of it reminding the user that he/she made a change and ask to save if they want to save it before closing the app (bool has to change within Main, edit doesn't have to change)
-Changed Edit to include the new data
-Add functionality to convert runtime to an hh:mm or hh:mm format (only needed on All())
-Changed some of the variables to be slightly more memory efficient. (using smaller data types where possible aswell as using unsigned types instead of signed)
-Changed Find to include watched and hasend options (refactored)
-Added Globalisation (language tag)
-Added the ability to open a webbrowser to look more information up
-Changed the deserialization of the json so the notes and description fields can contain any character
-Changed it so that App.Config now saves the current settings
-Improved the loading and saving of a file
- */
-/*** internet stuff
-  for google    "https://www.google.com/search?q=" and then the word or words where spaces are indicated by '+' so one+punch+man
-  for mal       "https://myanimelist.net/search/all?q=" and then word or words where spaces are indicated by "%20" so one%20punch%20man (or replace %20 with a white space)
-  but specific  "https://myanimelist.net/anime.php?q=" where anime.php can be replaced with manga.php, character.php and other categories
-  imdb          "https://www.imdb.com/find?q=" and then word or words where spaces are indicated by '+' so iron+man+3 (https://www.imdb.com/find?q= + search + &ref_=nv_sr_sm) is also possible
-  youtube       "https://www.youtube.com/results?search_query=" and then word or words where spaces are indicated by '+' so one+punch+man
-  wikipedia     "https://en.wikipedia.org/w/index.php?search=" and then word or words where spaces are indicated by '+' so one+punch+man  
-    Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); //opens the default webbrowser with time for polka on yt
- */
-/*** TODO
- *  - remove goto's from code loops in Remove() and Find() (probably have to refactor Find() again)
-     */
-
 namespace JsonApp
 {
     class Program
@@ -141,8 +114,6 @@ namespace JsonApp
                 {
                     Console.Clear();
                 }
-                else if (cmd.Equals("polka")) { Process.Start("https://www.youtube.com/watch?v=eI3ldLdCXKs"); }
-                else if (cmd.Equals("lonely")) { Process.Start("https://www.youtube.com/watch?v=unOSs2P-An0"); }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
                 {
                     if (IsChanged)

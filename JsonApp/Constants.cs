@@ -9,6 +9,7 @@ namespace JsonApp
 
         public const string APPLICATION_NAME = "json creator";
 
+        //All but MAL use '+' to seperate search words, MAL uses %20 or white spaces
         public const string GOOGLE = "https://www.google.com/search?q=";
         public const string MAL_ALL = "https://myanimelist.net/search/all?q=";
         public const string MAL_CATAGORY = "https://myanimelist.net/";
