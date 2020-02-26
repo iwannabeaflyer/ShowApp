@@ -538,7 +538,7 @@ namespace JsonApp
                 }
                 else
                 {
-                    Console.WriteLine(cmd + LanguageManager.GetTranslation("invalidCommand"));
+                    Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
                     Console.WriteLine(LanguageManager.GetTranslation("editOptions"));
                 }
             }
