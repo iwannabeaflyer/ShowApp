@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Configuration;
+using System.Text.Json;
 
 namespace JsonApp
 {
@@ -76,7 +76,7 @@ namespace JsonApp
                     Console.WriteLine(LanguageManager.GetTranslation("load"));
                     jsonObject.Items.Clear();
                     jsonString = Load();
-                    jsonObject.Items = Deserialize(jsonString);
+                    jsonObject = Deserialize(jsonString);
                     Console.WriteLine(LanguageManager.GetTranslation("loadComplete"));
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdSettings")))
@@ -169,18 +169,21 @@ namespace JsonApp
         /// </summary>
         /// <param name="jsonString"></param>
         /// <returns>List of ModelItems made using the json string</returns>
-        private static List<ModelItem> Deserialize(string jsonString)
+        private static JsonObject Deserialize(string jsonString)
         {
+            JsonObject ob = new JsonObject();
+            ob = JsonSerializer.Deserialize<JsonObject>(jsonString);
+            /*            
             List<ModelItem> result = new List<ModelItem>();
-            //split jsonString into modelitems objects
+            split jsonString into modelitems objects
             jsonString = jsonString.TrimStart('{').TrimEnd('}');
             string[] temp = jsonString.Split('{', '}');
-            //Add the important information to a model
+            Add the important information to a model
             for (int i = 1; i < temp.Length; i += 2)
             {
                 result.Add(new ModelItem(temp[i]));
-            }
-            return result;
+            }*/
+            return ob;
         }
 
         /// <summary>
@@ -190,6 +193,9 @@ namespace JsonApp
         /// <returns>The given JsonObject as string</returns>
         private static string Serialize(JsonObject jsonObject)
         {
+            string json = JsonSerializer.Serialize(jsonObject);
+
+            /*
             StringBuilder jsonBuilder = new StringBuilder();
             jsonBuilder.Append('{');
             foreach (ModelItem item in jsonObject.Items)
@@ -200,7 +206,8 @@ namespace JsonApp
             }
             jsonBuilder.Remove(jsonBuilder.Length - 2, 2);
             jsonBuilder.Append('}', 2);
-            return jsonBuilder.ToString();
+            return jsonBuilder.ToString();*/
+            return json;
         }
 
         /// <summary>

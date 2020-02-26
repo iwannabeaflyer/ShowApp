@@ -63,7 +63,7 @@ namespace JsonApp
             }
             */
         }
-
+        /*
         /// <summary>
         /// Create a json string from this object
         /// </summary>
@@ -75,19 +75,19 @@ namespace JsonApp
             modelBuilder.Append(ReturnName());
 
             //english name pair
-            modelBuilder.Append("\":{\"enName\":\"");
+            modelBuilder.Append("\":{\"EnName\":\"");
             modelBuilder.Append(EnName);
 
             //alternative name pair
-            modelBuilder.Append("\",\"altName\":\"");
+            modelBuilder.Append("\",\"AltName\":\"");
             modelBuilder.Append(AltName);
 
             //episodes pair
-            modelBuilder.Append("\",\"episodes\":");
+            modelBuilder.Append("\",\"Episodes\":");
             modelBuilder.Append(Episodes);
 
             //genres array
-            modelBuilder.Append(",\"genre\":[");
+            modelBuilder.Append(",\"Genre\":[");
             foreach (string s in Genres)
             {
                 modelBuilder.Append("\"");
@@ -98,33 +98,33 @@ namespace JsonApp
             modelBuilder.Append("]");
 
             //score pair
-            modelBuilder.Append(",\"score\":");
+            modelBuilder.Append(",\"Score\":");
             modelBuilder.Append(Score);
 
             //runtime pair
-            modelBuilder.Append(",\"runtime\":");
+            modelBuilder.Append(",\"Runtime\":");
             modelBuilder.Append(RunTime);
 
             //watched pair
-            modelBuilder.Append(",\"watched\":");
+            modelBuilder.Append(",\"Watched\":");
             modelBuilder.Append(BoolToString(Watched));
 
             //hasend pair
-            modelBuilder.Append(",\"hasend\":");
+            modelBuilder.Append(",\"Hasend\":");
             modelBuilder.Append(BoolToString(HasEnd));
 
             //notes pair
-            modelBuilder.Append(",\"notes\":\"");
+            modelBuilder.Append(",\"Notes\":\"");
             modelBuilder.Append(Notes);
 
             //description pair
-            modelBuilder.Append("\",\"description\":\"");
+            modelBuilder.Append("\",\"Description\":\"");
             modelBuilder.Append(Description);
 
             //finish the json string
             modelBuilder.Append("\"}");
             return modelBuilder.ToString();
-        }
+        } */
 
         /// <summary>
         /// Convert a string representing a bool to a bool
