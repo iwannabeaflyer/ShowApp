@@ -487,4 +487,10 @@ all commands should be fully lowercase</comment>
   <data name="saveMode" xml:space="preserve">
     <value>Do you want to give a directory to store the file on a specific location?</value>
   </data>
+  <data name="animelon" xml:space="preserve">
+    <value>animelon</value>
+  </data>
+  <data name="crunchyroll" xml:space="preserve">
+    <value>crunchyroll</value>
+  </data>
 </root>

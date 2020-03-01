@@ -485,4 +485,10 @@ all commands should be fully lowercase</comment>
   <data name="saveMode" xml:space="preserve">
     <value>Wilt u het bestand opslaan met een gespecificeerd pad?</value>
   </data>
+  <data name="animelon" xml:space="preserve">
+    <value>animelon</value>
+  </data>
+  <data name="crunchyroll" xml:space="preserve">
+    <value>crunchyroll</value>
+  </data>
 </root>

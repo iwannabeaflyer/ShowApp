@@ -6,6 +6,12 @@ using System.Diagnostics;
 using System.Configuration;
 using System.Text.Json;
 
+/**
+ * Look at Code Metrics of the Solution to find improvements: 
+ * Maintainablity of the code (creating more auxillary methods for the bigger methods
+ * Lines of Code (Works in coherance with Maintainability)
+*/
+
 namespace JsonApp
 {
     class Program
@@ -413,7 +419,14 @@ namespace JsonApp
                         Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
                         break;
                     }
-                    //MAL is the only site that accepts white spaces or %20, others need '+' between search words
+                    else if (cmd.Equals(LanguageManager.GetTranslation("animelon")))
+                    {
+                        Process.Start(Constants.ANIMELON + search);
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
+                        break;
+                    }
+
+                    //MAL & Animelon are the only site's that accepts white spaces or %20, others need '+' between search words
                     search = search.Replace(" ", "+");
                     if (cmd.Equals(LanguageManager.GetTranslation("google")))
                     {
@@ -438,6 +451,11 @@ namespace JsonApp
                         Process.Start(Constants.YOUTUBE + search + "+preview");
                         Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
                         break;
+                    }
+                    else if (cmd.Equals(LanguageManager.GetTranslation("crunchyroll")))
+                    {
+                        Process.Start(Constants.CRUNCHYROLL + search);
+                        Console.WriteLine(LanguageManager.GetTranslation("browserOpen"));
                     }
                     else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
                     {

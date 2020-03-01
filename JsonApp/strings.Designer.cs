@@ -97,6 +97,15 @@ namespace JsonApp {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to animelon.
+        /// </summary>
+        internal static string animelon {
+            get {
+                return ResourceManager.GetString("animelon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter an Alternative name of the show if it has one.
         /// </summary>
         internal static string assignAlternative {
@@ -386,6 +395,15 @@ namespace JsonApp {
         internal static string cmdWatched {
             get {
                 return ResourceManager.GetString("cmdWatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to crunchyroll.
+        /// </summary>
+        internal static string crunchyroll {
+            get {
+                return ResourceManager.GetString("crunchyroll", resourceCulture);
             }
         }
         
