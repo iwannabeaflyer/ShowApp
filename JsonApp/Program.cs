@@ -34,9 +34,7 @@ namespace JsonApp
                 cmd = Console.ReadLine().ToLower();
                 if (cmd.Equals(LanguageManager.GetTranslation("cmdAdd")))
                 {
-                    jsonObject.Items.Add(Add());
-                    IsChanged = true;
-                    Console.WriteLine(LanguageManager.GetTranslation("addComplete"));
+                    MainAdd(ref jsonObject, ref IsChanged);
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdRemove")))
                 {
@@ -45,76 +43,23 @@ namespace JsonApp
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdFind")))
                 {
-                    Console.WriteLine(LanguageManager.GetTranslation("find"));
-                    List<ModelItem> results = Find(jsonObject);
-                    if (results == null || results.Count() == 0) continue;
-                    //acces a specific item
-                    int elem = AccesItem(results.Count());
-                    results.ElementAt(elem).ShowAll();
-                    //Ask if the user wants to open a webbrowser for more information
-                    OpenBrowser(results.ElementAt(elem).ReturnName());
+                    MainFind(jsonObject);
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdEdit")))
                 {
-                    Console.WriteLine(LanguageManager.GetTranslation("edit"));
-                    //find certain items
-                    List<ModelItem> results = Find(jsonObject);
-                    if (results == null || results.Count() == 0) continue;
-                    //acces a specific item
-                    int elem = AccesItem(results.Count());
-                    ModelItem edit = results.ElementAt(elem);
-                    //Ask if the user wants to open a webbrowser for more information
-                    OpenBrowser(edit.ReturnName());
-                    //edit specific field(s)
-                    IsChanged = Edit(ref edit);
-                    Console.WriteLine(LanguageManager.GetTranslation("editComplete"));
+                    MainEdit(ref jsonObject,ref IsChanged);
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdSave")))
                 {
-                    Console.WriteLine(LanguageManager.GetTranslation("save"));
-                    jsonString = Serialize(jsonObject);
-                    Saving(jsonString);
-                    IsChanged = false;
-                    Console.WriteLine(LanguageManager.GetTranslation("saveComplete"));
+                    MainSave(ref jsonObject, ref IsChanged, ref jsonString);
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdLoad")))
                 {
-                    Console.WriteLine(LanguageManager.GetTranslation("load"));
-                    jsonObject.Items.Clear();
-                    jsonString = Load();
-                    jsonObject = Deserialize(jsonString);
-                    Console.WriteLine(LanguageManager.GetTranslation("loadComplete"));
+                    MainLoad(ref jsonObject, ref jsonString);
                 }
                 else if (cmd.Equals(LanguageManager.GetTranslation("cmdSettings")))
                 {
-                    LanguageManager.GetTranslation("settings");
-                    do
-                    {
-                        cmd = Console.ReadLine();
-                        if (cmd.Equals(LanguageManager.GetTranslation("settingsLanguage")))
-                        {
-                            string l = SettingsLanguage();
-                            LanguageManager.SetCulture(l);
-                            config.AppSettings.Settings["lang"].Value = l;
-                            config.Save(ConfigurationSaveMode.Modified);
-                            break;
-                        }
-                        else if (cmd.Equals(LanguageManager.GetTranslation("settingsTheme")))
-                        {
-                            config.AppSettings.Settings["theme"].Value = SettingsTheme();
-                            config.Save(ConfigurationSaveMode.Modified);
-                            break;
-                        }
-                        else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
-                            Console.WriteLine(LanguageManager.GetTranslation("settingsOptions"));
-                        }
-                    } while (true);
+                    MainSettings(ref config);
                 }
                 else if (cmd.Equals("clear"))
                 {
@@ -137,6 +82,92 @@ namespace JsonApp
             }
             Console.WriteLine(LanguageManager.GetTranslation("programEnd"));
             Console.ReadKey();
+        }
+
+        private static void MainSettings(ref Configuration config)
+        {
+            string cmd;
+            LanguageManager.GetTranslation("settings");
+            do
+            {
+                cmd = Console.ReadLine();
+                if (cmd.Equals(LanguageManager.GetTranslation("settingsLanguage")))
+                {
+                    string l = SettingsLanguage();
+                    LanguageManager.SetCulture(l);
+                    config.AppSettings.Settings["lang"].Value = l;
+                    config.Save(ConfigurationSaveMode.Modified);
+                    break;
+                }
+                else if (cmd.Equals(LanguageManager.GetTranslation("settingsTheme")))
+                {
+                    config.AppSettings.Settings["theme"].Value = SettingsTheme();
+                    config.Save(ConfigurationSaveMode.Modified);
+                    break;
+                }
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdExit")))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(LanguageManager.GetTranslation("invalidCommand"), cmd);
+                    Console.WriteLine(LanguageManager.GetTranslation("settingsOptions"));
+                }
+            } while (true);
+        }
+
+        private static void MainLoad(ref JsonObject jsonObject, ref string jsonString)
+        {
+            Console.WriteLine(LanguageManager.GetTranslation("load"));
+            jsonObject.Items.Clear();
+            jsonString = Load();
+            jsonObject = Deserialize(jsonString);
+            Console.WriteLine(LanguageManager.GetTranslation("loadComplete"));
+        }
+
+        private static void MainSave(ref JsonObject jsonObject, ref bool isChanged, ref string jsonString)
+        {
+            Console.WriteLine(LanguageManager.GetTranslation("save"));
+            jsonString = Serialize(jsonObject);
+            Saving(jsonString);
+            isChanged = false;
+            Console.WriteLine(LanguageManager.GetTranslation("saveComplete"));
+        }
+
+        private static void MainEdit(ref JsonObject jsonObject, ref bool isChanged)
+        {
+            Console.WriteLine(LanguageManager.GetTranslation("edit"));
+            //find certain items
+            List<ModelItem> results = Find(jsonObject);
+            if (results == null || results.Count() == 0) return;
+            //acces a specific item
+            int elem = AccesItem(results.Count());
+            ModelItem edit = results.ElementAt(elem);
+            //Ask if the user wants to open a webbrowser for more information
+            OpenBrowser(edit.ReturnName());
+            //edit specific field(s)
+            isChanged = Edit(ref edit);
+            Console.WriteLine(LanguageManager.GetTranslation("editComplete"));
+        }
+
+        private static void MainFind(JsonObject jsonObject)
+        {
+            Console.WriteLine(LanguageManager.GetTranslation("find"));
+            List<ModelItem> results = Find(jsonObject);
+            if (results == null || results.Count() == 0) return;
+            //acces a specific item
+            int elem = AccesItem(results.Count());
+            results.ElementAt(elem).ShowAll();
+            //Ask if the user wants to open a webbrowser for more information
+            OpenBrowser(results.ElementAt(elem).ReturnName());
+        }
+
+        private static void MainAdd(ref JsonObject jsonObject, ref bool isChanged)
+        {
+            jsonObject.Items.Add(Add());
+            isChanged = true;
+            Console.WriteLine(LanguageManager.GetTranslation("addComplete"));
         }
 
         /// <summary>
