@@ -10,6 +10,8 @@ using System.Text.Json;
  * Look at Code Metrics of the Solution to find improvements: 
  * Maintainablity of the code (creating more auxillary methods for the bigger methods
  * Lines of Code (Works in coherance with Maintainability)
+ * Cyclomatic Complexity is calculated by the number of paths the program can take (if statements, switches)
+ * The less paths it can take the less complex it becomes, thus being able to split those statements will reduce complexity
 */
 
 namespace JsonApp
@@ -603,8 +605,6 @@ namespace JsonApp
         {
             List<ModelItem> result = new List<ModelItem>();
             string cmd;
-            bool innerLoop, outerLoop;
-            innerLoop = outerLoop = true;
             //Ask for the command and check wether its a valid one or not
             do
             {
@@ -628,106 +628,10 @@ namespace JsonApp
                     Console.WriteLine(LanguageManager.GetTranslation("findOptions"));
                 }
             } while (true);
-            if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched")) || cmd.Equals(LanguageManager.GetTranslation("cmdEnding")))
-            {
-                bool term;
-                do
-                {
-                    do
-                    {
-                        if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched"))) Console.WriteLine(LanguageManager.GetTranslation("findWatched"));
-                        else Console.WriteLine(LanguageManager.GetTranslation("findEnding"));
-                        term = GetBool();
-                        if (term) Console.WriteLine(LanguageManager.GetTranslation("findConfirmYes"));
-                        else Console.WriteLine(LanguageManager.GetTranslation("findConfirmNo"));
-                        Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
-                        if (Console.ReadLine().ToLower().Equals(LanguageManager.GetTranslation("yesShort"))) innerLoop = false;
-                    } while (innerLoop);
-                    //Start searching
-                    if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched")))
-                    {
-                        for (int i = 0; i < jsonObject.Items.Count; i++)
-                        {
-                            if (jsonObject.Items[i].Watched == term) { result.Add(jsonObject.Items[i]); }
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < jsonObject.Items.Count; i++)
-                        {
-                            if (jsonObject.Items[i].HasEnd == term) { result.Add(jsonObject.Items[i]); }
-                        }
-                    }
-                    //Check if the list is empty
-                    if (result.Count == 0)
-                    {
-                        Console.WriteLine(LanguageManager.GetTranslation("findNoResult"), cmd, BoolToAnwser(term));
-                        if (!GetBool()) { Console.WriteLine(LanguageManager.GetTranslation("findCancel")); outerLoop = false; }
-                        else { outerLoop = innerLoop = true; }
-                    }
-                    else
-                    {
-                        outerLoop = false;
-                    }
-                } while (outerLoop);
-            }
+            if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched")) || cmd.Equals(LanguageManager.GetTranslation("cmdEnding"))) {   FindWithBool(ref jsonObject, ref result, cmd); }
             else
             {
-                string term;
-                do
-                {
-                    do
-                    {
-                        Console.WriteLine(LanguageManager.GetTranslation("findOther"));
-                        term = Console.ReadLine().ToLower();
-                        Console.WriteLine(LanguageManager.GetTranslation("findConfirmOther"), term);
-                        Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
-                        if (Console.ReadLine().ToLower().Equals(LanguageManager.GetTranslation("yesShort"))) innerLoop = false;
-                    } while (innerLoop);
-                    //Start searching
-                    if (cmd.Equals(LanguageManager.GetTranslation("cmdAlternative")))
-                    {
-                        foreach (ModelItem mi in jsonObject.Items)
-                        {
-                            if (mi.AltName.ToLower().Contains(term)) result.Add(mi);
-                        }
-                    }
-                    else if (cmd.Equals(LanguageManager.GetTranslation("cmdEnglish")))
-                    {
-                        foreach (ModelItem mi in jsonObject.Items)
-                        {
-                            if (mi.EnName.ToLower().Contains(term)) result.Add(mi);
-                        }
-                    }
-                    else if (cmd.Equals(LanguageManager.GetTranslation("cmdGenres")))
-                    {
-                        foreach (ModelItem mi in jsonObject.Items)
-                        {
-                            foreach (string g in mi.Genres)
-                            {
-                                if (g.ToLower() == term) result.Add(mi);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        foreach (ModelItem mi in jsonObject.Items)
-                        {
-                            if (mi.Description.ToLower().Contains(term)) result.Add(mi);
-                        }
-                    }
-                    //Check if the list is empty
-                    if (result.Count == 0)
-                    {
-                        Console.WriteLine(LanguageManager.GetTranslation("findNoResult"), cmd, term);
-                        if (!GetBool()) { Console.WriteLine(LanguageManager.GetTranslation("findCancel")); outerLoop = false; }
-                        else { outerLoop = innerLoop = true; }
-                    }
-                    else
-                    {
-                        outerLoop = false;
-                    }
-                } while (outerLoop);
+                FindWithString(ref jsonObject, ref result, cmd);
             }
 
             for (int i = 0; i < result.Count; i++)
@@ -736,6 +640,113 @@ namespace JsonApp
                 Console.WriteLine(result[i].ReturnName());
             }
             return result;
+        }
+
+        private static void FindWithString(ref JsonObject jsonObject, ref List<ModelItem> result, string cmd)
+        {
+            string term;
+            bool innerLoop, outerLoop;
+            innerLoop = outerLoop = true;
+            do
+            {
+                do
+                {
+                    Console.WriteLine(LanguageManager.GetTranslation("findOther"));
+                    term = Console.ReadLine().ToLower();
+                    Console.WriteLine(LanguageManager.GetTranslation("findConfirmOther"), term);
+                    Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
+                    if (Console.ReadLine().ToLower().Equals(LanguageManager.GetTranslation("yesShort"))) innerLoop = false;
+                } while (innerLoop);
+                //Start searching
+                if (cmd.Equals(LanguageManager.GetTranslation("cmdAlternative")))
+                {
+                    foreach (ModelItem mi in jsonObject.Items)
+                    {
+                        if (mi.AltName.ToLower().Contains(term)) result.Add(mi);
+                    }
+                }
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdEnglish")))
+                {
+                    foreach (ModelItem mi in jsonObject.Items)
+                    {
+                        if (mi.EnName.ToLower().Contains(term)) result.Add(mi);
+                    }
+                }
+                else if (cmd.Equals(LanguageManager.GetTranslation("cmdGenres")))
+                {
+                    foreach (ModelItem mi in jsonObject.Items)
+                    {
+                        foreach (string g in mi.Genres)
+                        {
+                            if (g.ToLower() == term) result.Add(mi);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (ModelItem mi in jsonObject.Items)
+                    {
+                        if (mi.Description.ToLower().Contains(term)) result.Add(mi);
+                    }
+                }
+                //Check if the list is empty
+                if (result.Count == 0)
+                {
+                    Console.WriteLine(LanguageManager.GetTranslation("findNoResult"), cmd, term);
+                    if (!GetBool()) { Console.WriteLine(LanguageManager.GetTranslation("findCancel")); outerLoop = false; }
+                    else { outerLoop = innerLoop = true; }
+                }
+                else
+                {
+                    outerLoop = false;
+                }
+            } while (outerLoop);
+        }
+
+        private static void FindWithBool(ref JsonObject jsonObject, ref List<ModelItem> result, string cmd)
+        {
+            bool term;
+            bool innerLoop, outerLoop;
+            innerLoop = outerLoop = true;
+            do
+            {
+                do
+                {
+                    if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched"))) Console.WriteLine(LanguageManager.GetTranslation("findWatched"));
+                    else Console.WriteLine(LanguageManager.GetTranslation("findEnding"));
+                    term = GetBool();
+                    if (term) Console.WriteLine(LanguageManager.GetTranslation("findConfirmYes"));
+                    else Console.WriteLine(LanguageManager.GetTranslation("findConfirmNo"));
+                    Console.WriteLine(LanguageManager.GetTranslation("findContinue"));
+                    if (Console.ReadLine().ToLower().Equals(LanguageManager.GetTranslation("yesShort"))) innerLoop = false;
+                } while (innerLoop);
+                //Start searching
+                if (cmd.Equals(LanguageManager.GetTranslation("cmdWatched")))
+                {
+                    for (int i = 0; i < jsonObject.Items.Count; i++)
+                    {
+                        if (jsonObject.Items[i].Watched == term) { result.Add(jsonObject.Items[i]); }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < jsonObject.Items.Count; i++)
+                    {
+                        if (jsonObject.Items[i].HasEnd == term) { result.Add(jsonObject.Items[i]); }
+                    }
+                }
+                //Check if the list is empty
+                if (result.Count == 0)
+                {
+                    Console.WriteLine(LanguageManager.GetTranslation("findNoResult"), cmd, BoolToAnwser(term));
+                    if (!GetBool()) { Console.WriteLine(LanguageManager.GetTranslation("findCancel")); outerLoop = false; }
+                    else { outerLoop = innerLoop = true; }
+                }
+                else
+                {
+                    outerLoop = false;
+                }
+            } while (outerLoop);
         }
 
         /// <summary>
