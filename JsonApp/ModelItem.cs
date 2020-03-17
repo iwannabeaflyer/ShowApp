@@ -18,6 +18,7 @@ namespace JsonApp
         public string Description { get; set; }     //Description of the show
 
         public ModelItem() { Genres = new List<string>(); }
+        /*
         public ModelItem(string json)
         {
             char[] array = { ':' };
@@ -61,8 +62,9 @@ namespace JsonApp
             {
                 Genres.Add(genre);
             }
-            */
+            s
         }
+        */
         /*
         /// <summary>
         /// Create a json string from this object

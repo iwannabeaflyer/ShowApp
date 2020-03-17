@@ -642,6 +642,12 @@ namespace JsonApp
             return result;
         }
 
+        /// <summary>
+        /// Find an object using a string
+        /// </summary>
+        /// <param name="jsonObject">ref to jsonObject</param>
+        /// <param name="result">ref to your list of results</param>
+        /// <param name="cmd">the last used command</param>
         private static void FindWithString(ref JsonObject jsonObject, ref List<ModelItem> result, string cmd)
         {
             string term;
@@ -703,6 +709,12 @@ namespace JsonApp
             } while (outerLoop);
         }
 
+        /// <summary>
+        /// Find an object using a bool
+        /// </summary>
+        /// <param name="jsonObject">ref to jsonObject</param>
+        /// <param name="result">ref to your list of results</param>
+        /// <param name="cmd">the last used command</param>
         private static void FindWithBool(ref JsonObject jsonObject, ref List<ModelItem> result, string cmd)
         {
             bool term;
